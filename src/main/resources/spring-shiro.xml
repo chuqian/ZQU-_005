@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<beans xmlns="http://www.springframework.org/schema/beans"  
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+            http://www.springframework.org/schema/util
+            http://www.springframework.org/schema/util/spring-util-2.0.xsd">
+  
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<property name="securityManager" ref="securityManager" />
+		<property name="loginUrl" value="login.html" />
+		<property name="unauthorizedUrl" value="403.htm" />
+		<property name="filterChainDefinitions">
+			<value>
+				/login.html = anon
+				/subLogin.action = anon
+				/* = authc
+			</value>
+		</property>
+		<property name="filters">
+			<util:map>
+				<entry key="rolesFilter" value-ref="rolesFilter" />
+			</util:map>
+		</property>
+	</bean>
+	
+	<bean id="rolesFilter" class="com.filter.RolesFilter">
+	</bean>
+	
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="realm" ref="userRealm" />
+		<property name="sessionManager" ref="sessionManager" />
+		<property name="cacheManager" ref="cacheManager" />
+		<property name="rememberMeManager" ref="rememberMeManager" />
+	</bean>
+
+	<bean id="userRealm" class="com.realm.UserRealm">
+		<property name="credentialsMatcher">
+			<bean id="credentialsMatcher" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+				<property name="hashAlgorithmName" value="md5" />
+			</bean>
+		</property>
+	</bean>	
+	
+	<bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+		<property name="sessionDAO">
+			<bean id="sessionDAO" class="com.session.RedisSessionDao"></bean>
+		</property>
+	</bean>
+	
+	<bean id="cacheManager" class="com.cache.RedisCacheManager"></bean>
+	
+	<bean id="rememberMeManager" class="import org.apache.shiro.web.mgt.CookieRememberMeManager">
+		<property name="cookie">
+			<bean id="cookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+				<constructor-arg value="rememberMe" />
+				<property name="maxAge" value="60*60*365" />
+			</bean>
+		</property>
+	</bean>
+	
+</beans>  

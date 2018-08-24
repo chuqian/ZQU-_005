@@ -17,51 +17,8 @@
             http://www.springframework.org/schema/util/spring-util-2.0.xsd">
             
     <context:property-placeholder location="classpath:spring-redis.xml" />
+    <context:property-placeholder location="classpath:spring-shiro.xml" />
     
     <context:component-scan base-package="com.*.service.impl" />
-    
-    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
-		<property name="securityManager" ref="securityManager" />
-		<property name="loginUrl" value="login.html" />
-		<property name="unauthorizedUrl" value="403.htm" />
-		<property name="filterChainDefinitions">
-			<value>
-				/login.html = anon
-				/subLogin.action = anon
-				/* = authc
-			</value>
-		</property>
-		<property name="filters">
-			<util:map>
-				<entry key="rolesFilter" value-ref="rolesFilter" />
-			</util:map>
-		</property>
-	</bean>
-	
-	<bean id="rolesFilter" class="com.filter.RolesFilter">
-	</bean>
-	
-	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
-		<property name="realm" ref="customerRealm" />
-		<property name="sessionManager" ref="sessionManager" />
-		<property name="cacheManager" ref="cacheManager" />
-		<property name="rememberMeManager" ref="rememberMeManager" />
-	</bean>
-
-	<bean id="customerRealm" class="com.realm.CustomerRealm">
-		<property name="credentialsMatcher" ref="credentialsMatcher" />
-	</bean>	
-	
-	<bean id="credentialsMatcher" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
-		<property name="hashAlgorithmName" value="md5" />
-	</bean>
-	
-	<bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
-		<property name="sessionDAO" ref="sessionDAO" />
-	</bean>
-	
-	<bean id="sessionDAO" class="com.session.RedisSessionDao"></bean>
-	
-	<bean id="cacheManager" class="com.cache.RedisCacheManager"></bean>
     
 </beans>
