@@ -79,6 +79,7 @@
         <scope>test</scope>
     </dependency>
 	
+	<!-- spring集成MongoDB -->
 	<dependency>
     	<groupId>org.springframework.data</groupId>
    		<artifactId>spring-data-mongodb</artifactId>

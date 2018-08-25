@@ -18,6 +18,7 @@
             
     <context:property-placeholder location="classpath:spring-redis.xml" />
     <context:property-placeholder location="classpath:spring-shiro.xml" />
+    <context:property-placeholder location="classpath:mongo-config.xml"/>
     
     <context:component-scan base-package="com.*.service.impl" />
     
