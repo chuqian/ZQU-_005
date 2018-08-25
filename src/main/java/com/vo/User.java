@@ -5,11 +5,11 @@ package com.vo;
  * @describe 用户类
  */
 public class User {
-	private String id;
-	private String password;
-	private String userType;
-	private String[] roles;
-	private String[] permissions;
+	private String id;        //用户id
+	private String password;    //用户密码
+	private String userType;    //用户类型
+	private String[] roles;     //用户角色
+	private String[] permissions;  //用户权限
 	
 	public String getId() {
 		return id;

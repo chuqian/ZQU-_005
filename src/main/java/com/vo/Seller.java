@@ -1,7 +1,5 @@
 package com.vo;
 
-import java.util.List;
-
 /**
  * @author chenchuqian
  * @date 2018年8月24日 下午11:32:31
@@ -14,7 +12,7 @@ public class Seller {
 	private Address address; //发货地址
 	private String type;    //店铺类型
 	private Integer score;   //信用评分
-	private List<Commodity> commoditys; //在卖商品
+	private String[] commoditys; //在卖商品
 	private String phone;    //手机号码
 	private String identity;  //省份证号
 	private Integer sex;      //性别
@@ -56,10 +54,10 @@ public class Seller {
 	public void setScore(Integer score) {
 		this.score = score;
 	}
-	public List<Commodity> getCommoditys() {
+	public String[] getCommoditys() {
 		return commoditys;
 	}
-	public void setCommoditys(List<Commodity> commoditys) {
+	public void setCommoditys(String[] commoditys) {
 		this.commoditys = commoditys;
 	}
 	public String getPhone() {
