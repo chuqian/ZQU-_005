@@ -1,9 +1,13 @@
-package com.vo;
+package com.entity;
+
+import org.springframework.data.mongodb.core.mapping.Document;
+
 /**
  * @author chenchuqian
  * @date 2018年8月25日 上午12:13:13
  * @describe 用户类
  */
+@Document(collection="user")
 public class User {
 	private String id;        //用户id
 	private String password;    //用户密码
