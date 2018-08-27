@@ -16,6 +16,7 @@ public class Comment {
 	private String commodityId;//商品Id
 	private String state;  //评论状态，是否屏蔽
 	
+	
 	public String getId() {
 		return id;
 	}
