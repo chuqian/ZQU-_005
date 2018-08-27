@@ -1,10 +1,15 @@
-package com.vo;
+package com.entity;
+
+import java.util.List;
+
+import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * @author chenchuqian
  * @date 2018年8月24日 下午11:32:31
  * @describe 商家类
  */
+@Document(collection="seller")
 public class Seller {
 	private String id;      //商家id
 	private String name;    //商家姓名
@@ -12,7 +17,7 @@ public class Seller {
 	private Address address; //发货地址
 	private String type;    //店铺类型
 	private Integer score;   //信用评分
-	private String[] commoditys; //在卖商品
+	private List<Commodity> commoditys; //在卖商品
 	private String phone;    //手机号码
 	private String identity;  //省份证号
 	private Integer sex;      //性别
@@ -54,10 +59,10 @@ public class Seller {
 	public void setScore(Integer score) {
 		this.score = score;
 	}
-	public String[] getCommoditys() {
+	public List<Commodity> getCommoditys() {
 		return commoditys;
 	}
-	public void setCommoditys(String[] commoditys) {
+	public void setCommoditys(List<Commodity> commoditys) {
 		this.commoditys = commoditys;
 	}
 	public String getPhone() {
@@ -84,5 +89,4 @@ public class Seller {
 	public void setState(Integer state) {
 		this.state = state;
 	}
-	
 }

@@ -1,10 +1,13 @@
-package com.vo;
+package com.entity;
+
+import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * @author chenchuqian
  * @date 2018年8月24日 下午11:31:45
  * @describe 商品类
  */
+@Document(collection="commodity")
 public class Commodity {
 	private String id;       //商品id
 	private String name;     //商品名称
