@@ -11,7 +11,7 @@
             http://www.springframework.org/schema/data/repository/spring-repository-1.5.xsd">        
     <!-- <context:property-placeholder location="classpath:db.properties" /> -->
    
-    <mongo:mongo id="mongoClient" host="localhost" port="27017"/>
+    <mongo:mongo id="mongoClient" host="10.79.4.32" port="27017"/>  
       
     <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">  
 	    <constructor-arg ref="mongoClient"/>  
