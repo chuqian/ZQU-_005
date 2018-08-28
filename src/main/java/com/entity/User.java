@@ -4,7 +4,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * @author chenchuqian
- * @date 2018年8月25日 上午12:13:13
+ * @date 2018年8月28日 下午10:49:08
  * @describe 用户类
  */
 @Document(collection="user")

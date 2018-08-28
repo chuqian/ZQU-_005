@@ -1,6 +1,11 @@
 package com.entity;
 
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.dto.Comment;
 
 /**
  * @author chenchuqian
@@ -16,7 +21,10 @@ public class Commodity {
 	private Integer score;   //综合评分
 	private Integer stock;   //库存
 	private String[] imSrc;  //图片
-	private Integer shelf;   //是否上架
+	private Integer isShelf; //是否上架
+	private Date shelfTime;  //上架时间
+	private Integer collectedNum;    //收藏数量
+	private List<Comment> comments;  //商品有关评论
 	
 	public String getId() {
 		return id;
@@ -60,11 +68,29 @@ public class Commodity {
 	public void setImSrc(String[] imSrc) {
 		this.imSrc = imSrc;
 	}
-	public Integer getShelf() {
-		return shelf;
+	public Integer getIsShelf() {
+		return isShelf;
 	}
-	public void setShelf(Integer shelf) {
-		this.shelf = shelf;
+	public void setIsShelf(Integer isShelf) {
+		this.isShelf = isShelf;
 	}
-	
+	public Date getShelfTime() {
+		return shelfTime;
+	}
+	public void setShelfTime(Date shelfTime) {
+		this.shelfTime = shelfTime;
+	}
+	public Integer getCollectedNum() {
+		return collectedNum;
+	}
+	public void setCollectedNum(Integer collectedNum) {
+		this.collectedNum = collectedNum;
+	}
+	public List<Comment> getComments() {
+		return comments;
+	}
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+
 }

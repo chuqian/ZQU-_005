@@ -1,11 +1,11 @@
-package com.entity;
+package com.dto;
 
 /**
  * @author chenchuqian
- * @date 2018年8月24日 下午11:30:42
- * @describe 地址类
+ * @date 2018年8月28日 下午11:06:12
+ * @describe 发货地址
  */
-public class Address {
+public class SendAddress {
 	private String province;  //省份
 	private String city;      //直辖市
 	private String county;    //县/区

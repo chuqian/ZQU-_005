@@ -4,7 +4,7 @@ import org.bson.Document;
 import org.junit.Test;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
-import com.entity.Address;
+import com.dto.GetAddress;
 import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
@@ -35,7 +35,7 @@ public class MongoTest {
 		MongoClient mongoClient = new MongoClient();
 		MongoTemplate mongoTemplate = new MongoTemplate(mongoClient, "mongoTest");
 		
-		Address address = new Address();
+		GetAddress address = new GetAddress();
 		address.setCity("guangdong");
 		mongoTemplate.insert(address);
 	}

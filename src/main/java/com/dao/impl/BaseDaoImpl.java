@@ -29,7 +29,6 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 				((Class<T>)this.getClass()).getGenericSuperclass();  //获取运行类的父类的参数化类型
 		Type[] types = ptype.getActualTypeArguments();     //获取实际类型参数
 		this.clazz = (Class<T>)types[0];
-		
 	}
 	
 	public MongoTemplate getMongoTemplate() {
