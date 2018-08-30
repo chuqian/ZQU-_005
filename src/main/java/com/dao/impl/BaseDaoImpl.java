@@ -14,7 +14,7 @@ import com.dao.BaseDao;
 /**
  * @author chenchuqian
  * @date 2018年8月25日 下午7:53:03
- * @describe 
+ * @describe 公共Dao实现类
  * @param <T> 
  */
 @SuppressWarnings("unchecked")
@@ -35,6 +35,10 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 		return mongoTemplate;
 	}
 	
+	public String getCollectionName() {
+		return clazz.getSimpleName().toLowerCase();
+	}
+	
 	@Override
 	public T findById(String id){
 		return mongoTemplate.findById(id, clazz);
@@ -46,20 +50,20 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 	}
 
 	@Override
-	public List<T> findByPage(int skip, int limit){
+	public List<T> find(int skip, int limit){
 		Query query = new Query().skip(skip).limit(limit);
 		return mongoTemplate.find(query, clazz);
 	}
 	
 	@Override
 	public int insert(Object objToSave){
-		mongoTemplate.insert(objToSave);
+		mongoTemplate.insert(objToSave, this.getCollectionName());
 		return 1;
 	}
 	
 	@Override
 	public int insert(List<T> rows) {
-		mongoTemplate.insertAll(rows);
+		mongoTemplate.insert(rows, clazz);;
 		return rows.size();
 	}
 
@@ -77,13 +81,11 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 	}
 
 	@Override
-	public int update(Object objToUpdate) {
+	public int update(String id, Object objToUpdate) {
+		/*Query query = new Query(Criteria.where("_id").is(id));
+		Update update = new Update();
+		mongoTemplate.updateMulti(query, update, clazz);*/
 		return 1;
-	}
-	
-	@Override
-	public int update(List<T> rows) {
-		return rows.size();
 	}
 	
 }

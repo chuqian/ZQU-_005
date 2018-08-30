@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * @author chenchuqian
  * @date 2018年8月25日 上午11:11:01
- * @describe 公共Dao类
+ * @describe 公共Dao接口
  */
 public interface BaseDao<T> {
 
@@ -17,7 +17,7 @@ public interface BaseDao<T> {
 	public T findById(String id);
 	
 	/**
-	 * 查询所有数据
+	 * 所有数据查询
 	 * @return
 	 */
 	public List<T> findAll();
@@ -28,7 +28,7 @@ public interface BaseDao<T> {
 	 * @param limit 查询个数
 	 * @return
 	 */
-	public List<T> findByPage(int skip, int limit);
+	public List<T> find(int skip, int limit);
 	
 	/**
 	 * 新增单个数据
@@ -60,16 +60,10 @@ public interface BaseDao<T> {
 	
 	/**
 	 * 数据更新
+	 * @param id
 	 * @param objToUpdate
 	 * @return 更新数目
 	 */
-	public int update(Object objToUpdate);
+	public int update(String id, Object objToUpdate);
 	
-	/**
-	 * 批量更新数据
-	 * @param rows
-	 * @return 更新数据数目
-	 */
-	public int update(List<T> rows);
-
 }
