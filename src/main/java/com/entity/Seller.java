@@ -2,6 +2,7 @@ package com.entity;
 
 import java.util.List;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.dto.SendAddress;
@@ -13,6 +14,7 @@ import com.dto.SendAddress;
  */
 @Document(collection="seller")
 public class Seller {
+	@Id
 	private String id;      //商家id
 	private String name;    //商家姓名
 	private String store;   //店铺名字

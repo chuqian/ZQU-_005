@@ -1,5 +1,6 @@
 package com.entity;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
@@ -9,6 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  */
 @Document(collection="user")
 public class User {
+	@Id
 	private String id;        //用户id
 	private String password;    //用户密码
 	private String userType;    //用户类型

@@ -3,6 +3,7 @@ package com.entity;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.dto.Comment;
@@ -14,6 +15,7 @@ import com.dto.Comment;
  */
 @Document(collection="commodity")
 public class Commodity {
+	@Id
 	private String id;       //商品id
 	private String name;     //商品名称
 	private Double price;    //商品价格
@@ -92,5 +94,5 @@ public class Commodity {
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
 	}
-
+	
 }

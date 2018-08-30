@@ -1,5 +1,6 @@
 package com.service;
 
+import com.common.PageQueryVo;
 import com.common.Pager;
 import com.entity.Commodity;
 
@@ -10,24 +11,34 @@ import com.entity.Commodity;
  * @describe
  */
 public interface CommodityService {
+	
 	/**
 	 * 商品展示
+	 * @param commodity
+	 * @param page
 	 * @return
 	 */
-	public Pager<Commodity> list();
+	public Pager<Commodity> list(Commodity commodity, PageQueryVo page);
 	
 	/**
 	 * 添加/修改
 	 * @param commodity
-	 * @return 1:操作成功; 0:操作失败
+	 * @return succe/fail
 	 */
-	public int addOrUpdate(Commodity commodity);
+	public String save(Commodity commodity);
 	
+	/**
+	 * 商品删除
+	 * @param id
+	 * @return succe/fail
+	 */
+	public String delete(String id);
+
 	/**
 	 * 商品上/下架
 	 * @param shelf 1:上架; 0:下架
-	 * @return 1:操作成功; 0:操作失败
+	 * @return succe/fail
 	 */
-	public int onOrDown(String id, int shelf);
-
+	public String onOrDown(String id, int shelf);
+	
 }

@@ -31,39 +31,30 @@ public interface BaseDao<T> {
 	public List<T> find(int skip, int limit);
 	
 	/**
-	 * 新增单个数据
-	 * @param objToSave
-	 * @return 新增个数 
+	 * 数据保存
+	 * @param t
+	 * @return
 	 */
-	public int insert(Object objToSave);
+	public int save(T t);
 	
 	/**
-	 * 批量增加数据
+	 * 批量数据保存
 	 * @param rows
-	 * @return 增加数据数目
+	 * @return
 	 */
-	public int insert(List<T> rows);
+	public int save(List<T> rows);
 	
 	/**
 	 * 根据id删除数据
-	 * @param id
+	 * @param ids
 	 * @return 删除数据数目
 	 */
-	public int deleteById(String id);
-	
+	public int deleteById(String... ids);
+
 	/**
-	 * 批量删除数据
-	 * @param ids 
-	 * @return 删除数据数目
+	 * 统计记录条数
+	 * @return 
 	 */
-	public int delete(String[] ids);
-	
-	/**
-	 * 数据更新
-	 * @param id
-	 * @param objToUpdate
-	 * @return 更新数目
-	 */
-	public int update(String id, Object objToUpdate);
+	public long rowsCount();
 	
 }

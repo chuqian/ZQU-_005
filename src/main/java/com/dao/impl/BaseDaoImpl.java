@@ -56,36 +56,29 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 	}
 	
 	@Override
-	public int insert(Object objToSave){
-		mongoTemplate.insert(objToSave, this.getCollectionName());
+	public int save(T t) {
+		mongoTemplate.save(t);
 		return 1;
 	}
 	
 	@Override
-	public int insert(List<T> rows) {
-		mongoTemplate.insert(rows, clazz);;
+	public int save(List<T> rows) {
+		for(T t : rows){
+			mongoTemplate.save(t);
+		}
 		return rows.size();
 	}
-
+	
 	@Override
-	public int deleteById(String id){
-		mongoTemplate.remove(new Query(Criteria.where("id").is(id)), clazz);
-		return 1;
+	public int deleteById(String... ids) {
+		for(String id : ids)
+			mongoTemplate.remove(new Query(Criteria.where("id").is(id)), clazz);
+		return ids.length;
 	}
 	
 	@Override
-	public int delete(String[] ids) {
-		for(int i=0; i<ids.length; i++)
-			mongoTemplate.remove(new Query(Criteria.where("id").is(ids[i])), clazz);
-		return ids.length;
-	}
-
-	@Override
-	public int update(String id, Object objToUpdate) {
-		/*Query query = new Query(Criteria.where("_id").is(id));
-		Update update = new Update();
-		mongoTemplate.updateMulti(query, update, clazz);*/
-		return 1;
+	public long rowsCount(){
+		return mongoTemplate.count(new Query(), clazz);
 	}
 	
 }
