@@ -51,4 +51,9 @@ public class Order {
 		this.state = state;
 	}
 	
+	@Override
+	public String toString() {
+		return "Order [id=" + id + ", customerId=" + customerId + ", commoditys=" + commoditys + ", orderTime="
+				+ orderTime + ", state=" + state + "]";
+	}
 }

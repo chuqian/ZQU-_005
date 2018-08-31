@@ -52,4 +52,9 @@ public class Comment {
 		this.state = state;
 	}
 	
+	@Override
+	public String toString() {
+		return "Comment [member=" + member + ", content=" + content + ", contentTime=" + contentTime + ", answer="
+				+ answer + ", answerTime=" + answerTime + ", state=" + state + "]";
+	}
 }

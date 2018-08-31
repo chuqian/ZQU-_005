@@ -66,4 +66,10 @@ public class CommodityMsg {
 		this.state = state;
 	}
 	
+	@Override
+	public String toString() {
+		return "CommodityMsg [commodityId=" + commodityId + ", commodityName=" + commodityName + ", imgScr=" + imgScr
+				+ ", content=" + content + ", contentTime=" + contentTime + ", answer=" + answer + ", answerTime="
+				+ answerTime + ", state=" + state + "]";
+	}
 }

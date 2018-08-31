@@ -1,5 +1,6 @@
 package com.entity;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -95,4 +96,10 @@ public class Commodity {
 		this.comments = comments;
 	}
 	
+	@Override
+	public String toString() {
+		return "Commodity [id=" + id + ", name=" + name + ", price=" + price + ", saledNum=" + saledNum + ", score="
+				+ score + ", stock=" + stock + ", imSrc=" + Arrays.toString(imSrc) + ", isShelf=" + isShelf
+				+ ", shelfTime=" + shelfTime + ", collectedNum=" + collectedNum + ", comments=" + comments + "]";
+	}
 }

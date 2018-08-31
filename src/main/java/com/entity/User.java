@@ -1,5 +1,7 @@
 package com.entity;
 
+import java.util.Arrays;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -48,4 +50,9 @@ public class User {
 		this.permissions = permissions;
 	}
 	
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", password=" + password + ", userType=" + userType + ", roles="
+				+ Arrays.toString(roles) + ", permissions=" + Arrays.toString(permissions) + "]";
+	}
 }

@@ -93,4 +93,11 @@ public class Seller {
 	public void setState(Integer state) {
 		this.state = state;
 	}
+	
+	@Override
+	public String toString() {
+		return "Seller [id=" + id + ", name=" + name + ", store=" + store + ", type=" + type + ", phone=" + phone
+				+ ", identity=" + identity + ", sex=" + sex + ", sendAddress=" + sendAddress + ", score=" + score
+				+ ", commoditys=" + commoditys + ", state=" + state + "]";
+	}
 }

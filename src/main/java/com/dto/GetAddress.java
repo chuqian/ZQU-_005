@@ -49,4 +49,10 @@ public class GetAddress {
 	public void setDetail(String detail) {
 		this.detail = detail;
 	}
+	
+	@Override
+	public String toString() {
+		return "GetAddress [name=" + name + ", phone=" + phone + ", province=" + province + ", city=" + city
+				+ ", county=" + county + ", detail=" + detail + "]";
+	}	
 }

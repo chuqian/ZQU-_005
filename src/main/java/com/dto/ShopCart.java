@@ -44,4 +44,10 @@ public class ShopCart {
 	public void setAddTime(Date addTime) {
 		this.addTime = addTime;
 	}
+	
+	@Override
+	public String toString() {
+		return "ShopCart [commodityId=" + commodityId + ", name=" + name + ", count=" + count + ", imgScr=" + imgScr
+				+ ", addTime=" + addTime + "]";
+	}
 }

@@ -95,4 +95,11 @@ public class Customer {
 	public void setState(Integer state) {
 		this.state = state;
 	}
+	
+	@Override
+	public String toString() {
+		return "Customer [id=" + id + ", member=" + member + ", nickname=" + nickname + ", username=" + username
+				+ ", phone=" + phone + ", address=" + address + ", sex=" + sex + ", email=" + email + ", shopCart="
+				+ shopCart + ", collects=" + collects + ", state=" + state + "]";
+	}
 }
