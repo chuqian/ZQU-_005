@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.dto.Collect;
 import com.dto.GetAddress;
+import com.dto.ShopCart;
 
 /**
  * @author chenchuqian
@@ -23,8 +25,8 @@ public class Customer {
 	private List<GetAddress> address;  //收货地址
 	private Integer sex;      //性别
 	private String email;     //邮箱
-	private List<Commodity> shopCart;  //购物车
-	private List<Commodity> collects;  //收藏夹
+	private List<ShopCart> shopCart;  //购物车
+	private List<Collect> collects;  //收藏夹
     private Integer state;    //状态
     
 	public String getId() {
@@ -75,16 +77,16 @@ public class Customer {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public List<Commodity> getShopCart() {
+	public List<ShopCart> getShopCart() {
 		return shopCart;
 	}
-	public void setShopCart(List<Commodity> shopCart) {
+	public void setShopCart(List<ShopCart> shopCart) {
 		this.shopCart = shopCart;
 	}
-	public List<Commodity> getCollects() {
+	public List<Collect> getCollects() {
 		return collects;
 	}
-	public void setCollects(List<Commodity> collects) {
+	public void setCollects(List<Collect> collects) {
 		this.collects = collects;
 	}
 	public Integer getState() {
