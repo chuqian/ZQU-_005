@@ -25,7 +25,7 @@ import org.springframework.stereotype.Component;
 import com.entity.User;
 import com.service.UserService;
 
-@Component
+@Component 
 public class LoginRealm extends AuthorizingRealm {
 	
 	@Resource(name = "userServiceImpl")

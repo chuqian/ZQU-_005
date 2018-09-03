@@ -28,7 +28,7 @@ public class LoginController {
 	
 	@RequestMapping(value = "/login.action", method = RequestMethod.POST)
 	public String login(User user, HttpServletResponse response) throws IOException {
-
+ 
 		Subject subject = SecurityUtils.getSubject();
 		UsernamePasswordToken token = new UsernamePasswordToken(user.getId(), user.getPassword());
 		
