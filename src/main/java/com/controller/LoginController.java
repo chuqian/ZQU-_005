@@ -20,16 +20,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.JSONPObject;
 import com.entity.User;
-import com.mongodb.client.model.ReturnDocument;
+
 
 @Controller
 public class LoginController {
 	
 	@RequestMapping(value = "/login.action", method = RequestMethod.POST)
 	public String login(User user, HttpServletResponse response) throws IOException {
-		System.out.println("the login request into here and the password is " + user.getPassword());
+
 		Subject subject = SecurityUtils.getSubject();
 		UsernamePasswordToken token = new UsernamePasswordToken(user.getId(), user.getPassword());
 		
@@ -50,7 +49,7 @@ public class LoginController {
 
 			response.getWriter().println(json);
 			response.getWriter().close();
-			System.out.println("the json send success");
+	
 		}
 		
 		return null;

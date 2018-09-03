@@ -8,7 +8,6 @@ package com.realm;
 import java.util.Arrays;
 
 import javax.annotation.Resource;
-import javax.swing.TransferHandler;
 
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -21,7 +20,6 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.tomcat.util.http.parser.Authorization;
 import org.springframework.stereotype.Component;
 
 import com.entity.User;
