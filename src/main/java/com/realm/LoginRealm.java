@@ -44,7 +44,6 @@ public class LoginRealm extends AuthorizingRealm {
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 		// TODO Auto-generated method stub
-		System.out.println("step into loginrealm");
 		String userName = (String)token.getPrincipal();
 		String password = new String((char[])token.getCredentials());
 		
@@ -53,12 +52,9 @@ public class LoginRealm extends AuthorizingRealm {
 		if(user == null)
 			throw new UnknownAccountException();/*no account was found*/
 		
-		if(!user.getPassword().equals(password)) {
-			System.out.println("the login id is " + user.getId());
-			System.out.println("the login user password is " + user.getPassword());
+		if(!user.getPassword().equals(password)) 
 			throw new IncorrectCredentialsException();/*error password*/
-		}
-
+		
 		return new SimpleAuthenticationInfo(user, new Md5Hash(user.getPassword(), ""), "LoginRealm");
 		
 	}
