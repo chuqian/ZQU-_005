@@ -12,12 +12,16 @@
             http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
             http://www.springframework.org/schema/aop
             http://www.springframework.org/schema/aop/spring-aop-4.0.xsd ">
-            
+              
     <import resource="classpath:spring-redis.xml" />
-    <!-- <import resource="classpath:spring-shiro.xml" /> -->
+    <!-- update by lgp
+    use the spring-shiro.xml file -->
+    <import resource="classpath:spring-shiro.xml" />
     <import resource="classpath:mongo-config.xml" />
-    
+     
     <context:component-scan base-package="com.*.impl" />
     <context:component-scan base-package="com.entity" />
+    <!-- add by lgp -->
+    <context:component-scan base-package="com.controller"/>
     
 </beans>

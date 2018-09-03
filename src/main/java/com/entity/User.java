@@ -1,17 +1,24 @@
 package com.entity;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.stereotype.Component;
 
 /**
  * @author chenchuqian
  * @date 2018年8月28日 下午10:49:08
  * @describe 用户类
  */
+@Component
 @Document(collection="user")
-public class User {
+/*update by lgp
+implements the serializable*/
+public class User implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	@Id
 	private String id;        //用户id
 	private String password;    //用户密码
