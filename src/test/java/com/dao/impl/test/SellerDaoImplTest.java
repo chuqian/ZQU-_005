@@ -16,6 +16,7 @@ import com.dto.Comment;
 import com.dto.SendAddress;
 import com.entity.Commodity;
 import com.entity.Seller;
+import com.mongodb.WriteResult;
 
 @RunWith(value=SpringJUnit4ClassRunner.class)
 @ContextConfiguration({"classpath:spring.xml"})
@@ -23,14 +24,16 @@ public class SellerDaoImplTest {
 
 	@Autowired
 	private SellerDaoImpl sellerDaoImpl;
-	
+	/**
+	 * 查询所有店铺
+	 */
 	@Test
 	public void testFindAll(){
 		List<Seller> list = sellerDaoImpl.findAll();
 	}
 	
 	/**
-	 * 第一层修改
+	 * 修改店铺信息（第一层）
 	 */
 	@Test
 	public void updateSellerFirst() {		
@@ -38,15 +41,61 @@ public class SellerDaoImplTest {
 	}
 	
 	/**
-	 * 第二层修改
+	 * 添加商品（第二层）
 	 */
 	@Test
-	public void updateSellerSecond() {		
-		System.out.println(sellerDaoImpl.updateSellerSecond("5b89f6415370c73ce4831b9e","5b8ca22313e5a525f8085b37","伊利牛奶00",55.00));
+	public void insertSellerSecond() {
+		String[] imSrc = new String[5];
+		for(int j=0;j<imSrc.length;j++) {
+			imSrc[j] = "http://///"+j;
+		}
+		Commodity commodity = new Commodity();
+		commodity.setId("cd"+new Date());
+		commodity.setName("kkkk");
+		commodity.setPrice(20.2);
+		commodity.setSaledNum(0);
+		commodity.setScore(0);
+		commodity.setStock(50);
+		commodity.setImSrc(imSrc);
+		commodity.setIsShelf(1);
+		commodity.setCollectedNum(0);
+		commodity.setComments(null);
+		sellerDaoImpl.insertSellerSecond("5b8df3985370c75880d5c6db",commodity);
 	}
 	
 	/**
-	 * 单个添加商家
+	 * 修改商品信息（第二层）
+	 */
+	@Test
+	public void updateSellerSecond() {		
+		sellerDaoImpl.updateSellerSecond("23456","伊利牛奶04561",100.00);
+	}
+	
+	/**
+	 * 删除商品（第二层）
+	 */
+	@Test
+	public void deleteSellerSecond() {
+		String[] imSrc = new String[5];
+		for(int j=0;j<imSrc.length;j++) {
+			imSrc[j] = "http://///"+j;
+		}
+		Commodity commodity = new Commodity();
+		commodity.setId("cdTue Sep 04 10:10:31 CST 2018");
+		commodity.setName("eeee");
+		commodity.setPrice(20.2);
+		commodity.setSaledNum(0);
+		commodity.setScore(0);
+		commodity.setStock(50);
+		commodity.setImSrc(imSrc);
+		commodity.setIsShelf(1);
+		commodity.setCollectedNum(0);
+		commodity.setComments(null);
+		sellerDaoImpl.deleteSellerSecond("cdTue Sep 04 09:23:42 CST 2018",commodity);
+	}
+	
+	/**
+	 * 单个添加商家(第一层)
 	 */
 	@Test
 	public void testInsert(){
@@ -63,6 +112,7 @@ public class SellerDaoImplTest {
 				imSrc[j] = "http://///"+i+j;
 			}
 			Commodity commodity = new Commodity();
+			commodity.setId("cd"+new Date());
 			commodity.setName("伊利牛奶22"+i);
 			commodity.setPrice(20.2);
 			commodity.setSaledNum(0);
@@ -101,8 +151,8 @@ public class SellerDaoImplTest {
 			sendAddress.setDetail("dddd");
 			
 			Seller seller = new Seller();
-			seller.setName("牛爸爸*" + i); 
-			seller.setStore("牛三星旗舰店*" + i);
+			seller.setName("ali爸爸*" + i); 
+			seller.setStore("sli旗舰店*" + i);
 			seller.setPhone("138011110000");
 			seller.setIdentity("2223333333332222");
 			seller.setSex(1);
@@ -152,55 +202,31 @@ public class SellerDaoImplTest {
 	}
 	
 	/**
-	 * 给最后一个店铺第一个商品添加评论（第三层添加）
+	 * 给一个店铺的一个商品(商品Id)添加评论（第三层添加）
 	 */
 	@Test
 	public void testInsertComment(){
-		List<Seller> list = sellerDaoImpl.findAll();
-		Seller seller = list.get(list.size()-1);
-		List<Commodity> commoditys = seller.getCommoditys();
-		Commodity commodity11 = new Commodity();
-		commodity11.setName("伊利牛奶222");
-		commodity11.setPrice(20.2);
-		commodity11.setSaledNum(0);
-		commodity11.setScore(0);
-		commodity11.setStock(50);
-		
-		int index = commoditys.indexOf(commodity11);
-		System.out.println(index);
-		Commodity commodity = commoditys.get(index);
-		
-		System.out.println(commodity.toString());
-		
-//		List<Comment> comments = new ArrayList<Comment>();
-//		if(commodity.getComments()!=null)
-//		{
-//			comments = commodity.getComments();
-//		}
-//		for(int i=1;i<=3;i++)
-//		{
-//			Comment comment = new Comment();
-//			comment.setMember("和附件四");
-//			comment.setContent("bhfdjjkfk");
-//			comment.setContentTime(new Date());
-//			comment.setState(1);
-//			comments.add(comment);
-//		}
-//		commodity.setComments(comments);
-//		commoditys.remove(0);
-		
-		
-		
-//		seller.setCommoditys(commoditys);
-//		int count = sellerDaoImpl.save(seller);
-//		System.out.println(count);
-//		list = sellerDaoImpl.findAll();
-//		seller = list.get(list.size()-1);
-//		System.out.println(seller.toString());
+		Comment comment = new Comment();
+		comment.setContent("评论222111");
+		comment.setContentTime(new Date());
+		comment.setMember("无名氏");
+		comment.setState(1);
+		sellerDaoImpl.insertComment("1111111111",comment);
 	}
 	
 	/**
-	 * 批量修改
+	 * 给一个店铺的一个商品(商品Id)的一个评论(评论Id)添加回复（第三层修改，未完成）
+	 */
+	@Test
+	public void testUpdateComment(){
+		Comment comment = new Comment();
+		comment.setAnswer("回复222111");
+		comment.setAnswerTime(new Date());
+		sellerDaoImpl.updateComment("1111111111","评论222111",comment);
+	}
+	
+	/**
+	 * 批量修改店铺信息
 	 */
 	@Test
 	public void testUpdate(){
@@ -216,7 +242,7 @@ public class SellerDaoImplTest {
 	}
 	
 	/**
-	 * 单个修改
+	 * 单个修改店铺信息
 	 */
 	@Test
 	public void testUpdate2(){
@@ -230,7 +256,7 @@ public class SellerDaoImplTest {
 	
 	
 	/**
-	 * 批量删除
+	 * 批量删除店铺
 	 */
 	@Test
 	public void testDelete() {
@@ -242,7 +268,7 @@ public class SellerDaoImplTest {
 	}
 	
 	/**
-	 * 单个删除(删除最后那个)
+	 * 单个删除店铺(删除最后那个)
 	 */
 	@Test
 	public void testDelete2() {
