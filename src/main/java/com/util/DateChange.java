@@ -14,7 +14,7 @@ import java.util.SimpleTimeZone;
  */
 public class DateChange {
 	
-	/**
+	/** 
 	 * Date类型转String类型
 	 * @param date
 	 * @return
