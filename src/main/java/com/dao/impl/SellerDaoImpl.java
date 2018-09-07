@@ -3,11 +3,8 @@ package com.dao.impl;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.BasicQuery;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
@@ -17,8 +14,6 @@ import com.dao.SellerDao;
 import com.dto.Comment;
 import com.dto.Commodity;
 import com.entity.Seller;
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBObject;
 import com.mongodb.WriteResult;
 
 /**
@@ -30,23 +25,60 @@ import com.mongodb.WriteResult;
 public class SellerDaoImpl extends BaseDaoImpl<Seller> implements SellerDao {
 	
 	@Override
-	public void updateComment(String commodityId,String commentId,Comment comment) {
-		/*Criteria criteria = Criteria.where("commoditys._id").is(commodityId).and("commoditys.comments.content").is(commentId);
+	public int updateCommentState(String commodityId, Comment comment) {
+		Criteria criteria = Criteria.where("commoditys._id").is(commodityId);
 		Query query = new Query(criteria);
-		Update update = new Update();
-		update.set("commoditys.comments.$[].answer", comment.getAnswer());
-		update.set("commoditys.comments.$[].answerTime", comment.getAnswerTime());
-		this.getMongoTemplate().upsert(query, update, Seller.class);*/
-		DBObject queryObject = new BasicDBObject("_id", "5b8df4665370c75e10b9c5af");
-		queryObject.put("commoditys._id", "1111111111");
-		DBObject fieldsObject = new BasicDBObject();
-		fieldsObject.put("commoditys", true);
-		Query query = new BasicQuery(queryObject, fieldsObject);
 		Seller seller = this.getMongoTemplate().findOne(query, Seller.class);
-		
-		List<Commodity> list = seller.getCommoditys();
-		Map<String, Commodity> map = list.stream().collect(Collectors.toMap(Commodity::getId, commodity->commodity));
-		System.out.println(map.get("1111111111").getComments());
+		Commodity commodity = new Commodity();
+		List<Commodity> Cylists = seller.getCommoditys();
+		int flag1 = -1, flag2 = -1;
+		for (Commodity commodity2 : Cylists) {
+			flag1++;
+			if(commodityId.equals(commodity2.getId()))
+			{
+				commodity = commodity2;
+				break;
+			}
+		}
+		List<Comment> Ctlists = commodity.getComments();
+		for (Comment comment3 : Ctlists) {
+			flag2++;
+			if(comment.getMember().equals(comment3.getMember()) && comment.getContentTime().equals(comment3.getContentTime())) {
+				break;
+			}
+		}
+		seller.getCommoditys().get(flag1).getComments().get(flag2).setState(comment.getState());
+		this.getMongoTemplate().save(seller);
+		return 1;
+	}
+	
+	@Override
+	public int updateCommentAnswer(String commodityId, Comment comment) {
+		Criteria criteria = Criteria.where("commoditys._id").is(commodityId);
+		Query query = new Query(criteria);
+		Seller seller = this.getMongoTemplate().findOne(query, Seller.class);
+		Commodity commodity = new Commodity();
+		List<Commodity> Cylists = seller.getCommoditys();
+		int flag1 = -1, flag2 = -1;
+		for (Commodity commodity2 : Cylists) {
+			flag1++;
+			if(commodityId.equals(commodity2.getId()))
+			{
+				commodity = commodity2;
+				break;
+			}
+		}
+		List<Comment> Ctlists = commodity.getComments();
+		for (Comment comment3 : Ctlists) {
+			flag2++;
+			if(comment.getMember().equals(comment3.getMember()) && comment.getContentTime().equals(comment3.getContentTime())) {
+				break;
+			}
+		}
+		seller.getCommoditys().get(flag1).getComments().get(flag2).setAnswer(comment.getAnswer());
+		seller.getCommoditys().get(flag1).getComments().get(flag2).setAnswerTime(comment.getAnswerTime());
+		this.getMongoTemplate().save(seller);
+		return 1;
 	}
 
 	@Override
@@ -130,4 +162,5 @@ public class SellerDaoImpl extends BaseDaoImpl<Seller> implements SellerDao {
 		this.getMongoTemplate().updateMulti(query, update, Seller.class);
 		return 0;
 	}
+
 }

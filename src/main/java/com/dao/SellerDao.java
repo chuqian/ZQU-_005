@@ -13,6 +13,7 @@ import com.mongodb.WriteResult;
  * @describe 商家类接口
  */
 public interface SellerDao {
+	
 	/**
 	 * 条件查询
 	 * @param seller
@@ -43,6 +44,7 @@ public interface SellerDao {
 	 * @return
 	 */
 	public List<Seller> findFuzzy(String key,String value);
+	
 	/**
 	 * 更新数据
 	 * @param key1
@@ -68,29 +70,40 @@ public interface SellerDao {
 	 * @param price
 	 */
 	WriteResult updateSellerSecond(String commodityId, String secondName, Double price);
+	
 	/**
 	 * 第二层添加
 	 * @param sellerId
 	 * @param commodity
 	 */
 	void insertSellerSecond(String sellerId, Commodity commodity);
+	
 	/**
 	 * 第二层删除，信息要完全匹配才可以删除
 	 * @param commodityId
 	 * @param commodity
 	 */
 	void deleteSellerSecond(String commodityId,Commodity commodity);
+	
 	/**
 	 * 第三层添加，评论
 	 * @param commodityId
 	 * @param comment
 	 */
 	void insertComment(String commodityId, Comment comment);
+	
 	/**
-	 * 第三层修改，评论
+	 * 第三层修改，回复评论
 	 * @param commentId
 	 * @param comment
 	 */
-	void updateComment(String commodityId,String commentId, Comment comment);
+	int updateCommentAnswer(String commodityId, Comment comment);
 
+	/**
+	 * 第三层修改，修改评论状态
+	 * @param commodityId
+	 * @param comment
+	 * @return
+	 */
+	int updateCommentState(String commodityId, Comment comment);
 }
