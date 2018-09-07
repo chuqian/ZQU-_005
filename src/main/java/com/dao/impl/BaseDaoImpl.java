@@ -6,8 +6,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.aggregation.ArithmeticOperators.Add;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 
 import com.dao.BaseDao;
 
@@ -28,6 +30,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 		ParameterizedType ptype = (ParameterizedType) 
 				((Class<T>)this.getClass()).getGenericSuperclass();  //获取运行类的父类的参数化类型
 		Type[] types = ptype.getActualTypeArguments();     //获取实际类型参数
+		
 		this.clazz = (Class<T>)types[0];
 	}
 	
@@ -57,7 +60,10 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 	
 	@Override
 	public int save(T t) {
+		System.out.println("the mongoTemplate value is " + mongoTemplate);
+		System.out.println(t + "the t value");
 		mongoTemplate.save(t);
+		System.out.println("success to save the user");
 		return 1;
 	}
 	
@@ -79,6 +85,12 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 	@Override
 	public long rowsCount(){
 		return mongoTemplate.count(new Query(), clazz);
+	}
+
+	/*add by lgp*/
+	@Override
+	public T findAndModify(Query query, Update update, Class<T> entityClass) {
+		return mongoTemplate.findAndModify(query, update, entityClass);
 	}
 	
 }

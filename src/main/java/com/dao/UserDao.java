@@ -11,6 +11,5 @@ import com.entity.User;
 
 @Repository
 public interface UserDao {
-	User findUser(String id);
-	void insertUser(User user);
+	
 }

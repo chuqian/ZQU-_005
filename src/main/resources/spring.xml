@@ -5,13 +5,13 @@
        xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-       		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       		http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
             http://www.springframework.org/schema/context
-            http://www.springframework.org/schema/context/spring-context-4.0.xsd
+            http://www.springframework.org/schema/context/spring-context-4.2.xsd
             http://www.springframework.org/schema/tx
-            http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+            http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
             http://www.springframework.org/schema/aop
-            http://www.springframework.org/schema/aop/spring-aop-4.0.xsd ">
+            http://www.springframework.org/schema/aop/spring-aop-4.2.xsd ">
               
     <import resource="classpath:spring-redis.xml" />
     <!-- update by lgp
@@ -19,9 +19,10 @@
     <import resource="classpath:spring-shiro.xml" />
     <import resource="classpath:mongo-config.xml" />
      
-    <context:component-scan base-package="com.*.impl" />
+    <!-- <context:component-scan base-package="com.*.impl" />
     <context:component-scan base-package="com.entity" />
-    <!-- add by lgp -->
-    <context:component-scan base-package="com.controller"/>
+    <context:component-scan base-package="com.controller"/> -->
+    
+    <context:component-scan base-package="com.*"/>
     
 </beans>
