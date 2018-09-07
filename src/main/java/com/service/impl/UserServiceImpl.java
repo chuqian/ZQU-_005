@@ -1,6 +1,8 @@
 
 package com.service.impl;
 
+import javax.management.relation.Role;
+
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
@@ -15,11 +17,12 @@ import com.service.UserService;
  */
 @Service
 public class UserServiceImpl implements UserService{
+	private static final int TWO_ROLE = 2;
 	private static final int NO_EXIST = 0;
 	private static final int HAVE_SELLER_ROLE = 1;	//此账号拥有卖家角色
 	private static final int HAVE_CUSTOMER_ROLE = 2;	//此账号拥有买家角色
 	private static final int HAVE_TWO_ROLE = 3;	//此账号同时拥有卖、买家角色
-	
+	private static final String ROLE = "seller";
 	@Override
 	public User findUser(BaseDao<User> uBaseDao, String id) {
 		return uBaseDao.findById(id);
@@ -43,7 +46,7 @@ public class UserServiceImpl implements UserService{
 		
 		if(user == null)	//email 没有注册过
 			return NO_EXIST;
-		else if(user.getRoles().length == 2)
+		else if(user.getRoles().length == TWO_ROLE)
 			return HAVE_TWO_ROLE;
 		else if(user.getRoles()[0].equals("seller"))
 			return HAVE_SELLER_ROLE;
@@ -68,6 +71,6 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	public boolean compareRole(String role) {
-		return "seller".equals(role);
+		return ROLE.equals(role);
 	}
 }
