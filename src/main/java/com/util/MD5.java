@@ -14,7 +14,7 @@ import com.entity.User;
 public class MD5 {
 	
 	/**
-	 * encode the user password
+	 * encode the user password 
 	 * @param password
 	 * @param userName
 	 * @return encodePassword

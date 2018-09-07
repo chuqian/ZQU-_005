@@ -3,7 +3,7 @@ package com.util;
 import java.util.UUID;
 
 /**
- * @ author : 李国鹏
+ * @ author : 李国鹏 
  * @ datetime : 18-8-24 上午10:52
  */
 public class CodeUtil {

@@ -18,7 +18,7 @@ public class MailUtil implements Runnable {
 	public MailUtil(String email, String code) {
 		this.email = email;
 		this.code = code;
-	}
+	} 
 
 	public void run() {
 		String from = "1241875397@qq.com";
