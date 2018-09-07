@@ -18,11 +18,13 @@
     use the spring-shiro.xml file -->
     <import resource="classpath:spring-shiro.xml" />
     <import resource="classpath:mongo-config.xml" />
-     
-    <!-- <context:component-scan base-package="com.*.impl" />
-    <context:component-scan base-package="com.entity" />
+    
+    <context:component-scan base-package="com.*" use-default-filters="false">
+    	<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>	
+    </context:component-scan> 
+    <context:component-scan base-package="com.*.impl" />
+    <!-- <context:component-scan base-package="com.entity" />
     <context:component-scan base-package="com.controller"/> -->
     
-    <context:component-scan base-package="com.*"/>
     
 </beans>
