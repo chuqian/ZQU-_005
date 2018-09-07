@@ -11,7 +11,6 @@ import com.entity.Customer;
  *@datetime : Sep 6, 2018 4:55:26 PM
  *@descriptioin :  
  */
-@Service
 public interface CustomerService {
-	void saveCustomer(BaseDao<Customer> cBaseDao, Customer customer);
+	void saveCustomer(Customer customer);
 }

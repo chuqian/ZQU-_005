@@ -1,15 +1,20 @@
 
 package com.service.impl;
 
-import javax.management.relation.Role;
+import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 import com.dao.BaseDao;
+import com.dao.UserDao;
+import com.dao.impl.BaseDaoImpl;
+import com.dao.impl.UserDaoImpl;
 import com.entity.User;
 import com.service.UserService;
+
 /**
  *@author : lgpeng
  *@datetime : Sep 1, 2018 12:50:44 PM
@@ -17,32 +22,36 @@ import com.service.UserService;
  */
 @Service
 public class UserServiceImpl implements UserService{
+	
+	@Autowired
+	private UserDaoImpl userDaoImpl; 
 	private static final int TWO_ROLE = 2;
 	private static final int NO_EXIST = 0;
 	private static final int HAVE_SELLER_ROLE = 1;	//此账号拥有卖家角色
 	private static final int HAVE_CUSTOMER_ROLE = 2;	//此账号拥有买家角色
 	private static final int HAVE_TWO_ROLE = 3;	//此账号同时拥有卖、买家角色
 	private static final String ROLE = "seller";
+	
 	@Override
-	public User findUser(BaseDao<User> uBaseDao, String id) {
-		return uBaseDao.findById(id);
+	public User findUser(String id) {
+		return userDaoImpl.findById(id);
 	}
 
 	@Override
-	public void saveUser(BaseDao<User> uBaseDao, User user) {
-		uBaseDao.save(user);
+	public void saveUser(User user) {
+		userDaoImpl.save(user);
 	}
 
 	@Override
-	public void updateUser(BaseDao<User> uBaseDao, User user) {
+	public void updateUser(User user) {
 		Query query = new Query(Criteria.where("role").is(user.getId()));
 		Update update = new Update().addToSet("role", user.getRoles()[0]);
-		uBaseDao.findAndModify(query, update, User.class);
+		userDaoImpl.findAndModify(query, update, User.class);
 	}
 
 	@Override
-	public int validateEmail(BaseDao<User> baseDao, String email) {
-		User user = baseDao.findById(email);
+	public int validateEmail(String email) {
+		User user = userDaoImpl.findById(email);
 		
 		if(user == null)	//email 没有注册过
 			return NO_EXIST;

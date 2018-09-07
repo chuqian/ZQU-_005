@@ -1,18 +1,8 @@
-/**
- *@author : lgpeng
- *@datetime : Sep 1, 2018 10:03:10 AM
- *@descriptioin :  
- */
+
 package com.controller;
 
 import java.io.IOException;
-import java.time.chrono.ThaiBuddhistEra;
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.http.*;
-import javax.xml.ws.Response;
-
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.session.Session;
@@ -21,12 +11,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.entity.User;
 
-
+/**
+ *@author : lgpeng
+ *@datetime : Sep 1, 2018 10:03:10 AM
+ *@descriptioin :  
+ */
 @Controller
 public class LoginController {
 	

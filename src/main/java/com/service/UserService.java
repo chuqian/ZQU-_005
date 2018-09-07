@@ -8,11 +8,10 @@ import com.entity.User;
  *@datetime : Sep 1, 2018 12:49:19 PM
  *@descriptioin :  
  */
-@Service
 public interface UserService {
+	User findUser(String id);
+	void saveUser(User user);
+	void updateUser(User user);
+	int validateEmail(String id);	
 	boolean validateEmail(String role, int type);
-	User findUser(BaseDao<User> uBaseDao, String id);
-	void saveUser(BaseDao<User> uBaseDao, User user);
-	void updateUser(BaseDao<User> uBaseDao, User user);
-	int validateEmail(BaseDao<User> uBaseDao, String id);	
 }

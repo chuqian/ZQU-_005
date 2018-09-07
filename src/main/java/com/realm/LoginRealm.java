@@ -1,8 +1,4 @@
-/**
- *@author : lgpeng
- *@datetime : Sep 1, 2018 11:23:00 AM
- *@descriptioin :  
- */
+
 package com.realm;
 
 import java.util.Arrays;
@@ -26,18 +22,19 @@ import org.springframework.stereotype.Component;
 import com.dao.BaseDao;
 import com.entity.User;
 import com.service.UserService;
-
+/**
+ *@author : lgpeng
+ *@datetime : Sep 1, 2018 11:23:00 AM
+ *@descriptioin :  自定义 realm
+ */
 @Component 
 public class LoginRealm extends AuthorizingRealm {
 	
-	@Autowired
-	private BaseDao<User> uBaseDao;
-	@Autowired
+	@Resource(name = "userServiceImpl")
 	private UserService userService;
 	
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-		// TODO Auto-generated method stub
 		User user = (User)principals.getPrimaryPrincipal();
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 		info.addRoles(Arrays.asList(user.getRoles()));
@@ -47,11 +44,10 @@ public class LoginRealm extends AuthorizingRealm {
 
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-		// TODO Auto-generated method stub
 		String userName = (String)token.getPrincipal();
 		String password = new String((char[])token.getCredentials());
 		
-		User user = userService.findUser(uBaseDao, userName);
+		User user = userService.findUser(userName);
 		
 		if(user == null)
 			throw new UnknownAccountException();/*no account was found*/

@@ -17,7 +17,6 @@ import com.service.UserService;
 public class UserTest {
 	
 	private User user;
-	private BaseDao<User> uBaseDao;
 	private UserService userService;
 	
 	public void testInsertUser() {
@@ -36,7 +35,7 @@ public class UserTest {
 		user.setPassword("123");
 		user.setPermissions(permissions);
 	
-		userService.insertUser(user);
+		userService.saveUser(user);
 	}
 	
 	@Test
@@ -51,7 +50,6 @@ public class UserTest {
 		@SuppressWarnings("resource")
 		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring.xml");
 		user = (User)applicationContext.getBean("user");
-		uBaseDao = (BaseDao<User>)applicationContext.getBean("baseDao");
 		userService = (UserService)applicationContext.getBean("userServiceImpl");
 	}
 }

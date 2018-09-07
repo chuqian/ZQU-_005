@@ -1,16 +1,13 @@
+
 package com.service;
 
-import org.springframework.stereotype.Service;
-
-import com.dao.BaseDao;
 import com.entity.Seller;
 
 /**
  *@author : 李国鹏
- *@datetime : Sep 6, 2018 11:10:29 AM
- *@descriptioin :  
+ *@datetime : Sep 7, 2018 2:56:11 PM
+ *@descriptioin :  卖家 Service 层接口
  */
-@Service
 public interface SellerService {
-	void saveSeller(BaseDao<Seller> baseDao, Seller seller);
+	void saveSeller(Seller seller);
 }
