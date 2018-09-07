@@ -2,9 +2,6 @@
 package com.realm;
 
 import java.util.Arrays;
-
-import javax.annotation.Resource;
-
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -18,10 +15,9 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import com.dao.BaseDao;
 import com.entity.User;
 import com.service.UserService;
+
 /**
  *@author : lgpeng
  *@datetime : Sep 1, 2018 11:23:00 AM
@@ -30,7 +26,7 @@ import com.service.UserService;
 @Component 
 public class LoginRealm extends AuthorizingRealm {
 	
-	@Resource(name = "userServiceImpl")
+	@Autowired
 	private UserService userService;
 	
 	@Override

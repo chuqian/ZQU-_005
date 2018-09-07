@@ -9,5 +9,9 @@ import com.entity.Seller;
  *@descriptioin :  卖家 Service 层接口
  */
 public interface SellerService {
+	/**
+	 * 
+	 * @param seller
+	 */
 	void saveSeller(Seller seller);
 }

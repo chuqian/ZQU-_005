@@ -1,17 +1,12 @@
 
 package com.service.impl;
 
-import javax.annotation.Resource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
-import com.dao.BaseDao;
 import com.dao.UserDao;
-import com.dao.impl.BaseDaoImpl;
-import com.dao.impl.UserDaoImpl;
 import com.entity.User;
 import com.service.UserService;
 
@@ -24,7 +19,7 @@ import com.service.UserService;
 public class UserServiceImpl implements UserService{
 	
 	@Autowired
-	private UserDaoImpl userDaoImpl; 
+	private UserDao userDao; 
 	private static final int TWO_ROLE = 2;
 	private static final int NO_EXIST = 0;
 	private static final int HAVE_SELLER_ROLE = 1;	//此账号拥有卖家角色
@@ -34,24 +29,24 @@ public class UserServiceImpl implements UserService{
 	
 	@Override
 	public User findUser(String id) {
-		return userDaoImpl.findById(id);
+		return userDao.findById(id);
 	}
 
 	@Override
 	public void saveUser(User user) {
-		userDaoImpl.save(user);
+		userDao.save(user);
 	}
 
 	@Override
 	public void updateUser(User user) {
 		Query query = new Query(Criteria.where("role").is(user.getId()));
 		Update update = new Update().addToSet("role", user.getRoles()[0]);
-		userDaoImpl.findAndModify(query, update, User.class);
+		userDao.findAndModify(query, update, User.class);
 	}
 
 	@Override
 	public int validateEmail(String email) {
-		User user = userDaoImpl.findById(email);
+		User user = userDao.findById(email);
 		
 		if(user == null)	//email 没有注册过
 			return NO_EXIST;

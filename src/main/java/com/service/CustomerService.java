@@ -1,9 +1,6 @@
 
 package com.service;
 
-import org.springframework.stereotype.Service;
-
-import com.dao.BaseDao;
 import com.entity.Customer;
 
 /**
@@ -12,5 +9,9 @@ import com.entity.Customer;
  *@descriptioin :  
  */
 public interface CustomerService {
+	/**
+	 * 
+	 * @param customer
+	 */
 	void saveCustomer(Customer customer);
 }

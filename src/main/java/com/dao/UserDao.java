@@ -1,15 +1,12 @@
-/**
- *@author : lgpeng
- *@datetime : Sep 1, 2018 12:57:23 PM
- *@descriptioin :  
- */
 package com.dao;
-
-import org.springframework.stereotype.Repository;
 
 import com.entity.User;
 
-@Repository
-public interface UserDao {
+/**
+ *@author : lgpeng
+ *@datetime : Sep 1, 2018 12:57:23 PM
+ *@descriptioin :  User Dao 接口
+ */
+public interface UserDao extends BaseDao<User>{
 	
 }
