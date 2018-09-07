@@ -9,12 +9,15 @@ import org.junit.Test;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.dao.BaseDao;
 import com.entity.User;
 import com.service.UserService;
 
 public class UserTest {
 	
 	private User user;
+	private BaseDao<User> uBaseDao;
 	private UserService userService;
 	
 	public void testInsertUser() {
@@ -43,10 +46,12 @@ public class UserTest {
 		System.out.println("the user id is " + userService.findUser("123").getId());
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void init() {
 		@SuppressWarnings("resource")
 		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring.xml");
 		user = (User)applicationContext.getBean("user");
+		uBaseDao = (BaseDao<User>)applicationContext.getBean("baseDao");
 		userService = (UserService)applicationContext.getBean("userServiceImpl");
 	}
 }
