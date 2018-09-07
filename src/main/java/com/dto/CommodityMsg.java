@@ -1,5 +1,6 @@
 package com.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -7,10 +8,15 @@ import java.util.Date;
  * @date 2018年8月28日 下午11:21:01
  * @describe 订单商品信息,关联到订单中的某个商品
  */
-public class CommodityMsg {
+public class CommodityMsg implements Serializable {
+
+	private static final long serialVersionUID = 1890475226288859219L;
+	
 	private String commodityId;  //商品id
 	private String commodityName; //商品名称
 	private String imgScr;      //图片地址
+	private Double price;       //商品价格
+	private Integer number;     //商品数量
 	private String content;     //评论内容
 	private Date contentTime;   //评论日期
 	private String answer;      //回复评论
@@ -34,6 +40,18 @@ public class CommodityMsg {
 	}
 	public void setImgScr(String imgScr) {
 		this.imgScr = imgScr;
+	}
+	public Double getPrice() {
+		return price;
+	}
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+	public Integer getNumber() {
+		return number;
+	}
+	public void setNumber(Integer number) {
+		this.number = number;
 	}
 	public String getContent() {
 		return content;
@@ -69,7 +87,7 @@ public class CommodityMsg {
 	@Override
 	public String toString() {
 		return "CommodityMsg [commodityId=" + commodityId + ", commodityName=" + commodityName + ", imgScr=" + imgScr
-				+ ", content=" + content + ", contentTime=" + contentTime + ", answer=" + answer + ", answerTime="
-				+ answerTime + ", state=" + state + "]";
+				+ ", price=" + price + ", number=" + number + ", content=" + content + ", contentTime=" + contentTime
+				+ ", answer=" + answer + ", answerTime=" + answerTime + ", state=" + state + "]";
 	}
 }

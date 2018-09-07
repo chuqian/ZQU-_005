@@ -2,7 +2,7 @@ package com.service;
 
 import com.common.PageQueryVo;
 import com.common.Pager;
-import com.entity.Commodity;
+import com.dto.Commodity;
 
 /**
  * 

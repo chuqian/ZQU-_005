@@ -1,17 +1,23 @@
 package com.dto;
 
+import java.io.Serializable;
+
 /**
  * @author chenchuqian
  * @date 2018年8月28日 下午11:02:37
  * @describe 收货地址
  */
-public class GetAddress {
+public class GetAddress implements Serializable {
+	
+	private static final long serialVersionUID = 7732988267615774295L;
+	
 	private String name;      //收货人姓名
 	private String phone;     //收货人手机号
 	private String province;  //省份
 	private String city;      //直辖市
 	private String county;    //县/区
 	private String detail;    //详细地址
+	private String postalNumber; //邮政编码
 	
 	public String getName() {
 		return name;
@@ -49,10 +55,16 @@ public class GetAddress {
 	public void setDetail(String detail) {
 		this.detail = detail;
 	}
+	public String getPostalNumber() {
+		return postalNumber;
+	}
+	public void setPostalNumber(String postalNumber) {
+		this.postalNumber = postalNumber;
+	}
 	
 	@Override
 	public String toString() {
 		return "GetAddress [name=" + name + ", phone=" + phone + ", province=" + province + ", city=" + city
-				+ ", county=" + county + ", detail=" + detail + "]";
-	}	
+				+ ", county=" + county + ", detail=" + detail + ", postalNumber=" + postalNumber + "]";
+	}
 }

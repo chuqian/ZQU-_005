@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
 import com.dao.CommodityDao;
-import com.entity.Commodity;
+import com.dto.Commodity;
 
 /**
  * @author chenchuqian

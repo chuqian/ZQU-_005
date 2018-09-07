@@ -1,5 +1,6 @@
 package com.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -7,7 +8,9 @@ import java.util.Date;
  * @date 2018年8月28日 下午5:10:34
  * @describe 收藏夹
  */
-public class Collect {
+public class Collect implements Serializable {
+	private static final long serialVersionUID = 1591853709545597979L;
+	
 	private String commodityId; //商品id
 	private String name;       //商品名称
 	private Double price;      //商品价格

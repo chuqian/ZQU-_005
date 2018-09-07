@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.common.PageQueryVo;
 import com.common.Pager;
-import com.entity.Commodity;
+import com.dto.Commodity;
 import com.service.CommodityService;
 
 /**

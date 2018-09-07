@@ -1,22 +1,19 @@
-package com.entity;
+package com.dto;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
-import com.dto.Comment;
 
 /**
  * @author chenchuqian
  * @date 2018年8月24日 下午11:31:45
  * @describe 商品类
  */
-@Document(collection="commodity")
-public class Commodity {
-	@Id
+public class Commodity implements Serializable {
+
+	private static final long serialVersionUID = 798355473319608062L;
+	
 	private String id;       //商品id
 	private String name;     //商品名称
 	private Double price;    //商品价格
