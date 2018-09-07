@@ -3,7 +3,7 @@ package com.dao;
 import java.util.List;
 
 import com.dto.Comment;
-import com.entity.Commodity;
+import com.dto.Commodity;
 import com.entity.Seller;
 import com.mongodb.WriteResult;
 

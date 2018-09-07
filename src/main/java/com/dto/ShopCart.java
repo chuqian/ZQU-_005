@@ -1,5 +1,6 @@
 package com.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -7,7 +8,10 @@ import java.util.Date;
  * @date 2018年8月28日 下午10:50:44
  * @describe 购物车
  */
-public class ShopCart {
+public class ShopCart implements Serializable {
+	
+	private static final long serialVersionUID = -5131765503213470470L;
+	
 	private String commodityId; //商品id
 	private String name;   //商品名称
 	private Integer count; //数量

@@ -2,7 +2,7 @@ package com.dao;
 
 import java.util.List;
 
-import com.entity.Commodity;
+import com.dto.Commodity;
 
 /**
  * @author chenchuqian

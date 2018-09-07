@@ -1,5 +1,6 @@
 package com.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -7,7 +8,9 @@ import java.util.Date;
  * @date 2018年8月28日 下午11:28:23
  * @describe 评论，关联到商品
  */
-public class Comment {
+public class Comment implements Serializable {
+	private static final long serialVersionUID = 1540486956094588363L;
+	
 	private String member;    //评论者(会员名)
 	private String content;   //评论内容
 	private Date contentTime; //评论日期

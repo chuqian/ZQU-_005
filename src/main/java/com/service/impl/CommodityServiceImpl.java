@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.common.PageQueryVo;
 import com.common.Pager;
 import com.dao.impl.CommodityDaoImpl;
-import com.entity.Commodity;
+import com.dto.Commodity;
 import com.service.CommodityService;
 
 /**

@@ -14,11 +14,10 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Document(collection="user")
-/*update by lgp
-implements the serializable*/
 public class User implements Serializable {
+
+	private static final long serialVersionUID = 5445975308468971325L;
 	
-	private static final long serialVersionUID = 1L;
 	@Id
 	private String id;        //用户id
 	private String password;    //用户密码

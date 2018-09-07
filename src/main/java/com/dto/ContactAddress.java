@@ -2,14 +2,15 @@ package com.dto;
 
 /**
  * @author chenchuqian
- * @date 2018年8月28日 下午11:06:12
- * @describe 发货地址
+ * @date 2018年9月6日 上午10:17:02
+ * @describe 联系地址
  */
-public class SendAddress {
-	private String province;  //省份
-	private String city;      //直辖市
-	private String county;    //县/区
-	private String detail;    //详细地址
+public class ContactAddress {
+	private String province;    //省份
+	private String city;        //直辖市
+	private String county;      //县/区
+	private String  detail;	    //详细地址
+	private String  postalNumber;  //邮政编号
 	
 	public String getProvince() {
 		return province;
@@ -35,10 +36,10 @@ public class SendAddress {
 	public void setDetail(String detail) {
 		this.detail = detail;
 	}
-	
-	@Override
-	public String toString() {
-		return "SendAddress [province=" + province + ", city=" + city + ", county=" + county + ", detail=" + detail
-				+ "]";
+	public String getPostalNumber() {
+		return postalNumber;
+	}
+	public void setPostalNumber(String postalNumber) {
+		this.postalNumber = postalNumber;
 	}
 }
