@@ -12,15 +12,5 @@ import com.entity.User;
 
 @Repository
 public class UserDaoImpl extends BaseDaoImpl<User> implements UserDao {
-	@Override
-	public User findUser(String id) {
-		// TODO Auto-generated method stub
-		return findById(id);
-	}
 	
-	@Override
-	public void insertUser(User user) {
-		// TODO Auto-generated method stub
-		save(user);
-	}
 }
