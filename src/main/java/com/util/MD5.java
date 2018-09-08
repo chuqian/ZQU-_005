@@ -1,25 +1,20 @@
+
+package com.util;
+
+import org.apache.shiro.crypto.hash.Md5Hash;
 /**
  *@author : lgpeng
  *@datetime : Sep 3, 2018 8:43:21 PM
- *@descriptioin :  
+ *@descriptioin :  对用户的密码进行加密
  */
-package com.util;
-
-import java.security.spec.EncodedKeySpec;
-
-import org.apache.shiro.crypto.hash.Md5Hash;
-
-import com.entity.User;
-
 public class MD5 {
-	
 	/**
-	 * encode the user password 
+	 * 对密码进行加密 
 	 * @param password
 	 * @param userName
 	 * @return encodePassword
 	 */
-	public String encode(String password, String userName) {
+	public static final String encode(String password, String userName) {
 		String encodedPassword = new Md5Hash(password, userName).toHex();
 		
 		return encodedPassword;

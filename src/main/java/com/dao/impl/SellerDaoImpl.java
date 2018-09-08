@@ -24,6 +24,12 @@ import com.mongodb.WriteResult;
 @Repository
 public class SellerDaoImpl extends BaseDaoImpl<Seller> implements SellerDao {
 	
+	
+	@Override
+	public Seller findByEmail(String email) {
+		return null;
+	}
+
 	@Override
 	public int updateCommentState(String commodityId, Comment comment) {
 		Criteria criteria = Criteria.where("commoditys._id").is(commodityId);

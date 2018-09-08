@@ -8,7 +8,9 @@ import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
 /**
- * @ author : 李国鹏 @ datetime : 18-8-24 上午10:53
+ * @ author : 李国鹏 
+ * @ datetime : 18-8-24 上午10:53
+ * @ description : 向注册邮箱发送验证码
  */
 public class MailUtil implements Runnable {
 

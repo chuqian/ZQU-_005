@@ -23,6 +23,8 @@ public class Commodity implements Serializable {
 	private String[] imSrc;  //图片
 	private Integer isShelf; //是否上架
 	private Date shelfTime;  //上架时间
+	private Integer formwork;   //运费
+	private String commodityType;  //商品类型
 	private Integer collectedNum;    //收藏数量
 	private List<Comment> comments;  //商品有关评论
 	
@@ -92,11 +94,24 @@ public class Commodity implements Serializable {
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
 	}
+	public Integer getFormwork() {
+		return formwork;
+	}
+	public void setFormwork(Integer formwork) {
+		this.formwork = formwork;
+	}
+	public String getCommodityType() {
+		return commodityType;
+	}
+	public void setCommodityType(String commodityType) {
+		this.commodityType = commodityType;
+	}
 	
 	@Override
 	public String toString() {
 		return "Commodity [id=" + id + ", name=" + name + ", price=" + price + ", saledNum=" + saledNum + ", score="
 				+ score + ", stock=" + stock + ", imSrc=" + Arrays.toString(imSrc) + ", isShelf=" + isShelf
-				+ ", shelfTime=" + shelfTime + ", collectedNum=" + collectedNum + ", comments=" + comments + "]";
+				+ ", shelfTime=" + shelfTime + ", formwork=" + formwork + ", commodityType=" + commodityType
+				+ ", collectedNum=" + collectedNum + ", comments=" + comments + "]";
 	}
 }

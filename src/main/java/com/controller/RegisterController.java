@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.cache.BaseCacheService;
@@ -21,6 +22,7 @@ import com.entity.Customer;
 import com.entity.Seller;
 import com.entity.User;
 import com.service.CustomerService;
+import com.service.RegisterService;
 import com.service.SellerService;
 import com.service.UserService;
 import com.service.impl.UserServiceImpl;
@@ -32,36 +34,26 @@ import com.util.MailUtil;
  *@descriptioin :  
  */
 @Controller
+@RequestMapping(value = "/register")
 public class RegisterController {
 	
 	@Autowired
-	private UserService userService;
-	@Autowired
-	private SellerService sellerService;
-	@Autowired
-	private CustomerService customerService;
-	@Autowired
-	private BaseCacheService baseCacheService;
-	private static final int NO_ROLE = 0;
+	private RegisterService registerService;
+	
 	/**
 	 * @param seller
 	 * @return 注册完后要返回的页面
 	 * @description 卖家注册
 	 */
-	@RequestMapping(value = "/registerSeller", method = RequestMethod.POST)
-	public ModelAndView registerSaller(Seller seller) {
-		ModelAndView mv = new ModelAndView("注册完后要跳转的页面");
-		mv.addObject("seller", seller);
-		sellerService.saveSeller(seller);
+	@RequestMapping(value = "/{path}", method = RequestMethod.POST)
+	public ModelAndView registerSaller(@RequestParam(value = "path")String path, HttpServletRequest request) {
+		String email = (String)request.getParameter("email");
+		String password = (String)request.getParameter("password");
+		String returnView = registerService.getRedirect(path);
 		
-		return mv;
-	}
-	
-	@RequestMapping(value = "/registerCustomer", method = RequestMethod.POST)
-	public ModelAndView registerCustomer(Customer customer) {
-		ModelAndView mv = new ModelAndView("注册完后要跳转的页面");
-		mv.addObject("customer", customer);
-		customerService.saveCustomer(customer);
+		registerService.saveObject(path);
+		ModelAndView mv = new ModelAndView(returnView);
+		mv.addObject("user", user);
 		
 		return mv;
 	}
@@ -69,11 +61,6 @@ public class RegisterController {
 	@RequestMapping(value = "/registerAccount", method = RequestMethod.POST)
 	public ModelAndView registerAccount(User user) {
 		ModelAndView mv = new ModelAndView("注册完账号后要跳转的页面");
-		
-		if(userService.validateEmail(user.getId()) != NO_ROLE) //此账号没有注册过买家和卖家
-			userService.saveUser(user);
-		else
-			userService.updateUser(user);	//此账号已经注册过卖家或买家其中一个角色账号
 		
 		mv.addObject("user", user);
 		
@@ -95,6 +82,7 @@ public class RegisterController {
 		baseCacheService.expire(code, 60);
 		baseCacheService.set(email, email);
 		baseCacheService.expire(email, 60);
+		
 	
 		try {
 			response.getWriter().write(code);
@@ -135,7 +123,7 @@ public class RegisterController {
 	 * @description 检查此邮箱是否已经注册 
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/validateEmail", method = RequestMethod.POST)
+	@RequestMapping(value = "/validateEmail/{path}", method = RequestMethod.POST)
 	public void validateEmail(HttpServletRequest request, HttpServletResponse response) {
 		String role = (String)request.getParameter("role");
 		String email = (String) request.getParameter("email");

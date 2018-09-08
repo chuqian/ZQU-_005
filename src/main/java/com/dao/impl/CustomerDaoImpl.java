@@ -13,5 +13,11 @@ import com.entity.Customer;
  */
 @Repository
 public class CustomerDaoImpl extends BaseDaoImpl<Customer> implements CustomerDao{
+
+	@Override
+	public Customer findByEmail(String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

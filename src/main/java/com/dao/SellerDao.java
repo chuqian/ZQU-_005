@@ -1,7 +1,6 @@
 package com.dao;
 
 import java.util.List;
-
 import com.dto.Comment;
 import com.dto.Commodity;
 import com.entity.Seller;
@@ -29,7 +28,14 @@ public interface SellerDao {
 	 * @return
 	 */
 	public List<Seller> findByCondition(Seller seller, int skip, int limit);
-
+	
+	/** add by lgp
+	 * 注册时根据 email 查询此 email 是否已经注册过卖家
+	 * @param email
+	 * @return
+	 */
+	public Seller findByEmail(String email);
+	
 	/**
 	 * 统计记录条数 
 	 * @param seller

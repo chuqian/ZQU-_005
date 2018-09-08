@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
  *@datetime : Sep 5, 2018 3:01:31 PM
  *@descriptioin :  方便扩展和更换缓存技术 
  */
-@Service
+
 public interface BaseCacheService {
 
 	public void set(String key, String value);
