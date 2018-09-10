@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.cache.BaseCacheService;
@@ -27,6 +28,7 @@ import com.service.SellerService;
 import com.service.UserService;
 import com.service.impl.UserServiceImpl;
 import com.util.CodeUtil;
+import com.util.MD5;
 import com.util.MailUtil;
 /**
  *@author : lgpeng
@@ -45,27 +47,19 @@ public class RegisterController {
 	 * @return 注册完后要返回的页面
 	 * @description 卖家注册
 	 */
-	@RequestMapping(value = "/{path}", method = RequestMethod.POST)
-	public ModelAndView registerSaller(@RequestParam(value = "path")String path, HttpServletRequest request) {
+	@RequestMapping(value = "/{role}", method = RequestMethod.POST)
+	public ModelAndView registerSaller(@RequestParam(value = "role")String role, HttpServletRequest request) {
 		String email = (String)request.getParameter("email");
 		String password = (String)request.getParameter("password");
-		String returnView = registerService.getRedirect(path);
+		String returnView = registerService.getRedirect(role);
 		
-		registerService.saveObject(path);
+		registerService.saveObject(role, email, MD5.encode(password, email));
 		ModelAndView mv = new ModelAndView(returnView);
-		mv.addObject("user", user);
+		mv.addObject("user", email);
 		
 		return mv;
 	}
-	
-	@RequestMapping(value = "/registerAccount", method = RequestMethod.POST)
-	public ModelAndView registerAccount(User user) {
-		ModelAndView mv = new ModelAndView("注册完账号后要跳转的页面");
-		
-		mv.addObject("user", user);
-		
-		return mv;
-	}
+
 	/**
 	 * @param request
 	 * @param response
@@ -76,13 +70,12 @@ public class RegisterController {
 	public void getCode(HttpServletRequest request, HttpServletResponse response) {
 		String code = CodeUtil.generateUniqueCode();
 		String email = (String)request.getParameter("email");
-		new MailUtil(email, code).run();
+		new Thread(new MailUtil(email, code)).start(); //启动发送验证码线程
 		
-		baseCacheService.set(code, code);
-		baseCacheService.expire(code, 60);
-		baseCacheService.set(email, email);
-		baseCacheService.expire(email, 60);
-		
+		registerService.setCache(code, code);
+		registerService.expireCache(code, 60); //验证码时间为 60s
+		registerService.setCache(email, email);
+		registerService.expireCache(email, 60);
 	
 		try {
 			response.getWriter().write(code);
@@ -101,8 +94,8 @@ public class RegisterController {
 	public void validateCode(HttpServletRequest request, HttpServletResponse response) {
 		String preCode = request.getParameter("code");
 		String preEmail = request.getParameter("email");
-		String afterCode = baseCacheService.get(preCode);
-		String afterEmail = baseCacheService.get(preEmail);
+		String afterCode = registerService.getCache(preCode);
+		String afterEmail = registerService.getCache(preEmail);
 		
 		try {
 			if(afterEmail == null)	//不是原先的 email
@@ -123,13 +116,12 @@ public class RegisterController {
 	 * @description 检查此邮箱是否已经注册 
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/validateEmail/{path}", method = RequestMethod.POST)
-	public void validateEmail(HttpServletRequest request, HttpServletResponse response) {
-		String role = (String)request.getParameter("role");
+	@RequestMapping(value = "/validateEmail/{role}", method = RequestMethod.POST)
+	public void validateEmail(@RequestParam(value = "role")String role, HttpServletRequest request, HttpServletResponse response) {
 		String email = (String) request.getParameter("email");
 		
 		try {
-			if(userService.validateEmail(role, userService.validateEmail(email)))
+			if(registerService.validateEmail(role, registerService.validateEmail(email, role)))
 				response.getWriter().write("1");
 			else
 				response.getWriter().write("0");
