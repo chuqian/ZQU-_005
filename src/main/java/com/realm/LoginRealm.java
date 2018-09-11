@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.entity.User;
 import com.service.UserService;
+import com.util.MD5;
 
 /**
  *@author : lgpeng
@@ -26,6 +27,8 @@ import com.service.UserService;
 @Component 
 public class LoginRealm extends AuthorizingRealm {
 	
+	@Autowired
+	private User user;
 	@Autowired
 	private UserService userService;
 	
@@ -41,17 +44,20 @@ public class LoginRealm extends AuthorizingRealm {
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 		String userName = (String)token.getPrincipal();
+		System.out.println("the loginRealm userName is " + userName);
 		String password = new String((char[])token.getCredentials());
 		
-		User user = userService.findUser(userName);
-		
-		if(user == null)
+		user = userService.findUser(userName);
+		System.out.println("the loginRealm find user is " + user.getPassword());
+		if(user == null) 
 			throw new UnknownAccountException();/*no account was found*/
 		
-		if(!user.getPassword().equals(password)) 
+		if(!user.getPassword().equals(MD5.encode(password, userName))) { 
+			System.out.println("the database's password is " + user.getPassword() + " the input password is " + password);
 			throw new IncorrectCredentialsException();/*error password*/
-		
-		return new SimpleAuthenticationInfo(user, new Md5Hash(user.getPassword(), ""), "LoginRealm");
+		}
+		System.out.println("the realm name is " + getName());
+		return new SimpleAuthenticationInfo(user.getId(), password, getName());
 	}
  
 }

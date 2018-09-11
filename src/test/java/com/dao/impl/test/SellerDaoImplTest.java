@@ -173,9 +173,10 @@ public class SellerDaoImplTest {
 		seller.setInfo("店铺简介");
 		seller.setContactAddress(contactAddress);
 		seller.setStoreImg("店铺标志图片地址");
-		seller.setSellerOrders(sellerOrders);
-		seller.setState(1);		
-		seller.setCommoditys(commoditys);
+		seller.setSellerOrders(null);
+		seller.setState(1);	
+		seller.setEmail("2630549550@qq.com");
+		seller.setCommoditys(null);
 		sellerDaoImpl.save(seller);
 	}
 	

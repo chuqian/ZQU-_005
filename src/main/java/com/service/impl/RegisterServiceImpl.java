@@ -1,18 +1,18 @@
 
 package com.service.impl;
 
-import javax.annotation.Resource;
-
+import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.cache.BaseCacheService;
-import com.dao.BaseDao;
+import com.dao.CustomerDao;
+import com.dao.SellerDao;
+import com.dao.UserDao;
 import com.entity.Customer;
 import com.entity.Seller;
 import com.entity.User;
 import com.service.RegisterService;
-import com.util.MD5;
+
 /**
  *@author : 李国鹏
  *@datetime : Sep 7, 2018 8:06:01 PM
@@ -22,31 +22,83 @@ import com.util.MD5;
 public class RegisterServiceImpl implements RegisterService{
 	
 	@Autowired
-	private Seller seller;
+	User user;
+	@Autowired
+	Seller seller;
 	@Autowired
 	private Customer customer;
-	@Resource(name = "sellerBaseDaoImpl")
-	private BaseDao<Seller> sBaseDao;
-	@Resource(name = "customerBaseDaoImpl")
-	private BaseDao<Customer> cBaseDao;
+	@Autowired
+	private UserDao userDao;
+	@Autowired
+	private SellerDao sellerDao;
+	@Autowired
+	private CustomerDao customerDao;
 	@Autowired
 	private BaseCacheService baseCacheService;
-	private static final String REDIRECT_VIEW = "返回买家的视图";
+	private final String SELLER = "seller";
+	private final String CUSTOMER = "customer";
+	private final String REDIRECT_VIEW = "customer";
 	
 	public String getRedirect(String path) {
 		if(REDIRECT_VIEW.equals(path))
 			return REDIRECT_VIEW;
 		else
-			return "要卖家的视图";
+			return SELLER;
 	}
 	
-	public void saveObject(String path,String password, String email) {
+	public void saveObject(String role,String password, String email) {
+		String uuid = UUID.randomUUID().toString();
 		
-		if(REDIRECT_VIEW.equals(path)) {
-			if(sBaseDao.findByEmail(email))
+		if(REDIRECT_VIEW.equals(role)) {
+			customer.setId(uuid);
 			customer.setEmail(email);
-			cBaseDao.save(customer);
+			customerDao.save(customer);
+			
+			if(sellerDao.findByEmail(email) == null) { //此 email 没有注册过卖家 
+				String roles[] = {CUSTOMER};
+				user.setId(uuid);
+				user.setPassword(password);
+				user.setRoles(roles);
+				userDao.save(user);
+			}
+			else {
+				String key = sellerDao.findByEmail(email).getId();
+				userDao.addRole(key, CUSTOMER);
+			}
 		}
+		else {
+			seller.setId(uuid);
+			seller.setEmail(email);
+			sellerDao.save(seller);
+			
+			if(customerDao.findByEmail(email) == null) { //此 email 没有注册过买家 
+				String roles[] = {SELLER};
+				User user = new User();
+				user.setId(uuid);
+				user.setPassword(password);
+				user.setRoles(roles);
+				userDao.save(user);
+			}
+			else {
+				String key = sellerDao.findByEmail(email).getId();
+				userDao.addRole(key, CUSTOMER);
+			}
+		}
+	}
+
+	@Override
+	public boolean validateEmail(String email, String role) {
+
+		if(SELLER.equals(role)) 
+			if(sellerDao.findByEmail(email) == null)
+				return true;	//此账号没有注册过卖家
+			else
+				return false;
+		else
+			if(customerDao.findByEmail(email) == null)
+				return true;	//此账号没有注册过买家
+			else 
+				return false;
 	}
 
 	@Override

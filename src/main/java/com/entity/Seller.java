@@ -30,6 +30,7 @@ public class Seller implements Serializable {
 	private String identity;  //身份证号
 	private Integer sex;      //性别
 	private String info;      //店铺简介
+	private String email;
 	private ContactAddress contactAddress; //联系地址
 	private String storeImg;  //店铺标志
 	private List<Commodity> commoditys; //店铺商品
@@ -41,6 +42,13 @@ public class Seller implements Serializable {
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public String getName() {
 		return name;
@@ -114,13 +122,12 @@ public class Seller implements Serializable {
 	public void setState(Integer state) {
 		this.state = state;
 	}
-	
 	@Override
 	public String toString() {
 		return "Seller [id=" + id + ", name=" + name + ", store=" + store + ", type=" + type + ", phone=" + phone
-				+ ", identity=" + identity + ", sex=" + sex + ", info=" + info + ", contactAddress=" + contactAddress
-				+ ", storeImg=" + storeImg + ", commoditys=" + commoditys + ", sellerOrders=" + sellerOrders
-				+ ", state=" + state + "]";
+				+ ", identity=" + identity + ", sex=" + sex + ", info=" + info + ", email=" + email
+				+ ", contactAddress=" + contactAddress + ", storeImg=" + storeImg + ", commoditys=" + commoditys
+				+ ", sellerOrders=" + sellerOrders + ", state=" + state + "]";
 	}
 	
 }

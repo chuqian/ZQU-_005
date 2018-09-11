@@ -1,8 +1,9 @@
 
 package com.dao.impl;
 
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
-
 import com.dao.CustomerDao;
 import com.entity.Customer;
 
@@ -13,10 +14,15 @@ import com.entity.Customer;
  */
 @Repository
 public class CustomerDaoImpl extends BaseDaoImpl<Customer> implements CustomerDao{
-
+	
+	private static final String EMAIL = "email";
 	@Override
 	public Customer findByEmail(String email) {
-		// TODO Auto-generated method stub
+		Query query = new Query(Criteria.where(EMAIL).is(email));
+		
+		if(this.getMongoTemplate().find(query, Customer.class).size() != 0)
+			return this.getMongoTemplate().find(query, Customer.class).get(0);
+		
 		return null;
 	}
 	

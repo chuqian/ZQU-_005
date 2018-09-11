@@ -8,5 +8,17 @@ import com.entity.User;
  *@descriptioin :  User Dao 接口
  */
 public interface UserDao extends BaseDao<User>{
+	/**
+	 * 增加角色
+	 * @param key
+	 * @param value
+	 */
+	void addRole(String key, String value);
 	
+	/**
+	 * 修改密码
+	 * @param key
+	 * @param value
+	 */
+	void updatePassword(String key, String value);
 }

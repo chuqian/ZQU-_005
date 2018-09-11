@@ -1,15 +1,11 @@
 package com.dao.impl;
 
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Pattern;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
-
 import com.dao.SellerDao;
 import com.dto.Comment;
 import com.dto.Commodity;
@@ -24,9 +20,14 @@ import com.mongodb.WriteResult;
 @Repository
 public class SellerDaoImpl extends BaseDaoImpl<Seller> implements SellerDao {
 	
-	
+	private final String EMAIL = "email";
 	@Override
 	public Seller findByEmail(String email) {
+		Query query = new Query(Criteria.where(EMAIL).is(email));
+		
+		if(this.getMongoTemplate().find(query, Seller.class).size() != 0 )
+			return this.getMongoTemplate().find(query, Seller.class).get(0);
+		
 		return null;
 	}
 

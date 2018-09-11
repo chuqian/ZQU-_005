@@ -1,5 +1,5 @@
 function send(){
-	$.post("login",{name:123,password:12},function(data){
+	$.post("login.action",{id:123,password:123},function(data){
 		alert("the return date is " + data);
 	})
 	

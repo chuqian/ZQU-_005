@@ -11,7 +11,7 @@ import com.mongodb.WriteResult;
  * @date 2018年8月31日 下午9:39:47
  * @describe 商家类接口
  */
-public interface SellerDao {
+public interface SellerDao extends BaseDao<Seller>{
 	
 	/**
 	 * 条件查询

@@ -6,33 +6,35 @@
 package com.user.test;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import com.dao.BaseDao;
 import com.entity.User;
 import com.service.UserService;
-
+import com.util.MD5;
+@RunWith(value=SpringJUnit4ClassRunner.class)
+@ContextConfiguration({"classpath:spring.xml"})
 public class UserTest {
 	
+	@Autowired
 	private User user;
+	@Autowired
 	private UserService userService;
 	
+	@Test
 	public void testInsertUser() {
-		init();
-		
 		String permissions[] = new String[2];
 		permissions[0] = "add";
 		permissions[1] = "delete";
-		
 		String roles[] = new String[2];
 		roles[0] = "admin";
 		roles[1] = "user";
-		user.setId("12312");
+		user.setId("123");
 		user.setRoles(roles);
 		user.setUserType("admin");
-		user.setPassword("123");
+		user.setPassword(MD5.encode("123", "123"));
 		user.setPermissions(permissions);
 	
 		userService.saveUser(user);
@@ -40,16 +42,7 @@ public class UserTest {
 	
 	@Test
 	public void testFindUser() {
-		init();
-		
 		System.out.println("the user id is " + userService.findUser("123").getId());
 	}
 	
-	@SuppressWarnings("unchecked")
-	public void init() {
-		@SuppressWarnings("resource")
-		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring.xml");
-		user = (User)applicationContext.getBean("user");
-		userService = (UserService)applicationContext.getBean("userServiceImpl");
-	}
 }

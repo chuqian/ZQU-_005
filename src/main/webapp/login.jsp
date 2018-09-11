@@ -14,6 +14,7 @@
 		<br>
 		password: <input type="text" name="password">
 		<br>
+		<input type="radio" name="rememberMe" >记住我
 		<input type="submit" value="submit" onclick="return send()">
 	</form>
 </body>
