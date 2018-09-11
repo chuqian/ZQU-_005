@@ -12,6 +12,7 @@ import com.entity.Customer;
 import com.entity.Seller;
 import com.entity.User;
 import com.service.RegisterService;
+import com.util.MD5;
 
 /**
  *@author : 李国鹏
@@ -21,12 +22,6 @@ import com.service.RegisterService;
 @Service
 public class RegisterServiceImpl implements RegisterService{
 	
-	@Autowired
-	User user;
-	@Autowired
-	Seller seller;
-	@Autowired
-	private Customer customer;
 	@Autowired
 	private UserDao userDao;
 	@Autowired
@@ -47,9 +42,11 @@ public class RegisterServiceImpl implements RegisterService{
 	}
 	
 	public void saveObject(String role,String password, String email) {
+		User user = new User();
 		String uuid = UUID.randomUUID().toString();
 		
 		if(REDIRECT_VIEW.equals(role)) {
+			Customer customer = new Customer();
 			customer.setId(uuid);
 			customer.setEmail(email);
 			customerDao.save(customer);
@@ -57,7 +54,7 @@ public class RegisterServiceImpl implements RegisterService{
 			if(sellerDao.findByEmail(email) == null) { //此 email 没有注册过卖家 
 				String roles[] = {CUSTOMER};
 				user.setId(uuid);
-				user.setPassword(password);
+				user.setPassword(MD5.encode(password, uuid));
 				user.setRoles(roles);
 				userDao.save(user);
 			}
@@ -67,15 +64,15 @@ public class RegisterServiceImpl implements RegisterService{
 			}
 		}
 		else {
+			Seller seller = new Seller();
 			seller.setId(uuid);
 			seller.setEmail(email);
 			sellerDao.save(seller);
 			
 			if(customerDao.findByEmail(email) == null) { //此 email 没有注册过买家 
 				String roles[] = {SELLER};
-				User user = new User();
 				user.setId(uuid);
-				user.setPassword(password);
+				user.setPassword(MD5.encode(password, uuid));
 				user.setRoles(roles);
 				userDao.save(user);
 			}

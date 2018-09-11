@@ -4,7 +4,7 @@ function getCode() {
 	var email = $('#email').val();
 	var data = {"email" : email};
 		
-	$.get("register/getCode.action", data, function(info) {
+	$.post("register/getCode.action", data, function(info) {
 		if(info != '')
 			alert('success to send the email ' + info);
 		else
@@ -33,7 +33,7 @@ function validateEmail() {
 	var email = $('#email').val();
 	var data = {"email" : email, "role" : "seller"};
 	
-	$.get("register/validateEmail.action", data, function(info) {
+	$.post("register/validateEmail.action", data, function(info) {
 		if(info == '1')
 			alert('the email not use ' + info);
 		else

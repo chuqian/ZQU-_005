@@ -10,14 +10,12 @@ import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
-import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.entity.User;
 import com.service.UserService;
-import com.util.MD5;
 
 /**
  *@author : lgpeng
@@ -26,9 +24,6 @@ import com.util.MD5;
  */
 @Component 
 public class LoginRealm extends AuthorizingRealm {
-	
-	@Autowired
-	private User user;
 	@Autowired
 	private UserService userService;
 	
@@ -44,19 +39,16 @@ public class LoginRealm extends AuthorizingRealm {
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 		String userName = (String)token.getPrincipal();
-		System.out.println("the loginRealm userName is " + userName);
 		String password = new String((char[])token.getCredentials());
 		
-		user = userService.findUser(userName);
-		System.out.println("the loginRealm find user is " + user.getPassword());
+		User user = userService.findUser(userName);
+		
 		if(user == null) 
 			throw new UnknownAccountException();/*no account was found*/
 		
-		if(!user.getPassword().equals(MD5.encode(password, userName))) { 
-			System.out.println("the database's password is " + user.getPassword() + " the input password is " + password);
+		if(!user.getPassword().equals(password)) 
 			throw new IncorrectCredentialsException();/*error password*/
-		}
-		System.out.println("the realm name is " + getName());
+		
 		return new SimpleAuthenticationInfo(user.getId(), password, getName());
 	}
  

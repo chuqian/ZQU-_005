@@ -5,13 +5,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.service.RegisterService;
 import com.util.CodeUtil;
-import com.util.MD5;
 import com.util.MailUtil;
 
 /**
@@ -31,15 +31,13 @@ public class RegisterController {
 	 * @return 注册完后要返回的页面
 	 * @description 卖家注册
 	 */
-	@RequestMapping(value ={"/seller", "/customer"}, method = RequestMethod.POST)
-	public ModelAndView register(HttpServletRequest request) {
-		System.out.println("step into register");
-		String role = (String)request.getParameter("role");
+	@RequestMapping(value = "/{role}", method = RequestMethod.POST)
+	public ModelAndView register(HttpServletRequest request, @PathVariable(value = "role")String role) {
 		String email = (String)request.getParameter("email");
 		String password = (String)request.getParameter("password");
 		String returnView = registerService.getRedirect(role);
 		
-		registerService.saveObject(role, MD5.encode(password, email), email);
+		registerService.saveObject(role, password, email);
 		ModelAndView mv = new ModelAndView(returnView);
 		mv.addObject("user", email);
 		
@@ -52,7 +50,7 @@ public class RegisterController {
 	 * @description 获取验证码
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/getCode", method = RequestMethod.GET)
+	@RequestMapping(value = "/getCode", method = RequestMethod.POST)
 	public void getCode(HttpServletRequest request, HttpServletResponse response) {
 		String code = CodeUtil.generateUniqueCode();
 		String email = (String)request.getParameter("email");
@@ -102,8 +100,9 @@ public class RegisterController {
 	 * @description 检查此邮箱是否已经注册 
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/validateEmail", method = RequestMethod.GET)
+	@RequestMapping(value = "/validateEmail", method = RequestMethod.POST)
 	public void validateEmail(HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("step into validateEmail");
 		String role = (String) request.getParameter("role");
 		String email = (String) request.getParameter("email");
 		

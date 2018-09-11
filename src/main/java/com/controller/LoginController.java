@@ -9,6 +9,7 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.jdbc.object.UpdatableSqlQuery;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -28,7 +29,7 @@ public class LoginController {
 	public String login(User user, HttpServletResponse response) throws IOException {
 		System.out.println("the user id is " + user.getPassword());
 		Subject subject = SecurityUtils.getSubject();
-		UsernamePasswordToken token = new UsernamePasswordToken(user.getId(),user.getPassword());
+		UsernamePasswordToken token = new UsernamePasswordToken(user.getId(), MD5.encode(user.getPassword(), user.getId()));
 		Session session = subject.getSession();
 		
 		try {
