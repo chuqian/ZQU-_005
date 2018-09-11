@@ -4,14 +4,12 @@ import java.io.Serializable;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.stereotype.Component;
 
 /**
  * @author chenchuqian
  * @date 2018年9月6日 下午4:28:03
  * @describe 平台商品
  */
-@Component
 @Document(collection="allCommodity")
 public class AllCommodity implements Serializable {
 

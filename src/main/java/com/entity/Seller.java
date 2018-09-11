@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.stereotype.Component;
 
 import com.dto.Commodity;
 import com.dto.ContactAddress;
@@ -15,7 +14,6 @@ import com.dto.SellerOrder;
  * @date 2018年8月28日 下午11:07:23
  * @describe 商家
  */
-@Component
 @Document(collection="seller")
 public class Seller implements Serializable {
 	

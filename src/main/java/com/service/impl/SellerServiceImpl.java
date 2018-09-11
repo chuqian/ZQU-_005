@@ -1,27 +1,25 @@
-
 package com.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import com.dao.impl.SellerDaoImpl;
+import com.dao.SellerDao;
 import com.entity.Seller;
 import com.service.SellerService;
 
 /**
- *@author : 李国鹏
- *@datetime : Sep 7, 2018 2:56:44 PM
- *@descriptioin :  卖家 SellerService 实现类
+ * @author chenchuqian
+ * @date 2018年9月11日 上午11:21:57
+ * @describe 卖家service实现
  */
-@Service
-public class SellerServiceImpl implements SellerService{
+public class SellerServiceImpl implements SellerService {
 
 	@Autowired
-	private SellerDaoImpl sellerDaoImpl;
-	
+	private SellerDao sellerDao;
+
 	@Override
-	public void saveSeller(Seller seller) {
-		sellerDaoImpl.save(seller);
+	public void save(Seller seller) {
+		sellerDao.save(seller);
 	}
+	
 	
 }
