@@ -5,14 +5,12 @@ import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.stereotype.Component;
 
 /**
  * @author chenchuqian
  * @date 2018年9月6日 下午4:23:11
  * @describe 类型
  */
-@Component
 @Document(collection="type")
 public class Type implements Serializable {
 
