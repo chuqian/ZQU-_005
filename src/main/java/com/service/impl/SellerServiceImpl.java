@@ -1,6 +1,7 @@
 package com.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.dao.SellerDao;
 import com.entity.Seller;
@@ -11,6 +12,7 @@ import com.service.SellerService;
  * @date 2018年9月11日 上午11:21:57
  * @describe 卖家service实现
  */
+@Service
 public class SellerServiceImpl implements SellerService {
 
 	@Autowired
