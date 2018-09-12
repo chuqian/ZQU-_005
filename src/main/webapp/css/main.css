@@ -256,7 +256,7 @@ body{
 #singup,
 #login{
     position: absolute;
-    display: none;
+/*     display: none; */
 }
 
 #toggle-checkbox:checked ~ div{
