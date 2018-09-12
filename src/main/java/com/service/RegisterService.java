@@ -1,8 +1,6 @@
 
 package com.service;
 
-import com.entity.User;
-
 /**
  *@author : 李国鹏
  *@datetime : Sep 7, 2018 8:04:16 PM
@@ -44,4 +42,9 @@ public interface RegisterService {
 	 */
 	void expireCache(String key, int seconds);
 	
+	/**验证邮箱
+	 * @param id
+	 * @return
+	 */
+	boolean validateEmail(String id, String role);	
 }

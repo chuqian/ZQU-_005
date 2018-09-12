@@ -7,11 +7,14 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
+import org.springframework.jdbc.object.UpdatableSqlQuery;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.entity.User;
+import com.util.MD5;
 
 /**
  *@author : lgpeng
@@ -24,29 +27,32 @@ public class LoginController {
 	@ResponseBody
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(User user, HttpServletResponse response) throws IOException {
- 
+		System.out.println("the user id is " + user.getPassword());
 		Subject subject = SecurityUtils.getSubject();
-		UsernamePasswordToken token = new UsernamePasswordToken(user.getId(), user.getPassword());
+		UsernamePasswordToken token = new UsernamePasswordToken(user.getId(), MD5.encode(user.getPassword(), user.getId()));
 		Session session = subject.getSession();
 		
 		try {
 			subject.login(token);
-			if(subject.hasRole("admin"))
+			if(subject.hasRole("admin")) {
+				System.out.println("return admin");
 				return "admin";
-			else if(subject.hasRole("user"))
+			}
+				
+			else if(subject.hasRole("user")) {
+				System.out.println("return  user");
 				return "user";
-			else 
+			}
+				
+				
+			else {
+				System.out.println("return saller");
 				return "saller";
+			}
+				
 		} catch (Exception e) {
-			// TODO: handle exception
-			
-			/*Map<String, Object> map = new HashMap<>();
-			map.put("msg", "1");
-			JSON json = new JSONObject(map);
-
-			response.getWriter().println(json);
-			response.getWriter().close();*/
-			response.getWriter().println("1");;
+			e.printStackTrace();
+			response.getWriter().println("1");
 		}
 		
 		return null;

@@ -4,8 +4,8 @@ function getCode() {
 	var email = $('#email').val();
 	var data = {"email" : email};
 		
-	$.post("getCode.action", data, function(info) {
-		if(info == '1')
+	$.post("register/getCode.action", data, function(info) {
+		if(info != '')
 			alert('success to send the email ' + info);
 		else
 			alert('fail to send the email ' + info);
@@ -19,7 +19,7 @@ function validateCode() {
 	var email = $('#email').val();
 	var data = {"email" : email, "code" : code};
 	
-	$.post("validateCode.action", data, function(info) {
+	$.post("register/validateCode.action", data, function(info) {
 		if(info == '1')
 			alert('success to validate the email ' + info);
 		else
@@ -31,9 +31,9 @@ function validateCode() {
 
 function validateEmail() {
 	var email = $('#email').val();
-	var data = {"email" : email, "role" : "admin"};
+	var data = {"email" : email, "role" : "seller"};
 	
-	$.post("validateEmail.action", data, function(info) {
+	$.post("register/validateEmail.action", data, function(info) {
 		if(info == '1')
 			alert('the email not use ' + info);
 		else

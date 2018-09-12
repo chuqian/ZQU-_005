@@ -28,8 +28,6 @@
 			/> </util:map> </property> -->
 	</bean>
 
-	<!-- <bean id="rolesFilter" class="com.filter.RolesFilter"> </bean> -->
-
 	<bean id="securityManager"
 		class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<property name="realm" ref="loginRealm" />
@@ -47,13 +45,6 @@
 		</property>
 	</bean>
 
-	<!-- <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager"> 
-		<property name="sessionDAO"> <bean id="sessionDAO" class="com.session.RedisSessionDao"></bean> 
-		</property> </bean> <bean id="cacheManager" class="com.cache.RedisCacheManager"></bean> 
-		<bean id="rememberMeManager" class="import org.apache.shiro.web.mgt.CookieRememberMeManager"> 
-		<property name="cookie"> <bean id="cookie" class="org.apache.shiro.web.servlet.SimpleCookie"> 
-		<constructor-arg value="rememberMe" /> <property name="maxAge" value="60*60*365" 
-		/> </bean> </property> </bean> -->
 	<bean id="sessionIdCookie"
 		class="org.apache.shiro.web.servlet.SimpleCookie">
 		<constructor-arg value="sid" />

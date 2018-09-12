@@ -3,14 +3,10 @@ package com.dao.impl;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.aggregation.ArithmeticOperators.Add;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
-
 import com.dao.BaseDao;
 
 /**
@@ -85,12 +81,6 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 	@Override
 	public long rowsCount(){
 		return mongoTemplate.count(new Query(), clazz);
-	}
-
-	/*add by lgp*/
-	@Override
-	public T findAndModify(Query query, Update update, Class<T> entityClass) {
-		return mongoTemplate.findAndModify(query, update, entityClass);
 	}
 	
 }

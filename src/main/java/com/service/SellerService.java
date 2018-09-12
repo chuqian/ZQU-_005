@@ -1,17 +1,14 @@
-
 package com.service;
 
 import com.entity.Seller;
 
 /**
- *@author : 李国鹏
- *@datetime : Sep 7, 2018 2:56:11 PM
- *@descriptioin :  卖家 Service 层接口
+ * @author chenchuqian
+ * @date 2018年9月11日 上午11:22:29
+ * @describe 
  */
 public interface SellerService {
-	/**
-	 * 
-	 * @param seller
-	 */
-	void saveSeller(Seller seller);
+
+	void save(Seller seller);
+
 }

@@ -10,7 +10,6 @@ import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
-import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +24,6 @@ import com.service.UserService;
  */
 @Component 
 public class LoginRealm extends AuthorizingRealm {
-	
 	@Autowired
 	private UserService userService;
 	
@@ -45,13 +43,13 @@ public class LoginRealm extends AuthorizingRealm {
 		
 		User user = userService.findUser(userName);
 		
-		if(user == null)
+		if(user == null) 
 			throw new UnknownAccountException();/*no account was found*/
 		
 		if(!user.getPassword().equals(password)) 
 			throw new IncorrectCredentialsException();/*error password*/
 		
-		return new SimpleAuthenticationInfo(user, new Md5Hash(user.getPassword(), ""), "LoginRealm");
+		return new SimpleAuthenticationInfo(user.getId(), password, getName());
 	}
  
 }

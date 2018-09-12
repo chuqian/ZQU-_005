@@ -1,33 +1,19 @@
-
 package com.controller;
 
 import java.io.IOException;
-
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import com.cache.BaseCacheService;
-import com.dao.BaseDao;
-import com.dao.UserDao;
-import com.dao.impl.SellerDaoImpl;
-import com.entity.Customer;
-import com.entity.Seller;
-import com.entity.User;
-import com.service.CustomerService;
 import com.service.RegisterService;
-import com.service.SellerService;
-import com.service.UserService;
-import com.service.impl.UserServiceImpl;
 import com.util.CodeUtil;
 import com.util.MailUtil;
+
 /**
  *@author : lgpeng
  *@datetime : Sep 3, 2018 4:50:11 PM
@@ -45,27 +31,19 @@ public class RegisterController {
 	 * @return 注册完后要返回的页面
 	 * @description 卖家注册
 	 */
-	@RequestMapping(value = "/{path}", method = RequestMethod.POST)
-	public ModelAndView registerSaller(@RequestParam(value = "path")String path, HttpServletRequest request) {
+	@RequestMapping(value = "/{role}", method = RequestMethod.POST)
+	public ModelAndView register(HttpServletRequest request, @PathVariable(value = "role")String role) {
 		String email = (String)request.getParameter("email");
 		String password = (String)request.getParameter("password");
-		String returnView = registerService.getRedirect(path);
+		String returnView = registerService.getRedirect(role);
 		
-		registerService.saveObject(path);
+		registerService.saveObject(role, password, email);
 		ModelAndView mv = new ModelAndView(returnView);
-		mv.addObject("user", user);
+		mv.addObject("user", email);
 		
 		return mv;
 	}
-	
-	@RequestMapping(value = "/registerAccount", method = RequestMethod.POST)
-	public ModelAndView registerAccount(User user) {
-		ModelAndView mv = new ModelAndView("注册完账号后要跳转的页面");
-		
-		mv.addObject("user", user);
-		
-		return mv;
-	}
+
 	/**
 	 * @param request
 	 * @param response
@@ -76,13 +54,12 @@ public class RegisterController {
 	public void getCode(HttpServletRequest request, HttpServletResponse response) {
 		String code = CodeUtil.generateUniqueCode();
 		String email = (String)request.getParameter("email");
-		new MailUtil(email, code).run();
+		new Thread(new MailUtil(email, code)).start(); //启动发送验证码线程
 		
-		baseCacheService.set(code, code);
-		baseCacheService.expire(code, 60);
-		baseCacheService.set(email, email);
-		baseCacheService.expire(email, 60);
-		
+		registerService.setCache(code, code);
+		registerService.expireCache(code, 60); //验证码时间为 60s
+		registerService.setCache(email, email);
+		registerService.expireCache(email, 60);
 	
 		try {
 			response.getWriter().write(code);
@@ -101,8 +78,8 @@ public class RegisterController {
 	public void validateCode(HttpServletRequest request, HttpServletResponse response) {
 		String preCode = request.getParameter("code");
 		String preEmail = request.getParameter("email");
-		String afterCode = baseCacheService.get(preCode);
-		String afterEmail = baseCacheService.get(preEmail);
+		String afterCode = registerService.getCache(preCode);
+		String afterEmail = registerService.getCache(preEmail);
 		
 		try {
 			if(afterEmail == null)	//不是原先的 email
@@ -123,13 +100,14 @@ public class RegisterController {
 	 * @description 检查此邮箱是否已经注册 
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/validateEmail/{path}", method = RequestMethod.POST)
+	@RequestMapping(value = "/validateEmail", method = RequestMethod.POST)
 	public void validateEmail(HttpServletRequest request, HttpServletResponse response) {
-		String role = (String)request.getParameter("role");
+		System.out.println("step into validateEmail");
+		String role = (String) request.getParameter("role");
 		String email = (String) request.getParameter("email");
 		
 		try {
-			if(userService.validateEmail(role, userService.validateEmail(email)))
+			if(registerService.validateEmail(email, role))
 				response.getWriter().write("1");
 			else
 				response.getWriter().write("0");

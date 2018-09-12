@@ -1,10 +1,7 @@
 
 package com.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
+import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import com.dao.UserDao;
 import com.entity.User;
@@ -18,15 +15,19 @@ import com.service.UserService;
 @Service
 public class UserServiceImpl implements UserService{
 	
-	@Autowired
+	@Resource(name = "userDaoImpl")
 	private UserDao userDao; 
-	private static final int TWO_ROLE = 2;
-	private static final int NO_EXIST = 0;
-	private static final int HAVE_SELLER_ROLE = 1;	//此账号拥有卖家角色
-	private static final int HAVE_CUSTOMER_ROLE = 2;	//此账号拥有买家角色
-	private static final int HAVE_TWO_ROLE = 3;	//此账号同时拥有卖、买家角色
-	private static final String ROLE = "seller";
 	
+	@Override
+	public void updateRole(String id, String role) {
+		userDao.addRole(id, role);
+	}
+
+	@Override
+	public void updatePassword(String id, String password) {
+		userDao.updatePassword(id, password);
+	}
+
 	@Override
 	public User findUser(String id) {
 		return userDao.findById(id);
@@ -37,44 +38,4 @@ public class UserServiceImpl implements UserService{
 		userDao.save(user);
 	}
 
-	@Override
-	public void updateUser(User user) {
-		Query query = new Query(Criteria.where("role").is(user.getId()));
-		Update update = new Update().addToSet("role", user.getRoles()[0]);
-		userDao.findAndModify(query, update, User.class);
-	}
-
-	@Override
-	public int validateEmail(String email) {
-		User user = userDao.findById(email);
-		
-		if(user == null)	//email 没有注册过
-			return NO_EXIST;
-		else if(user.getRoles().length == TWO_ROLE)
-			return HAVE_TWO_ROLE;
-		else if(user.getRoles()[0].equals("seller"))
-			return HAVE_SELLER_ROLE;
-		else 
-			return HAVE_CUSTOMER_ROLE;		
-	}
-	
-	@Override
-	public boolean validateEmail(String role, int type) {
-		if(type == NO_EXIST)
-			return true;
-		else if(type == HAVE_SELLER_ROLE && compareRole(role))
-			return false;
-		else if(type == HAVE_SELLER_ROLE && compareRole(role))
-			return true;
-		else if(type == HAVE_CUSTOMER_ROLE && compareRole(role))
-			return true;
-		else if(type == HAVE_CUSTOMER_ROLE && compareRole(role))
-			return false;
-		else
-			return false;
-	}
-	
-	public boolean compareRole(String role) {
-		return ROLE.equals(role);
-	}
 }

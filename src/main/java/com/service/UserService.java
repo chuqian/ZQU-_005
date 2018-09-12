@@ -8,32 +8,28 @@ import com.entity.User;
  *@descriptioin :  
  */
 public interface UserService {
-	/**
+	/**查找账号信息
 	 * @param id
 	 * @return user
 	 */
 	User findUser(String id);
 	
-	/**
+	/**保存账号信息
 	 * @param user
 	 */
 	void saveUser(User user);
 	
-	/**
+	/**添加角色
 	 * @param user
 	 */
-	void updateUser(User user);
+	void updateRole(String id, String role);
 	
 	/**
-	 * @param id
-	 * @return
+	 * 修改账号密码
+	 * @param key
+	 * @param password
 	 */
-	int validateEmail(String id);	
+	void updatePassword(String id, String password);
 	
-	/**
-	 * @param role
-	 * @param type
-	 * @return
-	 */
-	boolean validateEmail(String role, int type);
+
 }

@@ -2,11 +2,6 @@ package com.dao;
 
 import java.util.List;
 
-import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
-
-import com.entity.Customer;
-
 /**
  * @author chenchuqian
  * @date 2018年8月25日 上午11:11:01
@@ -61,14 +56,5 @@ public interface BaseDao<T> {
 	 * @return 
 	 */
 	public long rowsCount();
-
-	/**
-	 * add by lgp
-	 * @param query
-	 * @param update
-	 * @param entityClass
-	 * @description 修改数据
-	 */
-	public T findAndModify(Query query, Update update, Class<T> entityClass);
 	
 }
