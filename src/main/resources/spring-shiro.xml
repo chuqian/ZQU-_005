@@ -7,46 +7,47 @@
             http://www.springframework.org/schema/util
             http://www.springframework.org/schema/util/spring-util-4.2.xsd ">
 
-	<bean id="shiroFilter"
-		class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
 		<!-- update by lgp login.html => login.jsp -->
 		<!-- <property name="loginUrl" value="login.jsp" /> <property name="unauthorizedUrl" 
 			value="403.htm" /> -->
 		<property name="filterChainDefinitions">
 			<value>
-				/login.action = anon
+				/login = aauthc
+				/sellerLogin.jsp = anon
 				/register.jsp = anon
 				/getCode.action = anon
 				/validateCode.action = anon
 				/validateEmail.action = anon
 				/subLogin.action = anon
-				/* = authc
+				/js/** = anon
+				/img/** = anon
+				/css/** = anon
+				/dist/** = anon
+				/kindeditor-master/** = anon
+				/** = authc
 			</value>
 		</property>
-		<!-- <property name="filters"> <util:map> <entry key="rolesFilter" value-ref="rolesFilter" 
-			/> </util:map> </property> -->
+		<property name="filters"> 
+			<util:map> 
+				<entry key="aauthc" value-ref="adminFormAuthenticationFilter" /> 
+				<entry key="sauthc" value-ref="sellerFormAuthenticationFilter"/>
+				<entry key="cauthc" value-ref="customerFormAuthenticationFilter"/>
+			</util:map> 
+		</property>
 	</bean>
-
-	<bean id="securityManager"
-		class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+	
+	<bean id="loginRealm" class="com.realm.LoginRealm"/>
+	
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<property name="realm" ref="loginRealm" />
 		<property name="rememberMeManager" ref="rememberMeManager" />
 		<!-- <property name="sessionManager" ref="sessionManager" /> <property 
 			name="cacheManager" ref="cacheManager" />  -->
 	</bean>
 
-	<bean id="loginRealm" class="com.realm.LoginRealm">
-		<property name="credentialsMatcher">
-			<bean id="credentialsMatcher"
-				class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
-				<property name="hashAlgorithmName" value="md5" />
-			</bean>
-		</property>
-	</bean>
-
-	<bean id="sessionIdCookie"
-		class="org.apache.shiro.web.servlet.SimpleCookie">
+	<bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
 		<constructor-arg value="sid" />
 		<property name="httpOnly" value="true" />
 		<property name="maxAge" value="-1" />
@@ -64,7 +65,27 @@
 		<property name="cookie" ref="rememberMeCookie" />
 	</bean>
 	
-	<bean id="formAuthenticationFilter" class="org.apache.shiro.web.filter.authc.FormAuthenticationFilter">
+	<!-- 卖家表单验证 -->
+	<bean id="sellerFormAuthenticationFilter" class="com.filter.SellerFormAuthenticationFilter">
+    	<property name="usernameParam" value="userName"/>
+    	<property name="passwordParam" value="password"/>
     	<property name="rememberMeParam" value="rememberMe"/>
+    	<property name="loginUrl" value="/seller/login.jsp"/>
+	</bean>
+	
+	<!-- 买家表单验证 -->
+	<bean id="customerFormAuthenticationFilter" class="com.filter.CustomerFormAuthenticationFilter">
+    	<property name="usernameParam" value="userName"/>
+    	<property name="passwordParam" value="password"/>
+    	<property name="rememberMeParam" value="rememberMe"/>
+    	<property name="loginUrl" value="/cutomer/login.jsp"/>
+	</bean>
+	
+	<!-- 管理员表单验证 -->
+	<bean id="adminFormAuthenticationFilter" class="com.filter.AdminFormAuthenticationFilter">
+    	<property name="usernameParam" value="userName"/>
+    	<property name="passwordParam" value="password"/>
+    	<property name="rememberMeParam" value="rememberMe"/>
+    	<property name="loginUrl" value="/admin/login.jsp"/>
 	</bean>
 </beans>  

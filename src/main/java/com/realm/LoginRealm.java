@@ -8,21 +8,21 @@ import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import com.entity.User;
 import com.service.UserService;
+import com.util.MD5;
 
 /**
  *@author : lgpeng
  *@datetime : Sep 1, 2018 11:23:00 AM
  *@descriptioin :  自定义 realm
  */
-@Component 
 public class LoginRealm extends AuthorizingRealm {
 	@Autowired
 	private UserService userService;
@@ -38,18 +38,25 @@ public class LoginRealm extends AuthorizingRealm {
 
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+		System.out.println("the formauthenticationFilter success step into loginRealm");
 		String userName = (String)token.getPrincipal();
 		String password = new String((char[])token.getCredentials());
 		
 		User user = userService.findUser(userName);
 		
 		if(user == null) 
-			throw new UnknownAccountException();/*no account was found*/
+			throw new UnknownAccountException();	//没有此账号
 		
-		if(!user.getPassword().equals(password)) 
-			throw new IncorrectCredentialsException();/*error password*/
-		
-		return new SimpleAuthenticationInfo(user.getId(), password, getName());
+		if(!user.getPassword().equals(MD5.encode(password, user.getId()))) {
+			System.out.println("the password error");
+			throw new IncorrectCredentialsException();	//密码错误
+		}
+		/**																		    
+		 * 	传入 user 对象方面后面的授权操作
+		 *	token 的密码已在 LoginController 进行盐值加密，所以直接传入数据库的密码进行匹配即可  
+		 */
+		return new SimpleAuthenticationInfo(user,  password, getName());
+
 	}
  
 }
