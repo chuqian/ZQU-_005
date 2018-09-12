@@ -67,8 +67,8 @@
 	
 	<!-- 卖家表单验证 -->
 	<bean id="sellerFormAuthenticationFilter" class="com.filter.SellerFormAuthenticationFilter">
-    	<property name="usernameParam" value="userName"/>
-    	<property name="passwordParam" value="password"/>
+    	<property name="usernameParam" value="logUsername"/>
+    	<property name="passwordParam" value="logPassword"/>
     	<property name="rememberMeParam" value="rememberMe"/>
     	<property name="loginUrl" value="/seller/login.jsp"/>
 	</bean>
@@ -78,7 +78,7 @@
     	<property name="usernameParam" value="userName"/>
     	<property name="passwordParam" value="password"/>
     	<property name="rememberMeParam" value="rememberMe"/>
-    	<property name="loginUrl" value="/cutomer/login.jsp"/>
+    	<property name="loginUrl" value="/sellerLogin.jsp#login"/>
 	</bean>
 	
 	<!-- 管理员表单验证 -->
