@@ -10,11 +10,9 @@
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
 		<!-- update by lgp login.html => login.jsp -->
-		<!-- <property name="loginUrl" value="login.jsp" /> <property name="unauthorizedUrl" 
-			value="403.htm" /> -->
 		<property name="filterChainDefinitions">
 			<value>
-				/login = aauthc
+				/login/seller.action = anon
 				/sellerLogin.jsp = anon
 				/register.jsp = anon
 				/getCode.action = anon
@@ -29,13 +27,11 @@
 				/** = authc
 			</value>
 		</property>
-		<property name="filters"> 
+		<!-- <property name="filters"> 
 			<util:map> 
-				<entry key="aauthc" value-ref="adminFormAuthenticationFilter" /> 
-				<entry key="sauthc" value-ref="sellerFormAuthenticationFilter"/>
-				<entry key="cauthc" value-ref="customerFormAuthenticationFilter"/>
+				<entry key="mauthc" value-ref="myFormAuthenticationFilter"/>
 			</util:map> 
-		</property>
+		</property> -->
 	</bean>
 	
 	<bean id="loginRealm" class="com.realm.LoginRealm"/>
@@ -65,27 +61,27 @@
 		<property name="cookie" ref="rememberMeCookie" />
 	</bean>
 	
-	<!-- 卖家表单验证 -->
-	<bean id="sellerFormAuthenticationFilter" class="com.filter.SellerFormAuthenticationFilter">
+<!-- 	 卖家表单验证 
+	<bean id="myFormAuthenticationFilter" class="com.filter.MyFormAuthenticationFilter">
     	<property name="usernameParam" value="logUsername"/>
     	<property name="passwordParam" value="logPassword"/>
     	<property name="rememberMeParam" value="rememberMe"/>
-    	<property name="loginUrl" value="/seller/login.jsp"/>
+    	<property name="loginUrl" value="/sellerLogin.jsp"/>
 	</bean>
 	
-	<!-- 买家表单验证 -->
+	买家表单验证
 	<bean id="customerFormAuthenticationFilter" class="com.filter.CustomerFormAuthenticationFilter">
     	<property name="usernameParam" value="userName"/>
     	<property name="passwordParam" value="password"/>
     	<property name="rememberMeParam" value="rememberMe"/>
-    	<property name="loginUrl" value="/sellerLogin.jsp#login"/>
+    	<property name="loginUrl" value="/customerLogin.jsp"/>
 	</bean>
 	
-	<!-- 管理员表单验证 -->
+	管理员表单验证
 	<bean id="adminFormAuthenticationFilter" class="com.filter.AdminFormAuthenticationFilter">
     	<property name="usernameParam" value="userName"/>
     	<property name="passwordParam" value="password"/>
     	<property name="rememberMeParam" value="rememberMe"/>
-    	<property name="loginUrl" value="/admin/login.jsp"/>
-	</bean>
+    	<property name="loginUrl" value="/adminLogin.jsp"/>
+	</bean> -->
 </beans>  

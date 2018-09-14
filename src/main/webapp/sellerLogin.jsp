@@ -54,7 +54,7 @@
 				<h1>
 					登录 <small>没有账号？<a id="singupBtn" href="#singup">注册</a></small>
 				</h1>
-				<form action="" name="logForm" id="logForm">
+				<form action="login/seller.action" name="logForm" id="logForm" method="post">
 					<div class="form-group">
 						<label for="">用户名/手机/邮箱</label> <input class="form-control"
 							type="text" name="logUsername" id="logUsername"
