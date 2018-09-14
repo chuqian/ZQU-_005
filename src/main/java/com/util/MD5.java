@@ -15,7 +15,7 @@ public class MD5 {
 	 * @return encodePassword
 	 */
 	public static final String encode(String password, String id) {
-		String encodedPassword = new Md5Hash(password, id).toHex();
+		String encodedPassword = new Md5Hash(password, id).toString();
 		
 		return encodedPassword;
 	}

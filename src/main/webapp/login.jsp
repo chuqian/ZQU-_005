@@ -9,13 +9,13 @@
 <script type="text/javascript" src="js/login.js"></script>
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <body>
-	<form  method="post" action="">
-		account: <input type="text" name="userName">
+	<form  method="post">
+		account: <input type="text" name="id">
 		<br>
 		password: <input type="text" name="password">
 		<br>
-		<input type="checkbox" name="rememberMe" value="true">记住我
-		<input type="submit" value="submit" >
+		<input type="radio" name="rememberMe" >记住我
+		<input type="submit" value="submit" onclick="return send()">
 	</form>
 </body>
 </html>

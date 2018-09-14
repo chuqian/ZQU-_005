@@ -34,7 +34,8 @@ public class LoginServiceImpl implements LoginService{
 	@Override
 	public User getUser(String role, String id) {
 		User user = null;
-		String phone = "0?(13|14|15|17|18)[0-9]{9}";
+		System.out.println("the input id " + id);
+		String phone = "/^1[3,5,7,8]\\d{9}$/";
 		String email = "\\w[-\\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\\.)+[A-Za-z]{2,14}";
 		Pattern pattern = Pattern.compile(phone);
 		Pattern pattern2 = Pattern.compile(email);

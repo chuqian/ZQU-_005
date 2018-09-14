@@ -13,6 +13,7 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import com.entity.User;
 import com.service.LoginService;
 import com.service.UserService;
@@ -23,6 +24,7 @@ import com.util.MD5;
  *@datetime : Sep 1, 2018 11:23:00 AM
  *@descriptioin :  自定义 realm
  */
+@Component 
 public class LoginRealm extends AuthorizingRealm {
 	
 	@Autowired
@@ -53,7 +55,7 @@ public class LoginRealm extends AuthorizingRealm {
 		System.out.println("the login password is " + password);
 		
 		if(user == null) 
-			throw new UnknownAccountException();	//没有此账号
+			throw new UnknownAccountException();/*no account was found*/
 		
 		if(!user.getPassword().equals(MD5.encode(password, user.getId()))) {
 			System.out.println("the password error");
@@ -64,7 +66,6 @@ public class LoginRealm extends AuthorizingRealm {
 		 *	token 的密码已在 LoginController 进行盐值加密，所以直接传入数据库的密码进行匹配即可  
 		 */
 		return new SimpleAuthenticationInfo(user,  user.getPassword(), getName());
-
 	}
  
 }

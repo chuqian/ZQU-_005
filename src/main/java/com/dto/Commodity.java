@@ -27,6 +27,7 @@ public class Commodity implements Serializable {
 	private String commodityType;  //商品类型
 	private Integer collectedNum;    //收藏数量
 	private List<Comment> comments;  //商品有关评论
+	private String description; //商品描述
 	
 	public String getId() {
 		return id;
@@ -107,11 +108,19 @@ public class Commodity implements Serializable {
 		this.commodityType = commodityType;
 	}
 	
+	
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
 	@Override
 	public String toString() {
 		return "Commodity [id=" + id + ", name=" + name + ", price=" + price + ", saledNum=" + saledNum + ", score="
 				+ score + ", stock=" + stock + ", imSrc=" + Arrays.toString(imSrc) + ", isShelf=" + isShelf
 				+ ", shelfTime=" + shelfTime + ", formwork=" + formwork + ", commodityType=" + commodityType
-				+ ", collectedNum=" + collectedNum + ", comments=" + comments + "]";
+				+ ", collectedNum=" + collectedNum + ", comments=" + comments + ", description=" + description + "]";
 	}
+	
 }
