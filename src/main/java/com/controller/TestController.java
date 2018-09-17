@@ -12,7 +12,7 @@ public class TestController {
 	
 	@RequestMapping("/goodsPullOn.action")
 	public String goodsPullOn(){
-		return "/seller/goodsPullOn";
+		return "/front/seller/goodsPullOn";
 	}
 	
 	

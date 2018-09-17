@@ -13,7 +13,7 @@ public class Pager<T> {
 	private long total; 			// 总条数
 	private long pageCount;			// 总页数
 	private int currentPage = 1; 	// 当前页数
-	private static int size = 10; 	// 每页显示条数
+	private int size = 10; 	        // 每页显示条数
 	private List<T> rows; 		    // 文档数据
 	
 	public long getTotal() {
@@ -34,11 +34,11 @@ public class Pager<T> {
 	public void setCurrentPage(int currentPage) {
 		this.currentPage = currentPage;
 	}
-	public static int getSize() {
+	public int getSize() {
 		return size;
 	}
-	public static void setSize(int size) {
-		Pager.size = size;
+	public void setSize(int size) {
+		this.size = size;
 	}
 	public List<T> getRows() {
 		return rows;

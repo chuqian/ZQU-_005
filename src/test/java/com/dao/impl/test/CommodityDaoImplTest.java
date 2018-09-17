@@ -10,7 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.dao.impl.CommodityDaoImpl;
-import com.entity.Commodity;
+import com.entity.AllCommodity;
 
 @RunWith(value=SpringJUnit4ClassRunner.class)
 @ContextConfiguration({"classpath:spring.xml"})
@@ -20,25 +20,20 @@ public class CommodityDaoImplTest {
 	private CommodityDaoImpl commodityDaoImpl;
 	
 	@Test
-	public void testFindAll(){
-		List<Commodity> list = commodityDaoImpl.findAll();
-	}
-	
-	@Test
 	public void testInsert(){
-		Commodity commodity = new Commodity();
-		commodity.setName("炒米粉");
-		commodity.setPrice(10.5);
-		commodity.setSaledNum(12674);
-		commodityDaoImpl.save(commodity);
+		AllCommodity allCommodity = new AllCommodity();
+		allCommodity.setCommodityName("炒米粉");
+		allCommodity.setPrice(10.5);
+		allCommodity.setSaledNum(12674);
+		commodityDaoImpl.save(allCommodity);
 	}
 	
 	@Test
 	public void testInsert2(){
-		List<Commodity> list = new ArrayList<>();
+		List<AllCommodity> list = new ArrayList<>();
 		for(int i=0; i<20; i++){
-			Commodity commodity = new Commodity();
-			commodity.setName("name" + i); 
+			AllCommodity commodity = new AllCommodity();
+			commodity.setCommodityName("name" + i); 
 			list.add(commodity);
 		}
 		commodityDaoImpl.save(list);
@@ -46,13 +41,13 @@ public class CommodityDaoImplTest {
 	
 	@Test
 	public void testUpdate(){
-		List<Commodity> list = commodityDaoImpl.findAll();
+		List<AllCommodity> list = commodityDaoImpl.findAll();
 		for(int i=0; i<list.size(); i++){
-			Commodity commodity = list.get(i);
-			commodity.setName("naem" + i + 1); 
-			commodity.setPrice(null);
+			AllCommodity allCommodity = list.get(i);
+			allCommodity.setCommodityName("naem" + i + 1); 
+			allCommodity.setPrice(null);
 			/*commodity.setPrice(100.0 + i + 1);*/
-			list.set(i, commodity);
+			list.set(i, allCommodity);
 		}
 		int count = commodityDaoImpl.save(list);
 		System.out.println(count);
@@ -60,7 +55,7 @@ public class CommodityDaoImplTest {
 
 	@Test
 	public void testDelete() {
-		List<Commodity> list = commodityDaoImpl.findAll();
+		List<AllCommodity> list = commodityDaoImpl.findAll();
 		String[] ids = new String[list.size()];
 		for(int i=0; i<ids.length; i++)
 			ids[i] = list.get(i).getId();

@@ -67,7 +67,7 @@ public class SellerDaoImplTest {
 		commodity.setPrice(20.2);
 		commodity.setSaledNum(0);
 		commodity.setStock(50);
-		commodity.setImSrc(imSrc);
+		commodity.setImgSrc(imSrc);
 		commodity.setIsShelf(1);
 		commodity.setShelfTime(new Date());
 		commodity.setCollectedNum(0);
@@ -138,7 +138,7 @@ public class SellerDaoImplTest {
 			commodity.setSaledNum(0);
 			commodity.setScore(0);
 			commodity.setStock(50);
-			commodity.setImSrc(imSrc);
+			commodity.setImgSrc(imSrc);
 			commodity.setIsShelf(1);
 			commodity.setShelfTime(new Date());
 			commodity.setCollectedNum(0);
@@ -208,7 +208,7 @@ public class SellerDaoImplTest {
 				commodity.setSaledNum(0);
 				commodity.setScore(0);
 				commodity.setStock(50);
-				commodity.setImSrc(imSrc);
+				commodity.setImgSrc(imSrc);
 				commodity.setIsShelf(1);
 				commodity.setShelfTime(new Date());
 				commodity.setCollectedNum(0);
@@ -279,7 +279,7 @@ public class SellerDaoImplTest {
 			commodity.setSaledNum(0);
 			commodity.setScore(0);
 			commodity.setStock(50);
-			commodity.setImSrc(imSrc);
+			commodity.setImgSrc(imSrc);
 			commodity.setIsShelf(1);
 			commodity.setShelfTime(new Date());
 			commodity.setCollectedNum(0);
@@ -405,4 +405,13 @@ public class SellerDaoImplTest {
 		long count = sellerDaoImpl.rowsCount();
 		System.out.println(count);
 	}
+	
+	
+	
+	@Test
+	public void testGetOrdersBySeller(){
+		sellerDaoImpl.getOrdersBySeller("shangjia0Mon Sep 10 16:03:50 CST 2018", 1, 1L, 1L);
+	}
+	
+	
 }

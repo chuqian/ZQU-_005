@@ -11,24 +11,18 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.dao.impl.CommentDaoImpl;
-import com.dao.impl.CommodityDaoImpl;
 import com.dao.impl.SellerDaoImpl;
 import com.dto.Comment;
-import com.dto.SendAddress;
-import com.entity.Commodity;
+import com.dto.Commodity;
 import com.entity.Seller;
 
 @RunWith(value=SpringJUnit4ClassRunner.class)
 @ContextConfiguration({"classpath:spring.xml"})
 public class CommentDaoImplTest {
 
-	@Autowired
+	/*@Autowired
 	private SellerDaoImpl sellerDaoImpl;
 	private CommentDaoImpl commentDaoImpl;
-	
-
-	
-
 	
 	@Test
 	public void testInsert(){
@@ -48,9 +42,6 @@ public class CommentDaoImplTest {
 		
 		System.out.println(commodity.toString());
 		
-		
-		
-		
 		//添加评论
 		List<Comment> comments = new ArrayList<Comment>();
 		if(commodity.getComments()!=null)
@@ -63,9 +54,5 @@ public class CommentDaoImplTest {
 		comment.setContentTime(new Date());
 		comment.setState(1);
 		comments.add(comment);
-		
-		
-		
-		
-	}
+	}*/
 }

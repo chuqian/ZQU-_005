@@ -20,7 +20,7 @@ public class Commodity implements Serializable {
 	private Integer saledNum; //销量
 	private Integer score;   //综合评分
 	private Integer stock;   //库存
-	private String[] imSrc;  //图片
+	private String[] imgSrc;  //图片
 	private Integer isShelf; //是否上架
 	private Date shelfTime;  //上架时间
 	private Integer formwork;   //运费
@@ -65,11 +65,11 @@ public class Commodity implements Serializable {
 	public void setStock(Integer stock) {
 		this.stock = stock;
 	}
-	public String[] getImSrc() {
-		return imSrc;
+	public String[] getImgSrc() {
+		return imgSrc;
 	}
-	public void setImSrc(String[] imSrc) {
-		this.imSrc = imSrc;
+	public void setImgSrc(String[] imgSrc) {
+		this.imgSrc = imgSrc;
 	}
 	public Integer getIsShelf() {
 		return isShelf;
@@ -118,7 +118,7 @@ public class Commodity implements Serializable {
 	@Override
 	public String toString() {
 		return "Commodity [id=" + id + ", name=" + name + ", price=" + price + ", saledNum=" + saledNum + ", score="
-				+ score + ", stock=" + stock + ", imSrc=" + Arrays.toString(imSrc) + ", isShelf=" + isShelf
+				+ score + ", stock=" + stock + ", imSrc=" + Arrays.toString(imgSrc) + ", isShelf=" + isShelf
 				+ ", shelfTime=" + shelfTime + ", formwork=" + formwork + ", commodityType=" + commodityType
 				+ ", collectedNum=" + collectedNum + ", comments=" + comments + ", description=" + description + "]";
 	}

@@ -3,6 +3,7 @@ package com.dao;
 import java.util.List;
 import com.dto.Comment;
 import com.dto.Commodity;
+import com.dto.SellerOrder;
 import com.entity.Seller;
 import com.mongodb.WriteResult;
 
@@ -27,9 +28,9 @@ public interface SellerDao extends BaseDao<Seller>{
 	 * @param limit
 	 * @return
 	 */
-	public List<Seller> findByCondition(Seller seller, int skip, int limit);
+	public List<Seller> findByCondition(Seller seller, long skip, long limit);
 	
-	/** add by lgp
+	/** 
 	 * 注册时根据 email 查询此 email 是否已经注册过卖家
 	 * @param email
 	 * @return
@@ -112,4 +113,46 @@ public interface SellerDao extends BaseDao<Seller>{
 	 * @return
 	 */
 	int updateCommentState(String commodityId, Comment comment);
+	
+	
+	
+	/**
+	 * 获取商家店铺/信息
+	 * @param sellerId
+	 * @return
+	 */
+	Seller getInfoById(String sellerId);
+
+	/**
+	 * 店铺注销
+	 * @param sellerId
+	 */
+	void storeCancel(String sellerId);
+	
+	/**
+	 * 获取商家在卖商品
+	 * @param sellerId
+	 * @param skip
+	 * @param limit
+	 * @return
+	 */
+	List<Commodity> getCommodiyBySeller(String sellerId, long skip, long limit);
+	
+	/**
+	 * 新增在卖商品
+	 * @param sellerId
+	 * @param commodity
+	 */
+	void commodityToSeller(String sellerId, Commodity commodity);
+
+	/**
+	 * 获取商家订单
+	 * @param sellerId
+	 * @param orderState 
+	 * @param skip
+	 * @param limit
+	 * @return
+	 */
+	public List<SellerOrder> getOrdersBySeller(String sellerId, int orderState, long skip, long limit);
+
 }
