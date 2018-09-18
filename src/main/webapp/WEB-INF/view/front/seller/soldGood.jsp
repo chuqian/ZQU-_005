@@ -7,9 +7,9 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="./css/bootstrap.css">
-    <link rel="stylesheet" href="./css/main.css">
-    <link rel="stylesheet" href="./css//goods.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/css/bootstrap.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/css/main.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/css//goods.css">
 
     <title>Document</title>
 </head>
@@ -25,7 +25,7 @@
             <input class="hidden" type="checkbox" name="" id="toggle-checkbox">
             <div class="hidden-xs">
                 <ul class="nav navbar-nav">
-                    <li><a href="">首页</a></li>
+                    <li><a href="../seller/index.action">首页</a></li>
                     <li><a href="">消息</a><span id="tipNum" class="tipNum">5</span></li>
 
                 </ul>
@@ -153,12 +153,12 @@
     <div class="footer ">
         （沪）字第1248号 | 网络文化经营许可证：沪网文[2016]2296-134号 | 互联网ICP备案：沪ICP备13002172号-3 沪
     </div>
-    <script src="./js/jquery.min.js"></script>
-    <script src="./js/bootstrap.js"></script>
-    <script src="./kindeditor-master/kindeditor-all-min.js"></script>
-    <script src="./js//zh-CN.js"></script>
-    <script src="./js/generatePagenationBar.js"></script>
-    <script src="./js/_sellerCenter.js"></script>
+    <script src="${pageContext.request.contextPath }/js/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath }/js/bootstrap.js"></script>
+    <script src="${pageContext.request.contextPath }/kindeditor-master/kindeditor-all-min.js"></script>
+    <script src="${pageContext.request.contextPath }/js//zh-CN.js"></script>
+    <script src="${pageContext.request.contextPath }/js/generatePagenationBar.js"></script>
+    <script src="${pageContext.request.contextPath }/js/_sellerCenter.js"></script>
     <script>
         var editor;
         KindEditor.ready(function (K) {
@@ -218,7 +218,7 @@
             }
         }
     </script>
-    <script src="./js/laydate.js"></script>
+    <script src="${pageContext.request.contextPath }/js/laydate.js"></script>
     <script>
         laydate.render({
             elem: '#start' //指定元素
