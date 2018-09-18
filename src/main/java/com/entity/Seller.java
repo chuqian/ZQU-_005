@@ -28,10 +28,10 @@ public class Seller implements Serializable {
 	private String identity;  //身份证号
 	private Integer sex;      //性别
 	private String info;      //店铺简介
-	private String email;
-	private ContactAddress contactAddress; //联系地址
+	private String email;     //邮箱
 	private String storeImg;  //店铺标志
-	private List<Commodity> commoditys; //店铺商品
+	private ContactAddress contactAddress; //联系地址
+	private List<Commodity> commoditys;     //店铺商品
 	private List<SellerOrder> sellerOrders; //商家订单
 	private Integer state;    //商家状态
 	

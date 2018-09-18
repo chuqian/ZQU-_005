@@ -7,10 +7,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.common.PageQueryVo;
 import com.common.Pager;
+import com.common.SystemConst;
 import com.dto.Commodity;
 import com.entity.Seller;
 import com.service.SellerService;
@@ -29,19 +32,23 @@ public class SellerController {
 	
 	@RequestMapping("/index")
 	public String goodsPullOn(){
-		return "/front/seller/index";
+		return "/front/seller/goodsPullOn";
 	}
 	
-	@RequestMapping("/storeInfo")
+	@RequestMapping("/info")
 	public ModelAndView storeInfo(String sellerId){
-		ModelAndView mv = new ModelAndView("/front/seller/storeInfo");
+		sellerId = "shangjia0Mon Sep 10 16:03:50 CST 2018";
+		ModelAndView mv = new ModelAndView("/front/seller/editShopInfo");
+		mv.addObject("storeTypes", SystemConst.StoreType.values());
 		mv.addObject("seller", sellerService.info(sellerId));
 		return mv;
 	}
 	
-	@RequestMapping("/storeSave")
-	public void storeSave(Seller seller, HttpServletResponse response) throws IOException{
-		sellerService.save(seller);
+	@RequestMapping("/infoSave")
+	public void storeSave(Seller seller, CommonsMultipartFile file,	HttpServletResponse response) throws IOException{
+		
+		//sellerService.save(seller);
+		System.out.println(seller.getContactAddress());
 		response.getWriter().write("保存成功");
 	}
 	

@@ -7,9 +7,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="./css/bootstrap.css">
-    <link rel="stylesheet" href="./css/main.css">
-    <link rel="stylesheet" href="./css//goods.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/css/bootstrap.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/css/main.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/css//goods.css">
     
     <title>Document</title>
 </head>
@@ -17,23 +17,8 @@
 <body>
     <div class="navbar navbar-default myheader">
         <!-- 放置logo -->
-        <div class="container">
-            <div class="navbar-header myBrand">
-                多野卖家中心
-            </div>
-            <label class="toggle-label visible-xs-inline-block" for="toggle-checkbox">菜单</label>
-            <input class="hidden" type="checkbox" name="" id="toggle-checkbox">
-            <div class="hidden-xs">
-                <ul class="nav navbar-nav">
-                    <li><a href="">首页</a></li>
-                    <li><a href="">消息</a><span id="tipNum" class="tipNum">5</span></li>
-
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="login.html#login">登录</a></li>
-                    <li><a href="login.html#singup">注册</a></li>
-                </ul>
-            </div>
+        <div class="container" id="sellerTop">
+            
         </div>
     </div>
     <div class="container myContainer">

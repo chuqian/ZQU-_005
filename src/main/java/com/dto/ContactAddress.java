@@ -42,4 +42,10 @@ public class ContactAddress {
 	public void setPostalNumber(String postalNumber) {
 		this.postalNumber = postalNumber;
 	}
+	
+	@Override
+	public String toString() {
+		return "ContactAddress [province=" + province + ", city=" + city + ", county=" + county + ", detail=" + detail
+				+ ", postalNumber=" + postalNumber + "]";
+	}
 }
