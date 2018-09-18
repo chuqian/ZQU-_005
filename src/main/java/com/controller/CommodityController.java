@@ -87,7 +87,7 @@ public class CommodityController {
 		//保存上传的图片，返回图片名
 		String[] imSrc = fileService.saveFiles(files, savePath);
 		//商品图片路径
-		commodity.setImSrc(imSrc);
+		commodity.setImgSrc(imSrc);
 		System.out.println(files.length);
 		commodityService.commodityUpload(sellerId, commodity);
 		return "succe";

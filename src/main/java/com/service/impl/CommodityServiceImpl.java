@@ -77,7 +77,7 @@ public class CommodityServiceImpl implements CommodityService {
 		allCommodity.setCommodityName(commodity.getName());
 		allCommodity.setPrice(commodity.getPrice());
 		allCommodity.setSaledNum(commodity.getSaledNum());
-		allCommodity.setImgSrc(commodity.getImSrc()[0]);
+		allCommodity.setImgSrc(commodity.getImgSrc()[0]);
 		allCommodity.setCommodityType(commodity.getCommodityType());
 		commodityDaoImpl.commodityUpload(commodity, allCommodity);
 		return false;
