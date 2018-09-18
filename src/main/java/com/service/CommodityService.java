@@ -29,11 +29,12 @@ public interface CommodityService {
 	public String save(AllCommodity commodity);
 	
 	/**
-	 * 商品删除
-	 * @param id
-	 * @return succe/fail
+	 * 删除商品
+	 * @param sellerId
+	 * @param commodityId
+	 * @return
 	 */
-	public String delete(String id);
+	public boolean delete(String sellerId, String commodityId);
 
 	/**
 	 * 商品上架

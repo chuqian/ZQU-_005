@@ -38,6 +38,27 @@ public interface CommodityDao extends BaseDao<AllCommodity>{
 	 */
 	long rowsCount(AllCommodity commodity);
 	
+	/**
+	 * 商品上架
+	 * @param commodity
+	 * @param allCommodity
+	 * @return
+	 */
 	boolean commodityUpload(Commodity commodity, AllCommodity allCommodity);
+	
+	/**
+	 * 删除上架商品
+	 * @param sellerId
+	 * @param commodityId
+	 * @return
+	 */
+	boolean commodityDelete(String sellerId, String commodityId);
+	
+	/**
+	 * 删除平台的某件商品
+	 * @param commodityId
+	 * @return
+	 */
+	boolean allCommodityDelete(String commodityId);
 	
 }

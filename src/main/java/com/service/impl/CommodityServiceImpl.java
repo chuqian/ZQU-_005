@@ -56,10 +56,10 @@ public class CommodityServiceImpl implements CommodityService {
 	}
 	
 	@Override
-	public String delete(String id) {
-		if(commodityDaoImpl.deleteById(id) > 0)
-			return "succe";
-		return "fail";
+	public boolean delete(String sellerId, String commodityId) {
+		boolean commodityFlag = this.commodityDaoImpl.commodityDelete(sellerId, commodityId);
+//		boolean allCommodityFlag = this.commodityDaoImpl.allCommodityDelete(commodityId);
+		return commodityFlag; //&& allCommodityFlag;
 	}
 	
 	@Override

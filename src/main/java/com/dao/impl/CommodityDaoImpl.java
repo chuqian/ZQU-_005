@@ -53,5 +53,30 @@ public class CommodityDaoImpl extends BaseDaoImpl<AllCommodity> implements Commo
 		this.getMongoTemplate().save(allCommodity);
 		return true;
 	}
+	
+	@Override
+	public boolean commodityDelete(String sellerId, String commodityId) {
+		try {
+			System.out.println(sellerId + " " + commodityId);
+			Query query = Query.query(Criteria.where("_id").is(sellerId).and("commoditys._id").is(commodityId));
+			Update update = new Update();
+			update.unset("commoditys.$");
+			this.getMongoTemplate().updateFirst(query, update, Seller.class);
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
+	}
+	
+	@Override
+	public boolean allCommodityDelete(String commodityId) {
+		try {
+			Query query = Query.query(Criteria.where("_id").is(commodityId));
+			this.getMongoTemplate().remove(query, AllCommodity.class);
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
+	}
 
 }
