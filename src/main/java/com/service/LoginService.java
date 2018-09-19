@@ -10,7 +10,7 @@ import com.entity.User;
 
 public interface LoginService {
 	/**
-	 * 获取不同角色登录成功的一的跳转页面 
+	 * 获取不同角色登录成功的跳转页面 
 	 * @param role
 	 * @return
 	 */

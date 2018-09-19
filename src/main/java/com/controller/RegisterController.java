@@ -33,10 +33,10 @@ public class RegisterController {
 	 */
 	@RequestMapping(value = "/{role}", method = RequestMethod.POST)
 	public ModelAndView register(HttpServletRequest request, @PathVariable(value = "role")String role) {
-		String email = (String)request.getParameter("email");
-		String password = (String)request.getParameter("password");
+		String email = (String)request.getParameter("regUsername");
+		String password = (String)request.getParameter("regPassword1");
 		String returnView = registerService.getRedirect(role);
-		
+		System.out.println("the register email is " + email);
 		registerService.saveObject(role, password, email);
 		ModelAndView mv = new ModelAndView(returnView);
 		mv.addObject("user", email);
@@ -51,7 +51,7 @@ public class RegisterController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/getCode", method = RequestMethod.POST)
-	public void getCode(HttpServletRequest request, HttpServletResponse response) {
+	public String getCode(HttpServletRequest request) {
 		String code = CodeUtil.generateUniqueCode();
 		String email = (String)request.getParameter("email");
 		new Thread(new MailUtil(email, code)).start(); //启动发送验证码线程
@@ -62,10 +62,11 @@ public class RegisterController {
 		registerService.expireCache(email, 60);
 	
 		try {
-			response.getWriter().write(code);
-		} catch (IOException e) {
+			return code;
+		} catch (Exception e) {
 			e.printStackTrace();
-		};
+			return "fail";
+		}
 	}
 	
 	/**
@@ -75,21 +76,23 @@ public class RegisterController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/validateCode", method = RequestMethod.POST)
-	public void validateCode(HttpServletRequest request, HttpServletResponse response) {
+	public String validateCode(HttpServletRequest request) {
+		
 		String preCode = request.getParameter("code");
 		String preEmail = request.getParameter("email");
 		String afterCode = registerService.getCache(preCode);
 		String afterEmail = registerService.getCache(preEmail);
-		
+		System.out.println("the preemail is " + preEmail + "the precode is " + preCode + " the afteremail is " + afterEmail + " the aftercode is " + afterCode);
 		try {
 			if(afterEmail == null)	//不是原先的 email
-				response.getWriter().write("0");
+				return "0";
 			else if(afterCode == null)	//与服务器发送的验证码不一致
-				response.getWriter().write("0");
+				return "0";
 			else 
-				response.getWriter().write("1");
+				return "1";
 		} catch (Exception e) {
 			e.printStackTrace();
+			return "0";
 		}
 	}
 	
@@ -101,18 +104,19 @@ public class RegisterController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/validateEmail", method = RequestMethod.POST)
-	public void validateEmail(HttpServletRequest request, HttpServletResponse response) {
+	public String validateEmail(HttpServletRequest request) {
 		System.out.println("step into validateEmail");
 		String role = (String) request.getParameter("role");
 		String email = (String) request.getParameter("email");
 		
 		try {
 			if(registerService.validateEmail(email, role))
-				response.getWriter().write("1");
+				return "1";
 			else
-				response.getWriter().write("0");
+				return "0";
 		} catch (Exception e) {
 			e.printStackTrace();
+			return "0";
 		}	
 	}
 }

@@ -1,4 +1,3 @@
-
 package com.realm;
 
 import java.util.Arrays;
@@ -16,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.entity.User;
 import com.service.LoginService;
-import com.service.UserService;
 import com.util.MD5;
 
 /**
@@ -27,8 +25,6 @@ import com.util.MD5;
 @Component 
 public class LoginRealm extends AuthorizingRealm {
 	
-	@Autowired
-	private UserService userService;
 	@Autowired
 	private LoginService loginService;
 	
@@ -50,22 +46,18 @@ public class LoginRealm extends AuthorizingRealm {
 		
 		User user = loginService.getUser(role, userName);
 		
-		System.out.println(user);
-		System.out.println("the role is " + role);
-		System.out.println("the login password is " + password);
-		
 		if(user == null) 
 			throw new UnknownAccountException();/*no account was found*/
 		
-		if(!user.getPassword().equals(MD5.encode(password, user.getId()))) {
-			System.out.println("the password error");
+		if(!user.getPassword().equals(MD5.encode(password, user.getId()))) 
 			throw new IncorrectCredentialsException();	//密码错误
-		}
+		
 		/**																		    
 		 * 	传入 user 对象方面后面的授权操作
 		 *	token 的密码已在 LoginController 进行盐值加密，所以直接传入数据库的密码进行匹配即可  
 		 */
-		return new SimpleAuthenticationInfo(user,  user.getPassword(), getName());
+		user.setId(userName);
+		return new SimpleAuthenticationInfo(user,  password, getName());
 	}
  
 }

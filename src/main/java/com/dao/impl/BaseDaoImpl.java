@@ -56,10 +56,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 	
 	@Override
 	public int save(T t) {
-		System.out.println("the mongoTemplate value is " + mongoTemplate);
-		System.out.println(t + "the t value");
 		mongoTemplate.save(t);
-		System.out.println("success to save the user");
 		return 1;
 	}
 	

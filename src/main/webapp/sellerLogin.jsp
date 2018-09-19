@@ -46,7 +46,7 @@
 				<h1>
 					登录 <small>没有账号？<a id="singupBtn" href="#singup">注册</a></small>
 				</h1>
-				<form action="login/seller.action" name="logForm" id="logForm" method="post">
+				<form action="" name="logForm" id="logForm" method="post">
 					<div class="form-group">
 						<label for="">用户名/手机/邮箱</label> <input class="form-control"
 							type="text" name="logUsername" id="logUsername"
@@ -58,7 +58,7 @@
 							placeholder="请输入密码">
 					</div>
 					<div class="form-group">
-						<input type="checkbox">
+						<input type="checkbox"><span class="form-group">记住我</span>
 					</div>
 					<div class="form-group">
 						<a href="#">忘记密码?</a>
@@ -74,7 +74,7 @@
 				<h1>
 					注册 <small>已有账号？<a id="loginBtn" href="#login">登录</a></small>
 				</h1>
-				<form action="" name="regForm" id="regForm">
+				<form action="register/seller.action" name="regForm" id="regForm" method="post">
 					<div class="form-group">
 						<label for="">邮箱</label> <input class="form-control" type="text"
 							name="regUsername" id="regUsername" placeholder="请输入邮箱">
@@ -84,8 +84,8 @@
 						<div class="input-group" name="vCodeS">
 							<input type="text" class="form-control" name="vCode" id="vCode"
 								placeholder="请输入验证码">
-							<div class="input-group-btn">
-								<div class="btn btn-default">获取验证码</div>
+							<div class="input-group-btn" id="code">
+								<button class="btn btn-default" id="getCode">获取验证码</button>
 							</div>
 						</div>
 					</div>
@@ -116,4 +116,6 @@
 <script src="./js/jquery.min.js"></script>
 <script type="text/javascript" src="./js/jquery.validate.js"></script>
 <script src="./js/sellerValidation.js"></script>
+<script src="js/sellerLogin.js"></script>
+<script src="js/sellerRegister.js"></script>
 </html>

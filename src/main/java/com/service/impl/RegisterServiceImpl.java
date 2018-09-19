@@ -85,7 +85,6 @@ public class RegisterServiceImpl implements RegisterService{
 
 	@Override
 	public boolean validateEmail(String email, String role) {
-
 		if(SELLER.equals(role)) 
 			if(sellerDao.findByEmail(email) == null)
 				return true;	//此账号没有注册过卖家

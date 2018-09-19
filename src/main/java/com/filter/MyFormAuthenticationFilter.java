@@ -7,7 +7,6 @@ import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.apache.shiro.web.util.WebUtils;
 
-
 /**
  *@author : lgpeng
  *@datetime : Sep 13, 2018 8:44:42 AM

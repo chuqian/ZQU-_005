@@ -35,8 +35,8 @@ public class UserDaoImpl extends BaseDaoImpl<User> implements UserDao {
 	public User getUserFromSellerByName(String name) {
 		User user = null;
 		Seller seller = null;
-		seller = this.getMongoTemplate().findOne(new Query(Criteria.where("name").is(name)), Seller.class);
-		
+		seller = getMongoTemplate().findOne(new Query(Criteria.where("name").is(name)), Seller.class);
+
 		if(seller != null)
 			user = this.findById(seller.getId());
 		
