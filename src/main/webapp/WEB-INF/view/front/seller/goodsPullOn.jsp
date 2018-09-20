@@ -239,7 +239,6 @@
 	<div class="footer ">（沪）字第1248号 | 网络文化经营许可证：沪网文[2016]2296-134号 |
 		互联网ICP备案：沪ICP备13002172号-3 沪</div>
 	<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script> 
-
 	<script src="js/jquery.min.js"></script>
 	<script src="./js/_sellerCenter.js"></script>
 
@@ -269,7 +268,7 @@
             input.setAttribute('disabled', 'disabled');
         } else {
             input.addEventListener('change', readFile, false);
-        }　　　　　
+        }
         //handler   
         var imgDom, div
         function readFile() {
@@ -291,7 +290,6 @@
         }
     }
     </script>
-   	<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>  
 	<script type="text/javascript" src="js/jquery-form.js"></script>  
     <script type="text/javascript">
 	//文件异步上传
