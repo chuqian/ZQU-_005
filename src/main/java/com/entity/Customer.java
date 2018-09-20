@@ -6,10 +6,7 @@ import java.util.List;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.dto.Collect;
-import com.dto.CustomerOrder;
 import com.dto.GetAddress;
-import com.dto.ShopCart;
 
 /**
  * @author chenchuqian
@@ -30,9 +27,6 @@ public class Customer implements Serializable {
 	private String phone;     //手机号
 	private String email;     //邮箱
 	private List<GetAddress> address;  //收货地址
-	private List<ShopCart> shopCart;  //购物车
-	private List<Collect> collects;  //收藏夹
-	private List<CustomerOrder> orders; //订单列表
     private Integer state;    //状态
 	public String getId() {
 		return id;
@@ -82,24 +76,6 @@ public class Customer implements Serializable {
 	public void setAddress(List<GetAddress> address) {
 		this.address = address;
 	}
-	public List<ShopCart> getShopCart() {
-		return shopCart;
-	}
-	public void setShopCart(List<ShopCart> shopCart) {
-		this.shopCart = shopCart;
-	}
-	public List<Collect> getCollects() {
-		return collects;
-	}
-	public void setCollects(List<Collect> collects) {
-		this.collects = collects;
-	}
-	public List<CustomerOrder> getOrders() {
-		return orders;
-	}
-	public void setOrders(List<CustomerOrder> orders) {
-		this.orders = orders;
-	}
 	public Integer getState() {
 		return state;
 	}
@@ -110,7 +86,6 @@ public class Customer implements Serializable {
 	@Override
 	public String toString() {
 		return "Customer [id=" + id + ", member=" + member + ", nickname=" + nickname + ", username=" + username
-				+ ", sex=" + sex + ", phone=" + phone + ", email=" + email + ", address=" + address + ", shopCart="
-				+ shopCart + ", collects=" + collects + ", orders=" + orders + ", state=" + state + "]";
+				+ ", sex=" + sex + ", phone=" + phone + ", email=" + email + ", address=" + address + ", state=" + state + "]";
 	}
 }

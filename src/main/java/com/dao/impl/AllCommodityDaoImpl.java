@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.dao.AllCommodityDao;
-import com.dao.ConditionBeanUnit;
+import com.util.ConditionBeanUnit;
 import com.dao.SellerDao;
 import com.entity.AllCommodity;
 import com.entity.Seller;
