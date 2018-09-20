@@ -296,7 +296,7 @@
     $(document).ready(function() {
         $("#submit").on("click", function() {
             $('.form-horizontal').ajaxForm({  
-                url : "./commodiy/onOrDown.action", // 请求的url  
+                url : "./commodiy/commodityShelf.action", // 请求的url  
                 type : "post", // 请求方式  
                 dataType : "text", // 响应的数据类型  
                 async : true, // 异步  
@@ -314,7 +314,7 @@
                 }
             });  
         });  
-    });  
+    });
     </script>
 </body>
 
