@@ -1,14 +1,20 @@
-package com.dto;
+package com.entity;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.dto.AfterSale;
+import com.dto.Commodity;
 
 /**
  * @author chenchuqian
  * @date 2018年9月6日 下午5:12:16
  * @describe 买家订单
  */
+@Document(collection="customerOrder")
 public class CustomerOrder implements Serializable {
 	
 	private static final long serialVersionUID = -7181252640880362298L;

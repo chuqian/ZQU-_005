@@ -1,17 +1,21 @@
-package com.dto;
+package com.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * @author chenchuqian
  * @date 2018年8月28日 下午11:21:01
  * @describe 订单商品信息,关联到订单中的某个商品
  */
+@Document(collection="commodityMsg")
 public class CommodityMsg implements Serializable {
 
 	private static final long serialVersionUID = 1890475226288859219L;
 	
+	private String customerId;  //买家id
 	private String commodityId;  //商品id
 	private String commodityName; //商品名称
 	private String imgScr;      //图片地址
@@ -22,7 +26,12 @@ public class CommodityMsg implements Serializable {
 	private String answer;      //回复评论
 	private Date answerTime;    //回复日期
 	private Integer state;      //评论状态
-	
+	public String getCustomerId() {
+		return customerId;
+	}
+	public void setCustomerId(String customerId) {
+		this.customerId = customerId;
+	}
 	public String getCommodityId() {
 		return commodityId;
 	}
@@ -83,11 +92,11 @@ public class CommodityMsg implements Serializable {
 	public void setState(Integer state) {
 		this.state = state;
 	}
-	
 	@Override
 	public String toString() {
-		return "CommodityMsg [commodityId=" + commodityId + ", commodityName=" + commodityName + ", imgScr=" + imgScr
-				+ ", price=" + price + ", number=" + number + ", content=" + content + ", contentTime=" + contentTime
-				+ ", answer=" + answer + ", answerTime=" + answerTime + ", state=" + state + "]";
+		return "CommodityMsg [customerId=" + customerId + ", commodityId=" + commodityId + ", commodityName="
+				+ commodityName + ", imgScr=" + imgScr + ", price=" + price + ", number=" + number + ", content="
+				+ content + ", contentTime=" + contentTime + ", answer=" + answer + ", answerTime=" + answerTime
+				+ ", state=" + state + "]";
 	}
 }
