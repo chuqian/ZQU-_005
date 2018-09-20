@@ -62,11 +62,11 @@ public class CommodityController {
 	 * @param id
 	 * @return 
 	 */
-	@RequestMapping("/del")
+	@RequestMapping("/commodityDel")
 	@ResponseBody
-	public String del(@RequestParam(required=true)String id) {
-		 String state = commodityService.delete(id);
-		 return state;
+	public String del(String sellerId, String commodityId) {
+		 
+		 return "success";
 	}
 	
 	/**
@@ -78,7 +78,7 @@ public class CommodityController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value="/onOrDown")
+	@RequestMapping(value="/commodityShelf")
 	public String onOrDown(Commodity commodity, 
 			@RequestParam("file") CommonsMultipartFile[] files,
 			String sellerId, HttpServletRequest request) {
