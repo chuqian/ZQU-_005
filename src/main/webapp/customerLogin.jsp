@@ -85,7 +85,7 @@
 							<div class="input-group" name="vCodeS">
 								<input type="text" class="form-control" name="vCode" id="vCode" placeholder="请输入验证码">
 								<div class="input-group-btn">
-									<div class="btn btn-default">获取验证码</div>
+									<button class="btn btn-default" id="getCode">获取验证码</button>
 								</div>
 							</div>
 						</div>
@@ -113,6 +113,8 @@
 		</div>
 	</body>
 	<script src="./js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/customerLogin.js"></script>
+	<script type="text/javascript" src="js/customerRegister.js"></script>
 	<script type="text/javascript" src="./js/jquery.validate.js"></script>
 	<script>
 		$(function() {

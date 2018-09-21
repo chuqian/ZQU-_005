@@ -12,7 +12,7 @@ $('#logSubmit').click(function(){
 		return false;
 	}
 	
-	$.post('login/seller.action', {"userName" : userName, "password" : password}, function(data){
+	$.post('login/customer.action', {"userName" : userName, "password" : password}, function(data){
 		if(data == 'fail'){
 			$('#logPassword').after('<p id="tip">账号不存在或密码不正确</p>');
 		}
@@ -22,6 +22,7 @@ $('#logSubmit').click(function(){
 	
 	return false;
 });
+
 
 $('#logUsername').focus(function(){
 	$('#tip').remove();

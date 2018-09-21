@@ -24,8 +24,8 @@ public class CustomerOrder implements Serializable {
 	private List<CommodityMsg> commodityMsgs;	//订单商品 	
 	private Date datetime;	//生成日期
 	private Double freight;	//运费
-	private Double price;	//交易金额
-	private Integer orderState;	//交易状态
+	private Double price;	//交易金额 
+	private Integer tradeState;	//交易状态
 	private Integer logisticsState;		//物流状态
 	private AfterSale afterSale; //售后服务
 	private String wayBillNum;	//运单号码
@@ -38,7 +38,20 @@ public class CustomerOrder implements Serializable {
 	private String achieveAddress; //收货地址
 	private String achieveName;  //收货人
 	private String achievePost;  //收货邮编
+	private Integer orderState;	//订单状态
 	
+	public List<CommodityMsg> getCommodityMsgs() {
+		return commodityMsgs;
+	}
+	public void setCommodityMsgs(List<CommodityMsg> commodityMsgs) {
+		this.commodityMsgs = commodityMsgs;
+	}
+	public Integer getTradeState() {
+		return tradeState;
+	}
+	public void setTradeState(Integer tradeState) {
+		this.tradeState = tradeState;
+	}
 	public String getOrderid() {
 		return orderid;
 	}

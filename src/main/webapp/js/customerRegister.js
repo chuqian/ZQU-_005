@@ -1,6 +1,6 @@
 $('#regUsername').blur(function(){
 	var email = $('#regUsername').val();
-	var data = {"email" : email, "role" : "seller"};
+	var data = {"email" : email, "role" : "customer"};
 	
 	$.post("register/validateEmail.action", data, function(info) {
 		if(info == '1'){
@@ -35,8 +35,9 @@ $('#getCode').attr('disabled', true);
 
 $('#regSubmit').click(function(){
 	$('#tip').remove();
-	var code = $('#vCode').val().trim();
-	var email = $('#regUsername').val().trim();
+	var code = $('#vCode').val();
+	var email = $('#regUsername').val();
+	var data = {"email" : email, "code" : code};
 	var password = $('#regPassword1').val().trim();
 	var password1 = $('#regPassword2').val().trim();
 	
@@ -48,7 +49,7 @@ $('#regSubmit').click(function(){
 	if(code == ''){
 		$('#vCode').after('<p id="tip">验证码不能为空</p>');
 		return false;
-	}	
+	}
 	
 	if(password == ''){
 		$('#regPassword1').after('<p id="tip">密码不能为空</p>');
@@ -60,10 +61,9 @@ $('#regSubmit').click(function(){
 		return false;
 	}
 	
-	var data = {"email" : email, "code" : code};
-	
 	$.post("register/validateCode.action", data, function(info) {
 		if(info == '1'){
+			var password = $('#regPassword1').val().trim();
 			var data1 = {"email" : email, "password" : password};
 			$.post('reigter/seller.action', data1, function(){
 				location.href = "shopping/seller.jsp";

@@ -1,17 +1,13 @@
 package com.dao.impl;
 
-import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
-
 import com.dao.SellerAndMallDao;
 import com.dto.AfterSale;
 import com.dto.Comment;
-import com.dto.Commodity;
 import com.dto.SellerOrder;
 import com.entity.Seller;
 

@@ -13,16 +13,7 @@
 		<!-- update by lgp login.html => login.jsp -->
 		<property name="filterChainDefinitions">
 			<value>
-				/login/seller.action = anon
-				/sellerLogin.jsp = anon
-				/customerLogin.jsp = anon
-				/login.action = anon
-				/register.jsp = anon
-				/getCode.action = anon
-				/validateCode.action = anon
-				/validateEmail.action = anon
-				/subLogin.action = anon
-				/* = authc
+				/** = anon
 			</value>
 		</property>
 		<!-- <property name="filters"> 

@@ -21,6 +21,7 @@ public class ShopCart implements Serializable {
 	private Integer count; //数量
 	private String imgScr; //图片地址
 	private Date addTime;  //添加时间
+	private double amount; //金额
 	public String getCustomerId() {
 		return customerId;
 	}
@@ -57,9 +58,16 @@ public class ShopCart implements Serializable {
 	public void setAddTime(Date addTime) {
 		this.addTime = addTime;
 	}
+	public double getAmount() {
+		return amount;
+	}
+	public void setAmount(double amount) {
+		this.amount = amount;
+	}
 	@Override
 	public String toString() {
 		return "ShopCart [customerId=" + customerId + ", commodityId=" + commodityId + ", name=" + name + ", count="
-				+ count + ", imgScr=" + imgScr + ", addTime=" + addTime + "]";
+				+ count + ", imgScr=" + imgScr + ", addTime=" + addTime + ", amount=" + amount + "]";
 	}
+	
 }
