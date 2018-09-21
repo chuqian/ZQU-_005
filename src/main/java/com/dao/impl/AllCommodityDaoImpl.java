@@ -2,13 +2,13 @@ package com.dao.impl;
 
 import java.util.List;
 
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
 import com.dao.AllCommodityDao;
-import com.util.ConditionBeanUnit;
-import com.dao.SellerDao;
 import com.entity.AllCommodity;
-import com.entity.Seller;
+import com.util.ConditionBeanUnit;
 
 /**
  * @author liangjiahong
@@ -20,8 +20,16 @@ public class AllCommodityDaoImpl extends BaseDaoImpl<AllCommodity> implements Al
 
 	@Override
 	public List<AllCommodity> findFuzzy(List<ConditionBeanUnit> conditionBeanUnits, int skip, int limit) {
-		// TODO Auto-generated method stub
-		return null;
+		Query query = new Query();
+		int size = conditionBeanUnits.size();
+		Criteria[] criterias = new Criteria[size];
+		int i=0;
+		for (ConditionBeanUnit co : conditionBeanUnits) {
+			criterias[i] = Criteria.where(co.getKey()).regex(co.getValue());
+			i++;
+		}
+		query.addCriteria(new Criteria().orOperator(criterias[0],criterias[1],criterias[2])).skip(skip).limit(limit);
+		return this.getMongoTemplate().find(query, AllCommodity.class);
 	}
 
 }
