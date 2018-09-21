@@ -299,11 +299,11 @@ public class SellerDaoImplTest {
 	@Test
 	public void testInsertComment(){
 		Comment comment = new Comment();
-		comment.setContent("评论222111");
+		comment.setContent("评论f7ec6d74ec8640238b7fd38ce199e04a");
 		comment.setContentTime(new Date());
 		comment.setMember("无名氏");
 		comment.setState(1);
-		sellerDaoImpl.insertComment("222222222222222222",comment);
+		sellerDaoImpl.insertComment("f7ec6d74ec8640238b7fd38ce199e04a",comment);
 	}
 	
 	/**

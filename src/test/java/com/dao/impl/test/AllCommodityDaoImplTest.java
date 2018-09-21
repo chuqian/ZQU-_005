@@ -1,7 +1,6 @@
 package com.dao.impl.test;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -23,7 +22,7 @@ public class AllCommodityDaoImplTest {
 	private AllCommodityDaoImpl allCommodityDaoImpl;
 	
 	/**
-	 * 多条件模糊查询商品,分页
+	 * 多条件（商品id、商品价格、商品类型）模糊查询商品,分页
 	 */
 	@Test
 	public void testFindFuzzy(){
@@ -50,7 +49,7 @@ public class AllCommodityDaoImplTest {
 	}
 	
 	/**
-	 * 查询所有，分页
+	 * 查询所有平台商品，分页
 	 */
 	@Test
 	public void testPage() {
@@ -60,7 +59,7 @@ public class AllCommodityDaoImplTest {
 	}
 	
 	/**
-	 * 批量添加商品信息
+	 * 批量添加平台商品信息
 	 */
 	@Test
 	public void testInsert(){

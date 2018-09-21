@@ -7,7 +7,7 @@ import java.util.List;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.dto.AfterSale;
-import com.dto.Commodity;
+import com.dto.CommodityMsg;
 
 /**
  * @author chenchuqian
@@ -21,7 +21,7 @@ public class CustomerOrder implements Serializable {
 	
 	private String orderid;   //订单id
 	private String customerId; //买家id 
-	private List<Commodity> commoditys;	//订单商品 	
+	private List<CommodityMsg> commodityMsgs;	//订单商品 	
 	private Date datetime;	//生成日期
 	private Double freight;	//运费
 	private Double price;	//交易金额
@@ -51,11 +51,11 @@ public class CustomerOrder implements Serializable {
 	public void setCustomerId(String customerId) {
 		this.customerId = customerId;
 	}
-	public List<Commodity> getCommoditys() {
-		return commoditys;
+	public List<CommodityMsg> getCommoditys() {
+		return commodityMsgs;
 	}
-	public void setCommoditys(List<Commodity> commoditys) {
-		this.commoditys = commoditys;
+	public void setCommoditys(List<CommodityMsg> commodityMsgs) {
+		this.commodityMsgs = commodityMsgs;
 	}
 	public Date getDatetime() {
 		return datetime;
@@ -156,7 +156,7 @@ public class CustomerOrder implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "CustomerOrder [orderid=" + orderid + ", customerId=" + customerId + ", commoditys=" + commoditys
+		return "CustomerOrder [orderid=" + orderid + ", customerId=" + customerId + ", commodityMsgs=" + commodityMsgs
 				+ ", datetime=" + datetime + ", freight=" + freight + ", price=" + price + ", orderState=" + orderState
 				+ ", logisticsState=" + logisticsState + ", afterSale=" + afterSale + ", wayBillNum=" + wayBillNum
 				+ ", logistics=" + logistics + ", sendTime=" + sendTime + ", achieveTime=" + achieveTime
