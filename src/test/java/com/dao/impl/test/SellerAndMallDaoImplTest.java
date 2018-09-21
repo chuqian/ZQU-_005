@@ -154,6 +154,34 @@ public class SellerAndMallDaoImplTest {
 		long endTime = System.currentTimeMillis(); // 获取结束时间
 		System.out.println("程序运行时间： " + (endTime - startTime) + "ms");
 	}
+
+	/**
+	 * 根据商家id、订单id修改售后信息
+	 */
+	@Test
+	public void testUpdateAfterSale() {
+		long startTime = System.currentTimeMillis(); // 获取开始时间
+		Random ra =new Random();
+		int ran = ra.nextInt(1000)+1;
+		String SellerId = "5b9625662fcc73437f2a47ce";
+		String SellerOrderId = "shangjiadingdan6445";
+		AfterSale afterSale = new AfterSale();
+		afterSale.setReturnId("sellerReturnId" + ran);
+		afterSale.setApplytime(new Date());
+		afterSale.setSeviceType(1);
+		afterSale.setReason("码数不合");
+		afterSale.setDealtime(null);
+		afterSale.setReturnState(null);
+		System.out.println(afterSale.toString());
+		int w = sellerAndMallDaoImpl.updateAfterSale(SellerId, SellerOrderId, afterSale);
+		if(w==1)
+			System.out.println("修改售后成功");
+		else {
+			System.out.println("修改售后失败");
+		}
+		long endTime = System.currentTimeMillis(); // 获取结束时间
+		System.out.println("程序运行时间： " + (endTime - startTime) + "ms");
+	}
 	
 	
 
