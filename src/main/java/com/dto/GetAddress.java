@@ -11,6 +11,8 @@ public class GetAddress implements Serializable {
 	
 	private static final long serialVersionUID = 7732988267615774295L;
 	
+	private String addressId; //地址Id
+	private Integer isDefault;//是否默认
 	private String name;      //收货人姓名
 	private String phone;     //收货人手机号
 	private String province;  //省份
@@ -18,7 +20,18 @@ public class GetAddress implements Serializable {
 	private String county;    //县/区
 	private String detail;    //详细地址
 	private String postalNumber; //邮政编码
-	
+	public String getAddressId() {
+		return addressId;
+	}
+	public void setAddressId(String addressId) {
+		this.addressId = addressId;
+	}
+	public Integer getIsDefault() {
+		return isDefault;
+	}
+	public void setIsDefault(Integer isDefault) {
+		this.isDefault = isDefault;
+	}
 	public String getName() {
 		return name;
 	}
@@ -64,7 +77,8 @@ public class GetAddress implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "GetAddress [name=" + name + ", phone=" + phone + ", province=" + province + ", city=" + city
-				+ ", county=" + county + ", detail=" + detail + ", postalNumber=" + postalNumber + "]";
+		return "GetAddress [addressId=" + addressId + ", isDefault=" + isDefault + ", name=" + name + ", phone=" + phone
+				+ ", province=" + province + ", city=" + city + ", county=" + county + ", detail=" + detail
+				+ ", postalNumber=" + postalNumber + "]";
 	}
 }

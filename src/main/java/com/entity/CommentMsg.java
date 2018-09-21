@@ -8,14 +8,15 @@ import org.springframework.data.mongodb.core.mapping.Document;
 /**
  * @author chenchuqian
  * @date 2018年8月28日 下午11:21:01
- * @describe 订单商品信息,关联到订单中的某个商品
+ * @describe 评论信息
  */
-@Document(collection="commodityMsg")
-public class CommodityMsg implements Serializable {
+@Document(collection="commentMsg")
+public class CommentMsg implements Serializable {
 
 	private static final long serialVersionUID = 1890475226288859219L;
 	
 	private String customerId;  //买家id
+	private String orderId;    //订单id
 	private String commodityId;  //商品id
 	private String commodityName; //商品名称
 	private String imgScr;      //图片地址
@@ -92,9 +93,15 @@ public class CommodityMsg implements Serializable {
 	public void setState(Integer state) {
 		this.state = state;
 	}
+	public String getOrderId() {
+		return orderId;
+	}
+	public void setOrderId(String orderId) {
+		this.orderId = orderId;
+	}
 	@Override
 	public String toString() {
-		return "CommodityMsg [customerId=" + customerId + ", commodityId=" + commodityId + ", commodityName="
+		return "CommodityMsg [customerId=" + customerId + "orderId=" + orderId + ", commodityId=" + commodityId + ", commodityName="
 				+ commodityName + ", imgScr=" + imgScr + ", price=" + price + ", number=" + number + ", content="
 				+ content + ", contentTime=" + contentTime + ", answer=" + answer + ", answerTime=" + answerTime
 				+ ", state=" + state + "]";
