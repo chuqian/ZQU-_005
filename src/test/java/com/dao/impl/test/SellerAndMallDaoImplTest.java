@@ -142,8 +142,8 @@ public class SellerAndMallDaoImplTest {
 		afterSale.setApplytime(new Date());
 		afterSale.setSeviceType(1);
 		afterSale.setReason("码数不合");
-		afterSale.setDealtime(null);
-		afterSale.setReturnState(null);
+//		afterSale.setDealtime(null);
+//		afterSale.setReturnState(null);
 		System.out.println(afterSale.toString());
 		int w = sellerAndMallDaoImpl.insertAfterSale(SellerId, SellerOrderId, afterSale);
 		if(w==1)
@@ -166,12 +166,12 @@ public class SellerAndMallDaoImplTest {
 		String SellerId = "5b9625662fcc73437f2a47ce";
 		String SellerOrderId = "shangjiadingdan6445";
 		AfterSale afterSale = new AfterSale();
-		afterSale.setReturnId("sellerReturnId" + ran);
-		afterSale.setApplytime(new Date());
-		afterSale.setSeviceType(1);
-		afterSale.setReason("码数不合");
-		afterSale.setDealtime(null);
-		afterSale.setReturnState(null);
+//		afterSale.setReturnId("sellerReturnId" + ran);
+//		afterSale.setApplytime(new Date());
+//		afterSale.setSeviceType(1);
+//		afterSale.setReason("码数不合");
+		afterSale.setDealtime(new Date());
+		afterSale.setReturnState(0);
 		System.out.println(afterSale.toString());
 		int w = sellerAndMallDaoImpl.updateAfterSale(SellerId, SellerOrderId, afterSale);
 		if(w==1)
