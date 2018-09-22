@@ -2,6 +2,7 @@ package com.dao;
 
 import java.util.List;
 
+import com.dto.GetAddress;
 import com.entity.Customer;
 import com.entity.CustomerOrder;
 import com.entity.ShopCart;
@@ -60,4 +61,32 @@ public interface CustomerDao extends BaseDao<Customer>{
 	 * @param orderId
 	 */
 	void deleteOrder(String orderId);
+	
+	/**
+	 * 查询买家收货地址
+	 * @param customerId
+	 * @return
+	 */
+	List<Customer> getAddresses(String customerId);
+	
+	/**
+	 * 添加收货地址
+	 * @param address
+	 */
+	void insertAddress(GetAddress address, String customerId);
+	
+	/**
+	 * 删除地址
+	 * @param addressId
+	 * @param customerId
+	 */
+	void deleteAddress(String addressId, String customerId);
+	
+	/**
+	 * 更新收货地址
+	 * @param address
+	 * @param customerId
+	 */
+	void updateAddress(GetAddress address, String customerId);
+
 }

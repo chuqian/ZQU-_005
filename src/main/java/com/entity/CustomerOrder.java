@@ -19,7 +19,7 @@ public class CustomerOrder implements Serializable {
 	
 	private static final long serialVersionUID = -7181252640880362298L;
 	
-	private String orderid;   //订单id
+	private String orderId;   //订单id
 	private String customerId; //买家id 
 	private List<CommodityMsg> commodityMsgs;	//订单商品 	
 	private Date datetime;	//生成日期
@@ -52,11 +52,11 @@ public class CustomerOrder implements Serializable {
 	public void setTradeState(Integer tradeState) {
 		this.tradeState = tradeState;
 	}
-	public String getOrderid() {
-		return orderid;
+	public String getOrderId() {
+		return orderId;
 	}
-	public void setOrderid(String orderid) {
-		this.orderid = orderid;
+	public void setOrderId(String orderId) {
+		this.orderId = orderId;
 	}
 	public String getCustomerId() {
 		return customerId;
@@ -169,7 +169,7 @@ public class CustomerOrder implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "CustomerOrder [orderid=" + orderid + ", customerId=" + customerId + ", commodityMsgs=" + commodityMsgs
+		return "CustomerOrder [orderid=" + orderId + ", customerId=" + customerId + ", commodityMsgs=" + commodityMsgs
 				+ ", datetime=" + datetime + ", freight=" + freight + ", price=" + price + ", orderState=" + orderState
 				+ ", logisticsState=" + logisticsState + ", afterSale=" + afterSale + ", wayBillNum=" + wayBillNum
 				+ ", logistics=" + logistics + ", sendTime=" + sendTime + ", achieveTime=" + achieveTime
