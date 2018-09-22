@@ -1,8 +1,14 @@
 package com.dao.impl;
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import org.bson.types.ObjectId;
+import org.springframework.data.mongodb.core.aggregation.Aggregation;
+import org.springframework.data.mongodb.core.aggregation.Fields;
+import org.springframework.data.mongodb.core.aggregation.TypedAggregation;
 import org.springframework.data.mongodb.core.query.BasicQuery;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -13,6 +19,7 @@ import com.dao.CommodityDao;
 import com.dto.Commodity;
 import com.entity.AllCommodity;
 import com.entity.Seller;
+import com.mongodb.AggregationOutput;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 
@@ -94,6 +101,27 @@ public class CommodityDaoImpl extends BaseDaoImpl<AllCommodity> implements Commo
 		Query query = new Query(Criteria.where("_id").is(sellerId).and("commoditys._id").is(commodityId));
 		query.fields().include("commoditys");
 		return this.getMongoTemplate().findOne(query, Seller.class, "seller").getCommoditys().get(0);
+	}
+	
+	@Override
+	public int commodityCount(String sellerId) {
+		DBObject size = new BasicDBObject("$size", "$commoditys");
+		DBObject count = new BasicDBObject("count", size);
+		count.put("_id", 0);
+		DBObject project = new BasicDBObject("$project", count);
+		System.out.println(project.toString());
+		//筛选条件
+		DBObject id = new BasicDBObject("_id", new ObjectId(sellerId));
+		DBObject match  = new BasicDBObject("$match", id);
+		System.out.println(match.toString());
+		AggregationOutput out = this.getMongoTemplate().getCollection("seller").aggregate(match, project);
+		int total = 0;
+		for(Iterator<DBObject> iterator = out.results().iterator(); iterator.hasNext();){
+			System.out.println("in...");
+			DBObject dbObject = iterator.next();
+			total = Integer.parseInt((String) dbObject.get("count"));
+		}
+		return total;
 	}
 
 }

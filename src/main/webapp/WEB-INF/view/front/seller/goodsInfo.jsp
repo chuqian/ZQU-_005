@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -7,9 +9,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="./css/bootstrap.css">
-    <link rel="stylesheet" href="./css/main.css">
-    <link rel="stylesheet" href="./css//goods.css">
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css//goods.css">
     
     <title>Document</title>
 </head>
@@ -96,7 +98,7 @@
                                 </div>
                             </div>
                             <hr style="border-color: #888; margin-bottom: 10px;">
-                             
+                            <c:forEach items="${commoditys}" var="commodity">
                             <div class="row goods-item">
                                 <div class="col-sm-1">
                                     <input type="checkbox" name="box" id="">
@@ -104,199 +106,29 @@
                                     <input type="hidden" name="">
                                 </div>
                                 <div class="col-sm-2">
-                                    <img src="./img//default.png" alt="" width="120px" height="120px">
+                                    <img src="../img/default.png" alt="" width="120px" height="120px">
                                 </div>
-                                <div class="col-sm-2">名称</div>
-                                <div class="col-sm-1">价格</div>
-                                <div class="col-sm-1">是</div>
-                                <div class="col-sm-1">1000</div>
-                                <div class="col-sm-2">2018-08-08</div>
+                                <div class="col-sm-2">${commodity.name}</div>
+                                <div class="col-sm-1">${commodity.price}</div>
+                                <c:choose>
+                                	<c:when test="${commodity.isShelf == 1}">
+                                		<div class="col-sm-1">是</div>	
+                                	</c:when>
+                                	<c:otherwise>
+                                		<div class="col-sm-1">否</div>
+                                	</c:otherwise>
+                                </c:choose>
+                            	<div class="col-sm-1">${commodity.stock}</div>
+                                <div class="col-sm-2">
+                                <fmt:formatDate pattern="yyyy-MM-dd" value="${commodity.shelfTime}" type="both"/>
+                                </div>
                                 <div class="col-sm-2">
                                     <input type="button" value="详细" class="detailBtn">
                                     <input type="button" value="删除" class="deleBtn">
                                 </div>
                             </div>
                             <hr style="border-color: #888; margin-bottom: 10px;">
-                            <div class="row goods-item">
-                                <div class="col-sm-1">
-                                    <input type="checkbox" name="box" id="">
-                                    <!-- 存放商品的id -->
-                                    <input type="hidden" name="">
-                                </div>
-                                <div class="col-sm-2">
-                                    <img src="./img//default.png" alt="" width="120px" height="120px">
-                                </div>
-                                <div class="col-sm-2">名称</div>
-                                <div class="col-sm-1">价格</div>
-                                <div class="col-sm-1">是</div>
-                                <div class="col-sm-1">1000</div>
-                                <div class="col-sm-2">2018-08-08</div>
-                                <div class="col-sm-2">
-                                    <input type="button" value="详细" class="detailBtn">
-                                    <input type="button" value="删除" class="deleBtn">
-                                </div>
-                            </div>
-                            <hr style="border-color: #888; margin-bottom: 10px;">
-                            <div class="row goods-item">
-                                <div class="col-sm-1">
-                                    <input type="checkbox" name="box" id="">
-                                    <!-- 存放商品的id -->
-                                    <input type="hidden" name="">
-                                </div>
-                                <div class="col-sm-2">
-                                    <img src="./img//default.png" alt="" width="120px" height="120px">
-                                </div>
-                                <div class="col-sm-2">名称</div>
-                                <div class="col-sm-1">价格</div>
-                                <div class="col-sm-1">是</div>
-                                <div class="col-sm-1">1000</div>
-                                <div class="col-sm-2">2018-08-08</div>
-                                <div class="col-sm-2">
-                                    <input type="button" value="详细" class="detailBtn">
-                                    <input type="button" value="删除" class="deleBtn">
-                                </div>
-                            </div>
-                            <hr style="border-color: #888; margin-bottom: 10px;">
-                            <div class="row goods-item">
-                                <div class="col-sm-1">
-                                    <input type="checkbox" name="box" id="">
-                                    <!-- 存放商品的id -->
-                                    <input type="hidden" name="">
-                                </div>
-                                <div class="col-sm-2">
-                                    <img src="./img//default.png" alt="" width="120px" height="120px">
-                                </div>
-                                <div class="col-sm-2">名称</div>
-                                <div class="col-sm-1">价格</div>
-                                <div class="col-sm-1">是</div>
-                                <div class="col-sm-1">1000</div>
-                                <div class="col-sm-2">2018-08-08</div>
-                                <div class="col-sm-2">
-                                    <input type="button" value="详细" class="detailBtn">
-                                    <input type="button" value="删除" class="deleBtn">
-                                </div>
-                            </div>
-                            <hr style="border-color: #888; margin-bottom: 10px;">
-                            <div class="row goods-item">
-                                <div class="col-sm-1">
-                                    <input type="checkbox" name="box" id="">
-                                    <!-- 存放商品的id -->
-                                    <input type="hidden" name="">
-                                </div>
-                                <div class="col-sm-2">
-                                    <img src="./img//default.png" alt="" width="120px" height="120px">
-                                </div>
-                                <div class="col-sm-2">名称</div>
-                                <div class="col-sm-1">价格</div>
-                                <div class="col-sm-1">是</div>
-                                <div class="col-sm-1">1000</div>
-                                <div class="col-sm-2">2018-08-08</div>
-                                <div class="col-sm-2">
-                                    <input type="button" value="详细" class="detailBtn">
-                                    <input type="button" value="删除" class="deleBtn">
-                                </div>
-                            </div>
-                            <hr style="border-color: #888; margin-bottom: 10px;">
-                            <div class="row goods-item">
-                                <div class="col-sm-1">
-                                    <input type="checkbox" name="box" id="">
-                                    <!-- 存放商品的id -->
-                                    <input type="hidden" name="">
-                                </div>
-                                <div class="col-sm-2">
-                                    <img src="./img//default.png" alt="" width="120px" height="120px">
-                                </div>
-                                <div class="col-sm-2">名称</div>
-                                <div class="col-sm-1">价格</div>
-                                <div class="col-sm-1">是</div>
-                                <div class="col-sm-1">1000</div>
-                                <div class="col-sm-2">2018-08-08</div>
-                                <div class="col-sm-2">
-                                    <input type="button" value="详细" class="detailBtn">
-                                    <input type="button" value="删除" class="deleBtn">
-                                </div>
-                            </div>
-                            <hr style="border-color: #888; margin-bottom: 10px;">
-                            <div class="row goods-item">
-                                <div class="col-sm-1">
-                                    <input type="checkbox" name="box" id="">
-                                    <!-- 存放商品的id -->
-                                    <input type="hidden" name="">
-                                </div>
-                                <div class="col-sm-2">
-                                    <img src="./img//default.png" alt="" width="120px" height="120px">
-                                </div>
-                                <div class="col-sm-2">名称</div>
-                                <div class="col-sm-1">价格</div>
-                                <div class="col-sm-1">是</div>
-                                <div class="col-sm-1">1000</div>
-                                <div class="col-sm-2">2018-08-08</div>
-                                <div class="col-sm-2">
-                                    <input type="button" value="详细" class="detailBtn">
-                                    <input type="button" value="删除" class="deleBtn">
-                                </div>
-                            </div>
-                            <hr style="border-color: #888; margin-bottom: 10px;">
-                            <div class="row goods-item">
-                                <div class="col-sm-1">
-                                    <input type="checkbox" name="box" id="">
-                                    <!-- 存放商品的id -->
-                                    <input type="hidden" name="">
-                                </div>
-                                <div class="col-sm-2">
-                                    <img src="./img//default.png" alt="" width="120px" height="120px">
-                                </div>
-                                <div class="col-sm-2">名称</div>
-                                <div class="col-sm-1">价格</div>
-                                <div class="col-sm-1">是</div>
-                                <div class="col-sm-1">1000</div>
-                                <div class="col-sm-2">2018-08-08</div>
-                                <div class="col-sm-2">
-                                    <input type="button" value="详细" class="detailBtn">
-                                    <input type="button" value="删除" class="deleBtn">
-                                </div>
-                            </div>
-                            <hr style="border-color: #888; margin-bottom: 10px;">
-                            <div class="row goods-item">
-                                <div class="col-sm-1">
-                                    <input type="checkbox" name="box" id="">
-                                    <!-- 存放商品的id -->
-                                    <input type="hidden" name="">
-                                </div>
-                                <div class="col-sm-2">
-                                    <img src="./img//default.png" alt="" width="120px" height="120px">
-                                </div>
-                                <div class="col-sm-2">名称</div>
-                                <div class="col-sm-1">价格</div>
-                                <div class="col-sm-1">是</div>
-                                <div class="col-sm-1">1000</div>
-                                <div class="col-sm-2">2018-08-08</div>
-                                <div class="col-sm-2">
-                                    <input type="button" value="详细" class="detailBtn">
-                                    <input type="button" value="删除" class="deleBtn">
-                                </div>
-                            </div>
-                            <hr style="border-color: #888; margin-bottom: 10px;">
-                            <div class="row goods-item">
-                                <div class="col-sm-1">
-                                    <input type="checkbox" name="box" id="">
-                                    <!-- 存放商品的id -->
-                                    <input type="hidden" name="">
-                                </div>
-                                <div class="col-sm-2">
-                                    <img src="./img//default.png" alt="" width="120px" height="120px">
-                                </div>
-                                <div class="col-sm-2">名称</div>
-                                <div class="col-sm-1">价格</div>
-                                <div class="col-sm-1">是</div>
-                                <div class="col-sm-1">1000</div>
-                                <div class="col-sm-2">2018-08-08</div>
-                                <div class="col-sm-2">
-                                    <input type="button" value="详细" class="detailBtn">
-                                    <input type="button" value="删除" class="deleBtn">
-                                </div>
-                            </div>
-                            <hr style="border-color: #888; margin-bottom: 10px;">
+                            </c:forEach>
                             <div id="pagenationBar" class="pagenationBar pull-right btn-group"></div>
                         </div>
                     </div>
@@ -308,11 +140,11 @@
     <div class="footer ">
         （沪）字第1248号 | 网络文化经营许可证：沪网文[2016]2296-134号 | 互联网ICP备案：沪ICP备13002172号-3 沪
     </div>
-    <script src="./js/jquery.min.js"></script>
-    <script src="./kindeditor-master/kindeditor-all-min.js"></script>
-    <script src="./js//zh-CN.js"></script>
-    <script src="./js/generatePagenationBar.js"></script>
-    <script src="./js/_sellerCenter.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../kindeditor-master/kindeditor-all-min.js"></script>
+    <script src="../js//zh-CN.js"></script>
+    <script src="../js/generatePagenationBar.js"></script>
+    <script src="../js/_sellerCenter.js"></script>
     <script>
 			var editor;
 			KindEditor.ready(function(K) {

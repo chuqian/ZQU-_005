@@ -88,4 +88,9 @@ public class CommodityServiceImpl implements CommodityService {
 		return this.commodityDaoImpl.findSellerCommodity(sellerId, skip, size);
 	}
 	
+	@Override
+	public int count(String sellerId) {
+		return commodityDaoImpl.commodityCount(sellerId);
+	
+	}
 }

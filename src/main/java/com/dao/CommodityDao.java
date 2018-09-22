@@ -78,4 +78,11 @@ public interface CommodityDao extends BaseDao<AllCommodity>{
 	 */
 	Commodity findSellerCommodityOne(String sellerId, String commodityId);
 	
+	/**
+	 * 商家拥有商品总数
+	 * @param sellerId
+	 * @return
+	 */
+	int commodityCount(String sellerId);
+	
 }

@@ -57,4 +57,11 @@ public interface CommodityService {
 	 */
 	public List<Commodity> findSellerCommodity(String sellerId, int skip, int size);
 	
+	/**
+	 * 商家锁拥有商品总数
+	 * @param sellerId
+	 * @return
+	 */
+	int count(String sellerId);
+	
 }

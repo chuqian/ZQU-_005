@@ -1,5 +1,9 @@
 package com.controller;
 
+import static org.junit.Assert.fail;
+
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,14 +60,26 @@ public class CommodityController {
 	
 	/**
 	 * 商品删除
-	 * @param id
-	 * @return 
+	 * @param sellerId
+	 * @param commodityId
+	 * @return
 	 */
 	@RequestMapping("/commodityDel")
 	@ResponseBody
 	public String del(String sellerId, String commodityId) {
-		 
-		 return "success";
+		 if(commodityService.delete(sellerId, commodityId))
+			 return "success";
+		 else
+			 return "fail";
+	}
+	
+	/**
+	 * 跳转到商品上架页面
+	 * @return
+	 */
+	@RequestMapping("/goodsPullOn")
+	public String toGoodsPullOn(){
+		return "/front/seller/goodsPullOn";
 	}
 	
 	/**
@@ -88,5 +104,22 @@ public class CommodityController {
 		System.out.println(files.length);
 		commodityService.commodityUpload(sellerId, commodity);
 		return "succe";
+	}
+	
+	/**
+	 * 跳转到商品信息页面
+	 * @param currentPage
+	 * @return
+	 */
+	@RequestMapping(value="/toGoodInfo")
+	public ModelAndView toGoodInfo(@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage){
+		int pageSize = 10;
+		String sellerId = "5b9625662fcc73437f2a47ce";
+		List<Commodity> commoditys = commodityService.findSellerCommodity(sellerId, (currentPage-1)*pageSize, pageSize);
+		System.out.println(commoditys.size());
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("commoditys", commoditys);
+		mv.setViewName("/front/seller/goodsInfo");
+		return mv;
 	}
 }
