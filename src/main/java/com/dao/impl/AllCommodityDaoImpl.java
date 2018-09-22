@@ -13,7 +13,7 @@ import com.util.ConditionBeanUnit;
 /**
  * @author liangjiahong
  * @date 2018年9月20日 上午10:44:18
- * @describe 
+ * @describe 平台商品接口实现
  */
 @Repository
 public class AllCommodityDaoImpl extends BaseDaoImpl<AllCommodity> implements AllCommodityDao {

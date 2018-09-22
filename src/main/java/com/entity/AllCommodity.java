@@ -5,6 +5,8 @@ import java.io.Serializable;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.dto.Commodity;
+
 /**
  * @author chenchuqian
  * @date 2018年9月6日 下午4:28:03
@@ -23,6 +25,25 @@ public class AllCommodity implements Serializable {
 	private Integer saledNum;    //销量
 	private String imgSrc;		 //图片
 	private String commodityType; //商品类型
+	
+	public AllCommodity(){
+		
+	}
+	
+	/**
+	 * 通过卖家商品构造平台商品
+	 * @param sellerId
+	 * @param commodity
+	 */
+	public AllCommodity(String sellerId, Commodity commodity) {
+		this.sellerId = sellerId;
+		this.id = commodity.getId();
+		this.commodityName = commodity.getName();
+		this.price = commodity.getPrice();
+		this.saledNum = 0;
+		this.imgSrc = commodity.getImgSrc()!=null ? commodity.getImgSrc()[0] : null;
+		this.commodityType = commodity.getCommodityType();
+	}
 	
 	public String getId() {
 		return id;

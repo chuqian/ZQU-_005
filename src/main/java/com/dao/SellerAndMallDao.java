@@ -46,11 +46,21 @@ public interface SellerAndMallDao extends BaseDao<Seller> {
 	int insertComments(String CommodityId, List<Comment> comments);
 	
 	/**
-	 * 根据商家订单id添加售后服务
+	 * 根据商家订单id添加售后服务信息
+	 * @param SellerId
 	 * @param SellerOrderId
 	 * @param afterSale
 	 * @return
 	 */
 	int insertAfterSale(String SellerId, String SellerOrderId, AfterSale afterSale);
+	
+	/**
+	 * 根据商家订单id修改售后服务信息
+	 * @param SellerId
+	 * @param SellerOrderId
+	 * @param afterSale
+	 * @return
+	 */
+	int updateAfterSale(String SellerId, String SellerOrderId, AfterSale afterSale);
 	
 }

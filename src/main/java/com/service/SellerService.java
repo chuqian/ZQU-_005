@@ -1,5 +1,9 @@
 package com.service;
 
+import com.common.PageQueryVo;
+import com.common.Pager;
+import com.dto.Commodity;
+import com.dto.SellerOrder;
 import com.entity.Seller;
 
 /**
@@ -9,6 +13,46 @@ import com.entity.Seller;
  */
 public interface SellerService {
 
-	void save(Seller seller);
+	/**
+	 * 商家/店铺信息
+	 * @param sellerId
+	 * @return
+	 */
+	public Seller info(String sellerId); 
+	
+	/**
+	 * 商家/店铺信息保存
+	 * @param seller
+	 */
+	public void save(Seller seller);
+ 	/**
+	 * 店铺注销
+	 * @param sellerId
+	 */
+	public void storeCancel(String sellerId);
+ 	/**
+	 * 获取在卖商品
+	 * @param sellerId
+	 * @param commodity
+	 * @param page
+	 * @return
+	 */
+	public Pager<Commodity> getCommodiyBySeller(String sellerId, Commodity commodity, PageQueryVo page);
+	
+	/**
+	 * 添加在卖商品
+	 * @param sellerId
+	 * @param commodity
+	 */
+	public void commodityToSeller(String sellerId, Commodity commodity);
+	
+	/**
+	 * 卖家所有订单
+	 * @param sellerId
+	 * @param orderState
+	 * @param page
+	 * @return
+	 */
+	public Pager<SellerOrder> getOrders(String sellerId, int orderState, PageQueryVo page);
 
 }
