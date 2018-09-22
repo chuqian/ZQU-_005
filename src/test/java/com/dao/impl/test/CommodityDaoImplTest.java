@@ -10,7 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.dao.impl.CommodityDaoImpl;
-import com.entity.Commodity;
+import com.dto.Commodity;
 
 @RunWith(value=SpringJUnit4ClassRunner.class)
 @ContextConfiguration({"classpath:spring.xml"})

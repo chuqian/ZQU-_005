@@ -1,15 +1,25 @@
 package com.dao.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
+
+import org.springframework.data.mongodb.core.aggregation.Aggregation;
+import org.springframework.data.mongodb.core.query.BasicQuery;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
+
 import com.dao.SellerDao;
 import com.dto.Comment;
 import com.dto.Commodity;
+import com.dto.SellerOrder;
+import com.entity.AllCommodity;
 import com.entity.Seller;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
 import com.mongodb.WriteResult;
 
 /**
@@ -170,4 +180,80 @@ public class SellerDaoImpl extends BaseDaoImpl<Seller> implements SellerDao {
 		return 0;
 	}
 
+	
+	
+	@SuppressWarnings("serial")
+	@Override
+	public Seller getInfoById(String sellerId) {
+		Map<String, Boolean> fieldMap = new HashMap<String, Boolean>(){{
+			put("name", true);
+			put("store", true);
+			put("type", true);
+			put("phone", true);
+			put("identity", true);
+			put("sex", true);
+			put("info", true);
+			put("email", true);
+			put("contactAddress", true);
+			put("storeImg", true);
+		}};
+		DBObject queryObject = new BasicDBObject("_id", sellerId);
+		DBObject fieldsObject = new BasicDBObject(fieldMap);
+		Query query = new BasicQuery(queryObject, fieldsObject);
+		
+		return this.getMongoTemplate().findOne(query, Seller.class);
+	}
+ 	@Override
+	public void storeCancel(String sellerId) {
+		Query query = new Query(Criteria.where("_id").is(sellerId));
+		Update update = new Update().unset("store").unset("type").unset("info")
+				.unset("contactAddress").unset("storeImg").unset("commoditys");
+		this.getMongoTemplate().updateFirst(query, update, Seller.class);
+	}
+ 	@Override
+	public List<Commodity> getCommodiyBySeller(String sellerId, long skip, long limit) {
+		DBObject queryObject = new BasicDBObject("_id", sellerId);
+		DBObject fieldObject = new BasicDBObject("commoditys", true);
+		Query query = new BasicQuery(queryObject, fieldObject);
+		//此种方法查询性能差，待改进
+		List<Commodity> commodityList = this.getMongoTemplate().findOne(query, Seller.class).getCommoditys();
+		//return commodityList.subList(fromIndex, toIndex);
+		return null;
+	}
+ 	@Override
+	public void commodityToSeller(String sellerId, Commodity commodity) {
+		//把商品添加至平台
+		AllCommodity platformCommodity = new AllCommodity(sellerId, commodity);
+		this.getMongoTemplate().insert(platformCommodity);
+	
+		//把商品添加至商家
+		Query query = new Query(Criteria.where("_id").is(sellerId));
+		commodity.setId(platformCommodity.getId());
+		Update update = new Update().addToSet("commoditys", commodity);
+		this.getMongoTemplate().updateFirst(query, update, Seller.class);
+	}
+ 	@Override
+	public List<SellerOrder> getOrdersBySeller(String sellerId, int orderState,	long skip, long limit) {
+		
+		/*此种方法查询性能太低
+		DBObject queryObject = new BasicDBObject("_id", sellerId);
+		DBObject fieldsObject = new BasicDBObject("sellerOrders", true);
+		Query query = new BasicQuery(queryObject, fieldsObject);
+		Seller seller = this.getMongoTemplate().findOne(query, Seller.class);
+		return seller.getSellerOrders().subList(1, 10);*/
+		
+		//下面这种方法还没找到解决方案
+		Aggregation aggregation = Aggregation.newAggregation(
+				Aggregation.match(Criteria.where("_id").is(sellerId)),
+				Aggregation.unwind("sellerOrders"),
+				Aggregation.match(Criteria.where("sellerOrders.orderState").is(orderState)),
+				Aggregation.skip(skip),	
+				Aggregation.limit(limit));
+		
+		/*AggregationResults<Seller> aggRes = this.getMongoTemplate().
+				aggregate(aggregation, "seller", Seller.class);*/      //这里会报错
+		return null;
+		/*return aggRes.getMappedResults();*/
+	}
+	
 }
