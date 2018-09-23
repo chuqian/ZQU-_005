@@ -1,4 +1,4 @@
-package zhuanfa;
+package com.util;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -18,7 +18,7 @@ public class tongwebinf extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = request.getParameter("url");
 		System.out.println(url);
-		request.getRequestDispatcher("/WEB-INF/view/"+url+".jsp").forward(request,response);
+		request.getRequestDispatcher("/WEB-INF/view/front/customer/"+url+".jsp").forward(request,response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
