@@ -1,5 +1,7 @@
 package com.service;
 
+import java.util.Map;
+
 import com.common.PageQueryVo;
 import com.common.Pager;
 import com.dto.Commodity;
@@ -24,7 +26,8 @@ public interface SellerService {
 	 * 商家/店铺信息保存
 	 * @param seller
 	 */
-	public void save(Seller seller);
+	public void infoSave(Map<String, String> editInfo);
+	
  	/**
 	 * 店铺注销
 	 * @param sellerId

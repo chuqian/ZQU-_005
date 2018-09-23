@@ -1,50 +1,40 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"	pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <HTML>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<link rel="stylesheet" href="./css/bootstrap.css">
-<link rel="stylesheet" href="./css/main.css">
-<link rel="stylesheet" href="./css/goods.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/goods.css">
 <title>Document</title>
 </head>
 
 <body>
 	<div class="navbar navbar-default myheader">
 		<!-- 放置logo -->
-		<div class="container">
-			<div class="navbar-header myBrand">多野卖家中心</div>
-			<label class="toggle-label visible-xs-inline-block"
-				for="toggle-checkbox">菜单</label> <input class="hidden"
-				type="checkbox" name="" id="toggle-checkbox">
-			<div class="hidden-xs">
-				<ul class="nav navbar-nav">
-					<li><a href="">首页</a></li>
-					<li><a href="">消息</a><span id="tipNum" class="tipNum">5</span></li>
+		<div class="container" id="sellerTop">
 
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="login.html#login">登录</a></li>
-					<li><a href="login.html#singup">注册</a></li>
-				</ul>
-			</div>
 		</div>
 	</div>
 	<div class="container myContainer">
 		<div class="row">
 			<div class="col-sm-2">
-				<div id="sellerMenu" class="hidden-xs list-group side-bar"></div>
+				<div id="sellerMenu" class="hidden-xs list-group side-bar">
+				
+				</div>
 			</div>
+			
 			<div class="col-sm-10">
 				<div class="wrapper">
 					<div class="location">
 						<label>卖家中心</label> <label>></label> <label>商品上架</label>
 					</div>
 					<div class="goodsInfo">
-<!-- 						<form class="form-horizontal" action="./commodiy/onOrDown.action" method="post" enctype="multipart/form-data"> -->
+<!-- 						<form class="form-horizontal" action="${pageContext.request.contextPath}/commodiy/onOrDown.action" method="post" enctype="multipart/form-data"> -->
 						<form method="POST" enctype="multipart/form-data" class="form-horizontal" id="info"> 
 							<input type="hidden" value="5b9625662fcc73437f2a47ce" name="sellerId">
 							<div class="form-group">
@@ -157,7 +147,7 @@
 						<label>卖家中心</label> <label>></label> <label>商品上架</label>
 					</div>
 					<div class="goodsInfo">
-<!-- 						<form class="form-horizontal" action="./commodiy/onOrDown.action" method="post" enctype="multipart/form-data"> -->
+<!-- 						<form class="form-horizontal" action="${pageContext.request.contextPath}/commodiy/onOrDown.action" method="post" enctype="multipart/form-data"> -->
 						<form method="POST" enctype="multipart/form-data" class="form-horizontal" id="info"> 
 							<input type="hidden" value="5b9625662fcc73437f2a47ce" name="sellerId">
 							<div class="form-group">
@@ -238,12 +228,10 @@
 	</div>
 	<div class="footer ">（沪）字第1248号 | 网络文化经营许可证：沪网文[2016]2296-134号 |
 		互联网ICP备案：沪ICP备13002172号-3 沪</div>
-	<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script> 
-	<script src="js/jquery.min.js"></script>
-	<script src="./js/_sellerCenter.js"></script>
-
-	<script src="./kindeditor-master/kindeditor-all-min.js"></script>
-	<script src="./js/zh-CN.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/_sellerCenter.js"></script>
+	<script src="${pageContext.request.contextPath}/kindeditor-master/kindeditor-all-min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/zh-CN.js"></script>
 	
 	<script>
 			var editor;
@@ -290,7 +278,7 @@
         }
     }
     </script>
-	<script type="text/javascript" src="js/jquery-form.js"></script>  
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-form.js"></script>  
     <script type="text/javascript">
 	//文件异步上传
     $(document).ready(function() {

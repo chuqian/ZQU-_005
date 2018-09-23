@@ -1,6 +1,7 @@
 package com.controller;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.common.PageQueryVo;
 import com.common.Pager;
 import com.dto.Commodity;
-import com.entity.Seller;
+import com.enumm.StoreType;
 import com.service.SellerService;
 
 /**
@@ -27,21 +28,39 @@ public class SellerController {
 	@Autowired
 	private SellerService sellerService;
 	
-	@RequestMapping("/index")
+	/**
+	 * 首页
+	 * @return
+	 */
+	/*@RequestMapping("/index")
 	public String goodsPullOn(){
 		return "/front/seller/goodsPullOn";
-	}
+	}*/
 	
+	/**
+	 * 店铺/卖家信息
+	 * @param sellerId
+	 * @return	
+	 */
 	@RequestMapping("/storeInfo")
 	public ModelAndView storeInfo(String sellerId){
-		ModelAndView mv = new ModelAndView("/front/seller/storeInfo");
+		//ModelAndView mv = new ModelAndView("/front/seller/storeInfo");
+		sellerId = "5b9625662fcc73437f2a47ce";
+		ModelAndView mv = new ModelAndView("/front/seller/editShopInfo");
 		mv.addObject("seller", sellerService.info(sellerId));
+		mv.addObject("storeTypes", StoreType.values());
 		return mv;
 	}
 	
+	/**
+	 * 店铺/卖家信息保存
+	 * @param seller
+	 * @param response
+	 * @throws IOException
+	 */
 	@RequestMapping("/storeSave")
-	public void storeSave(Seller seller, HttpServletResponse response) throws IOException{
-		sellerService.save(seller);
+	public void storeSave(Map<String, String> editInfo, HttpServletResponse response) throws IOException{
+		sellerService.infoSave(editInfo);
 	
 		response.getWriter().write("保存成功");
 	}
@@ -92,6 +111,5 @@ public class SellerController {
 		mv.addObject("pager", sellerService.getOrders(sellerId, orderState, page));
 		return mv;
 	}
-	
 	
 }

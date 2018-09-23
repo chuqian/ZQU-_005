@@ -405,4 +405,11 @@ public class SellerDaoImplTest {
 		long count = sellerDaoImpl.rowsCount();
 		System.out.println(count);
 	}
+	
+	
+	
+	@Test
+	public void testGetOrdersBySeller() {
+		sellerDaoImpl.getOrdersBySeller("5b9625662fcc73437f2a47ce", 1, 0, 2);
+	}
 }

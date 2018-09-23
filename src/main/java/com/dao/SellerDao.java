@@ -1,6 +1,7 @@
 package com.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.dto.Comment;
 import com.dto.Commodity;
@@ -116,12 +117,20 @@ public interface SellerDao extends BaseDao<Seller>{
 	int updateCommentState(String commodityId, Comment comment);
 	
 	
+	
 	/**
 	 * 获取商家店铺/信息
 	 * @param sellerId
 	 * @return
 	 */
 	Seller getInfoById(String sellerId);
+	
+	/**
+	 * 商家店铺/信息保存
+	 * @param editInfo
+	 */
+	void InfoSave(Map<String, String> editInfo);
+	
  	/**
 	 * 店铺注销
 	 * @param sellerId

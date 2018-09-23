@@ -71,7 +71,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 	@Override
 	public int deleteById(String... ids) {
 		for(String id : ids)
-			mongoTemplate.remove(new Query(Criteria.where("id").is(id)), clazz);
+			mongoTemplate.remove(new Query(Criteria.where("_id").is(id)), clazz);
 		return ids.length;
 	}
 	

@@ -1,11 +1,12 @@
 package com.dao.impl;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Pattern;
 
-import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.query.BasicQuery;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -203,6 +204,25 @@ public class SellerDaoImpl extends BaseDaoImpl<Seller> implements SellerDao {
 		
 		return this.getMongoTemplate().findOne(query, Seller.class);
 	}
+	
+	@Override
+	public void InfoSave(Map<String, String> editInfo) {
+		Set<String> keySet = editInfo.keySet();
+		Iterator<String> it = keySet.iterator();
+		Query query = null;
+		Update update = new Update();
+		
+		while(it.hasNext()){
+			String key = it.next();
+			String value = editInfo.get(key);
+			if(key == "id")
+				query = Query.query(Criteria.where("_id").is(value));
+			else
+				update.set(key, value);
+		}
+		this.getMongoTemplate().updateFirst(query, update, Seller.class);
+	}
+	
  	@Override
 	public void storeCancel(String sellerId) {
 		Query query = new Query(Criteria.where("_id").is(sellerId));
@@ -210,16 +230,14 @@ public class SellerDaoImpl extends BaseDaoImpl<Seller> implements SellerDao {
 				.unset("contactAddress").unset("storeImg").unset("commoditys");
 		this.getMongoTemplate().updateFirst(query, update, Seller.class);
 	}
+ 	
  	@Override
 	public List<Commodity> getCommodiyBySeller(String sellerId, long skip, long limit) {
-		DBObject queryObject = new BasicDBObject("_id", sellerId);
-		DBObject fieldObject = new BasicDBObject("commoditys", true);
-		Query query = new BasicQuery(queryObject, fieldObject);
-		//此种方法查询性能差，待改进
-		List<Commodity> commodityList = this.getMongoTemplate().findOne(query, Seller.class).getCommoditys();
-		//return commodityList.subList(fromIndex, toIndex);
-		return null;
+ 		Query query = new Query(Criteria.where("_id").is(sellerId));
+		query.fields().slice("commoditys", (int)skip, (int)limit);
+		return this.getMongoTemplate().findOne(query, Seller.class, "seller").getCommoditys();
 	}
+ 	
  	@Override
 	public void commodityToSeller(String sellerId, Commodity commodity) {
 		//把商品添加至平台
@@ -232,28 +250,24 @@ public class SellerDaoImpl extends BaseDaoImpl<Seller> implements SellerDao {
 		Update update = new Update().addToSet("commoditys", commodity);
 		this.getMongoTemplate().updateFirst(query, update, Seller.class);
 	}
+ 	
  	@Override
 	public List<SellerOrder> getOrdersBySeller(String sellerId, int orderState,	long skip, long limit) {
-		
-		/*此种方法查询性能太低
-		DBObject queryObject = new BasicDBObject("_id", sellerId);
-		DBObject fieldsObject = new BasicDBObject("sellerOrders", true);
-		Query query = new BasicQuery(queryObject, fieldsObject);
-		Seller seller = this.getMongoTemplate().findOne(query, Seller.class);
-		return seller.getSellerOrders().subList(1, 10);*/
-		
-		//下面这种方法还没找到解决方案
-		Aggregation aggregation = Aggregation.newAggregation(
-				Aggregation.match(Criteria.where("_id").is(sellerId)),
-				Aggregation.unwind("sellerOrders"),
-				Aggregation.match(Criteria.where("sellerOrders.orderState").is(orderState)),
+		/*Aggregation aggregation = Aggregation.newAggregation(
+				Aggregation.unwind("$sellerOrders"),
+				Aggregation.match(Criteria.where("_id").is(sellerId).and("sellerOrders.orderState").is(orderState)),
+				Aggregation.project("sellerOrders"),
 				Aggregation.skip(skip),	
 				Aggregation.limit(limit));
 		
-		/*AggregationResults<Seller> aggRes = this.getMongoTemplate().
-				aggregate(aggregation, "seller", Seller.class);*/      //这里会报错
-		return null;
-		/*return aggRes.getMappedResults();*/
+		AggregationResults<Object> aggRes = this.getMongoTemplate().
+				aggregate(aggregation, "seller", Object.class);
+		
+		aggRes.getMappedResults();  //返回List<Object>，怎么转为List<SellerOrder>？ */
+		
+		Query query = new Query(Criteria.where("_id").is(sellerId).and("sellerOrders.orderState").is(orderState));
+		query.fields().slice("sellerOrders", (int)skip, (int)limit);
+		return this.getMongoTemplate().findOne(query, Seller.class, "seller").getSellerOrders();
 	}
-	
+
 }

@@ -1,6 +1,7 @@
 package com.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,8 +31,8 @@ public class SellerServiceImpl implements SellerService {
 	}
 	
 	@Override
-	public void save(Seller seller) {
-		sellerDao.save(seller);
+	public void infoSave(Map<String, String> editInfo) {
+		sellerDao.InfoSave(editInfo);
 	}
  	@Override
 	public void storeCancel(String sellerId) {
