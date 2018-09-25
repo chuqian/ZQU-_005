@@ -82,4 +82,19 @@ public class AllCommodityDaoImplTest {
 		allCommodityDaoImpl.save(lists);
 	}
 	
+	@Test
+	public void testUpdate() {
+		AllCommodity allCommodity = new AllCommodity();
+		Random ra =new Random();
+		int ran = ra.nextInt(1000)+1;
+		allCommodity.setId("allCommodity553");
+		allCommodity.setCommodityName("商品" + ran);
+		allCommodity.setCommodityType("类型" + ran);
+		allCommodity.setImgSrc("图片地址" + ran);
+		allCommodity.setPrice(1.00);
+		allCommodity.setSaledNum(0);
+		allCommodity.setSellerId("seller" + ran);
+		allCommodityDaoImpl.save(allCommodity);
+	}
+	
 }

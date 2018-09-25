@@ -15,14 +15,14 @@ import com.entity.Seller;
 public interface SellerAndMallDao extends BaseDao<Seller> {
 	
 	/**
-	 *   根据商品id查询商铺信息及商品信息
+	 * 根据商品id查询商铺信息及商品信息
 	 * @param commodityId
 	 * @return
 	 */
 	Seller findByCommodityId(String commodityId);
 	
 	/**
-	 *  修改商品收藏数量
+	 * 根据商品id修改商品收藏数量
 	 * @param commodityId
 	 * @param flag 为1时加1，为-1时减1
 	 * @return
@@ -35,7 +35,7 @@ public interface SellerAndMallDao extends BaseDao<Seller> {
 	 * @param sellerOrder
 	 * @return
 	 */
-	int updataSellerOrder(String SellerId, SellerOrder sellerOrder);
+	int insertSellerOrder(String SellerId, SellerOrder sellerOrder);
 	
 	/**
 	 * 根据商品id增加批量评论
@@ -47,20 +47,18 @@ public interface SellerAndMallDao extends BaseDao<Seller> {
 	
 	/**
 	 * 根据商家订单id添加售后服务信息
-	 * @param SellerId
 	 * @param SellerOrderId
 	 * @param afterSale
 	 * @return
 	 */
-	int insertAfterSale(String SellerId, String SellerOrderId, AfterSale afterSale);
+	int insertAfterSale(String SellerOrderId, AfterSale afterSale);
 	
 	/**
 	 * 根据商家订单id修改售后服务信息
-	 * @param SellerId
 	 * @param SellerOrderId
 	 * @param afterSale
 	 * @return
 	 */
-	int updateAfterSale(String SellerId, String SellerOrderId, AfterSale afterSale);
+	int updateAfterSale(String SellerOrderId, AfterSale afterSale);
 	
 }

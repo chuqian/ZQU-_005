@@ -31,22 +31,22 @@ public class SellerAndMallDaoImpl extends BaseDaoImpl<Seller> implements SellerA
 	@Override
 	public int updateCollentNum(String commodityId, int flag) {
 		int flag1 = -1;
-		if(flag!=0) {
+		if (flag != 0) {
 			Criteria criteria = Criteria.where("commoditys._id").is(commodityId);
 			Query query = new Query(criteria);
 			query = new Query(criteria);
 			Update update = new Update();
-			update.inc("commoditys.$.collectedNum", flag);	
+			update.inc("commoditys.$.collectedNum", flag);
 			this.getMongoTemplate().upsert(query, update, Seller.class);
 			flag1 = 1;
 		}
 		return flag1;
 	}
-	
+
 	@Override
-	public int updataSellerOrder(String SellerId, SellerOrder sellerOrder) {
+	public int insertSellerOrder(String SellerId, SellerOrder sellerOrder) {
 		int flag = -1;
-		if(sellerOrder!=null) {
+		if (sellerOrder != null) {
 			Query query = Query.query(Criteria.where("_id").is(SellerId));
 			Update update = new Update();
 			update.push("sellerOrders", sellerOrder);
@@ -55,15 +55,15 @@ public class SellerAndMallDaoImpl extends BaseDaoImpl<Seller> implements SellerA
 		}
 		return flag;
 	}
-	
+
 	@Override
 	public int insertComments(String CommodityId, List<Comment> comments) {
 		int size = comments.size();
 		int flag = -1;
-		if(size>0) {
+		if (size > 0) {
 			Query query = Query.query(Criteria.where("commoditys._id").is(CommodityId));
 			Update update = new Update();
-			for (int i=0; i<size; i++) {
+			for (int i = 0; i < size; i++) {
 				update.push("commoditys.$.comments", comments.get(i));
 				this.getMongoTemplate().upsert(query, update, Seller.class);
 			}
@@ -71,62 +71,34 @@ public class SellerAndMallDaoImpl extends BaseDaoImpl<Seller> implements SellerA
 		}
 		return flag;
 	}
-	
+
 	@Override
-	public int insertAfterSale(String SellerId, String SellerOrderId, AfterSale afterSale) {
-		Criteria criteria = Criteria.where("id").is(SellerId);
-		Query query = new Query(criteria);
-		int flag=-1;
+	public int insertAfterSale(String SellerOrderId, AfterSale afterSale) {
+		int flag = -1;
 		try {
-			Seller seller = this.getMongoTemplate().findOne(query, Seller.class);
-			List<SellerOrder> sellerOrders = seller.getSellerOrders();
-			if(sellerOrders!=null) {
-				for (SellerOrder sellerOrder : sellerOrders) {
-					if(sellerOrder.getOrderId().equals(SellerOrderId)) {
-						if(sellerOrder.getAfterSale() == null)
-						{
-							Criteria criteria1 = Criteria.where("sellerOrders.orderId").is(SellerOrderId);
-							Query query1 = new Query(criteria1);
-							Update update = new Update();
-							update.set("sellerOrders.$.afterSale", afterSale);
-							this.getMongoTemplate().upsert(query1, update, Seller.class);
-							flag=1;
-						}
-						break;
-					}
-				}
-			}
+			Criteria criteria1 = Criteria.where("sellerOrders.orderId").is(SellerOrderId);
+			Query query1 = new Query(criteria1);
+			Update update = new Update();
+			update.set("sellerOrders.$.afterSale", afterSale);
+			this.getMongoTemplate().upsert(query1, update, Seller.class);
+			flag = 1;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return flag;
 	}
-	
+
 	@Override
-	public int updateAfterSale(String SellerId, String SellerOrderId, AfterSale afterSale) {
-		Criteria criteria = Criteria.where("id").is(SellerId);
-		Query query = new Query(criteria);
-		int flag=-1;
+	public int updateAfterSale(String SellerOrderId, AfterSale afterSale) {
+		int flag = -1;
 		try {
-			Seller seller = this.getMongoTemplate().findOne(query, Seller.class);
-			List<SellerOrder> sellerOrders = seller.getSellerOrders();
-			if(sellerOrders!=null) {
-				for (SellerOrder sellerOrder : sellerOrders) {
-					if(sellerOrder.getOrderId().equals(SellerOrderId)) {
-						if(sellerOrder.getAfterSale().getDealtime() == null && sellerOrder.getAfterSale().getDealtime() == null)
-						{
-							Criteria criteria1 = Criteria.where("sellerOrders.orderId").is(SellerOrderId);
-							Query query1 = new Query(criteria1);
-							Update update = new Update();
-							update.set("sellerOrders.$.afterSale.$.dealtime", afterSale.getDealtime());
-							update.set("sellerOrders.$.afterSale.$.returnState", afterSale.getReturnState());
-							this.getMongoTemplate().upsert(query1, update, Seller.class);
-							flag=1;
-						}
-						break;
-					}
-				}
-			}
+			Criteria criteria1 = Criteria.where("sellerOrders.orderId").is(SellerOrderId);
+			Query query1 = new Query(criteria1);
+			Update update = new Update();
+			update.set("sellerOrders.$.afterSale.$.dealtime", afterSale.getDealtime());
+			update.set("sellerOrders.$.afterSale.$.returnState", afterSale.getReturnState());
+			this.getMongoTemplate().upsert(query1, update, Seller.class);
+			flag = 1;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

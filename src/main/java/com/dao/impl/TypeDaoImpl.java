@@ -1,5 +1,8 @@
 package com.dao.impl;
 
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
 import com.dao.TypeDao;
@@ -13,4 +16,16 @@ import com.entity.Type;
 @Repository
 public class TypeDaoImpl extends BaseDaoImpl<Type> implements TypeDao {
 	
+	@Override
+	public int deleteCommodityTypes(String id, String commodityType) {
+		try {
+			Query query = Query.query(Criteria.where("_id").is(id));
+			Update update = new Update();
+			update.pull("commodityTypes", commodityType);
+			this.getMongoTemplate().updateMulti(query, update, Type.class);
+		} catch (Exception e) {
+			return -1;
+		}
+		return 1;
+	}
 }

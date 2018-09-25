@@ -9,4 +9,11 @@ import com.entity.Type;
  */
 public interface TypeDao extends BaseDao<Type> {
 	
+	/**
+	 * 删除类型里的一个商品类型
+	 * @param id
+	 * @param commodityTypes
+	 * @return
+	 */
+	int deleteCommodityTypes(String id, String commodityType);
 }

@@ -93,7 +93,7 @@ public class SellerAndMallDaoImplTest {
 		sellerOrder.setAfterSale(null);
 		sellerOrder.setWayBillNum(null);
 		sellerOrder.setLogistics(null);
-		int w = sellerAndMallDaoImpl.updataSellerOrder(SellerId, sellerOrder);
+		int w = sellerAndMallDaoImpl.insertSellerOrder(SellerId, sellerOrder);
 		if(w==1)
 			System.out.println("添加商家订单成功");
 	}
@@ -145,7 +145,7 @@ public class SellerAndMallDaoImplTest {
 //		afterSale.setDealtime(null);
 //		afterSale.setReturnState(null);
 		System.out.println(afterSale.toString());
-		int w = sellerAndMallDaoImpl.insertAfterSale(SellerId, SellerOrderId, afterSale);
+		int w = sellerAndMallDaoImpl.insertAfterSale(SellerOrderId, afterSale);
 		if(w==1)
 			System.out.println("添加售后成功");
 		else {
@@ -173,7 +173,7 @@ public class SellerAndMallDaoImplTest {
 		afterSale.setDealtime(new Date());
 		afterSale.setReturnState(0);
 		System.out.println(afterSale.toString());
-		int w = sellerAndMallDaoImpl.updateAfterSale(SellerId, SellerOrderId, afterSale);
+		int w = sellerAndMallDaoImpl.updateAfterSale(SellerOrderId, afterSale);
 		if(w==1)
 			System.out.println("修改售后成功");
 		else {
