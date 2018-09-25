@@ -36,4 +36,5 @@ public class TypeTest {
 		String commodityType = "商品类型2";
 		typeDao.deleteCommodityTypes(id, commodityType);
 	}
+	
 }

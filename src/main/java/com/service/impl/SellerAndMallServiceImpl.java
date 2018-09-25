@@ -41,7 +41,7 @@ public class SellerAndMallServiceImpl implements SellerAndMallService {
 		if(seller!=null) {
 			if(seller.getCommoditys()!=null) {
 				for (Commodity commodity: seller.getCommoditys()) {
-					if(commodityId.equals(commodity.getId())) {
+					if(commodityId.equals(commodity.getId()) && !(commodity.getCollectedNum()<=0 && flag==-1)) {
 						return sellerAndMallDao.updateCollentNum(commodityId, flag);
 					}
 					break;

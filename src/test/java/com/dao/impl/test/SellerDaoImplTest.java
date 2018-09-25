@@ -101,15 +101,15 @@ public class SellerDaoImplTest {
 	public void deleteSellerSecond() {
 		
 		//删除最后一个商铺里的商品
-		List<Seller> list = sellerDaoImpl.findAll();
-		Seller seller = list.get(list.size()-1);
+		Seller seller = sellerDaoImpl.findById("5ba9ee225370c75264dde2d3");
+//		Seller seller = list.get(list.size()-1);
 
 		//删除商铺里最后一个商品
 		List<Commodity> commodities = seller.getCommoditys();
 		System.out.println(commodities.size());
 		Commodity commodity = commodities.get(commodities.size()-1);
 		System.out.println(commodity.getId());
-		sellerDaoImpl.deleteSellerSecond(commodity.getId(),commodity);
+		sellerDaoImpl.deleteSellerSecond(commodity.getId());
 	}
 	
 	/**
@@ -132,7 +132,7 @@ public class SellerDaoImplTest {
 				imSrc[j] = "http://///"+i+j;
 			}
 			Commodity commodity = new Commodity();
-			commodity.setId("shangping"+new Date());
+			commodity.setId("shangping"+i+new Date());
 			commodity.setName("伊利牛奶22"+i);
 			commodity.setPrice(20.2);
 			commodity.setSaledNum(0);
@@ -151,7 +151,7 @@ public class SellerDaoImplTest {
 		List<SellerOrder> sellerOrders = new ArrayList<>();
 		for (int i=1;i<=3;i++) {
 			SellerOrder sellerOrder = new SellerOrder();
-			sellerOrder.setOrderId("shangjiadingdan"+new Date());
+			sellerOrder.setOrderId("shangjiadingdan"+i+new Date());
 			sellerOrder.setMember("会员名"+i);
 			sellerOrder.setMoney(777.6+i);
 			sellerOrder.setDateTime(new Date());
@@ -173,10 +173,10 @@ public class SellerDaoImplTest {
 		seller.setInfo("店铺简介");
 		seller.setContactAddress(contactAddress);
 		seller.setStoreImg("店铺标志图片地址");
-		seller.setSellerOrders(null);
+		seller.setSellerOrders(sellerOrders);
 		seller.setState(1);	
 		seller.setEmail("2630549550@qq.com");
-		seller.setCommoditys(null);
+		seller.setCommoditys(commoditys);
 		sellerDaoImpl.save(seller);
 	}
 	

@@ -18,7 +18,7 @@ import com.service.TypeService;
  */
 @RunWith(value=SpringJUnit4ClassRunner.class)
 @ContextConfiguration({"classpath:spring.xml"})
-public class Typetest {
+public class TypeTest {
 	
 	@Autowired
 	private TypeService typeService;
@@ -31,8 +31,17 @@ public class Typetest {
 		}
 	}
 	
-	public void saveType() {
-		
+	@Test
+	public void testDeleteOneType() {
+		String id = "type14";
+		typeService.deleteOneType(id);
 	}
-
+	
+	@Test
+	public void testDeleTypeOneCommodityType() {
+		String id = "type993";
+		String commodityType = "商品类型5";
+		typeService.deleTypeOneCommodityType(id, commodityType);
+	}
+	
 }
