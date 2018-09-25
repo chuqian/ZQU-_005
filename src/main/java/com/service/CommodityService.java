@@ -64,4 +64,9 @@ public interface CommodityService {
 	 */
 	int count(String sellerId);
 	
+	List<Commodity> commodityCondition(String sellerId, String name, Double down, Double up, 
+			Integer isShelf, Integer skip, Integer limit);
+	
+	int commodityConditionCount(String sellerId, String name, Double down, Double up, 
+			Integer isShelf);
 }

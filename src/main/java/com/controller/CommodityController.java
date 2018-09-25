@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -116,9 +117,32 @@ public class CommodityController {
 		int pageSize = 10;
 		String sellerId = "5b9625662fcc73437f2a47ce";
 		List<Commodity> commoditys = commodityService.findSellerCommodity(sellerId, (currentPage-1)*pageSize, pageSize);
-		System.out.println(commoditys.size());
+		int total = commodityService.count(sellerId);
+		int totalPage = total % 10 == 0 ? total/10 : total/10 + 1; 
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("commoditys", commoditys);
+		mv.addObject("totalPage", totalPage);
+		mv.addObject("page", currentPage);
+		mv.setViewName("/front/seller/goodsInfo");
+		return mv;
+	}
+	
+	@RequestMapping(value="/toGoodInfCondition")
+	public ModelAndView toGoodInfCondition(
+			@RequestParam(value="name") String name, 
+			@RequestParam(value="down") Double down, 
+			@RequestParam(value="up") Double up, @RequestParam(value="isShelf") Integer isShelf,
+			@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage) {
+		int pageSize = 10;
+		String sellerId = "5b9625662fcc73437f2a47ce";
+		int skip = (currentPage -1) * pageSize; 
+		List<Commodity> commoditys = commodityService.commodityCondition(sellerId, name, down, up, isShelf, skip, pageSize);
+		int total = commodityService.commodityConditionCount(sellerId, name, down, up, isShelf);
+		int totalPage = total % 10 == 0 ? total/10 : total/10 + 1; 
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("commoditys", commoditys);
+		mv.addObject("totalPage", totalPage);
+		mv.addObject("page", currentPage);
 		mv.setViewName("/front/seller/goodsInfo");
 		return mv;
 	}

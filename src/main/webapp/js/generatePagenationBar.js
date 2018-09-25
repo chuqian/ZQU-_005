@@ -1,37 +1,4 @@
-//总页数
-const totalPage = 100
-//当前页数
-const page = 6
-function _click(target){
-    let btnText = target.innerText
-    let pre = ""
-    let tail = ""
-    if(window.location.href.indexOf('/tab/good') != -1) {
-        pre = '/tab/good/?'
-    } else if (window.location.href.indexOf('/tab/share') != -1) {
-        pre = '/tab/share/?'
-    } else if(window.location.href.indexOf('/tab/ask') != -1) {
-        pre = '/tab/ask/?'
-    } else if(window.location.href.indexOf('/tab/job') != -1) {
-        pre = '/tab/job/?'
-    } else if(window.location.href.indexOf('/search') != -1){
-        let start = window.location.href.indexOf('&')
-        tail = window.location.href.substr(start)
-        pre = '/search/?'
-        console.log(tail)
-    } else {
-        pre = "/?"
-    }
-    if(btnText === '<<') {
-        window.location.href = pre + 'page=' + 1 + tail
-    }
-    else if(btnText === '>>') {
-        window.location.href = pre + 'page=' + totalPage + tail
-    }
-    else {
-        window.location.href = pre + 'page=' + target.innerText + tail
-    }
-}
+
 
 /**
  * 生成分页条， 后台需要提供totalPage和page参数

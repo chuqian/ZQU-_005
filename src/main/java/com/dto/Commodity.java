@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 /**
  * @author chenchuqian
  * @date 2018年8月24日 下午11:31:45
@@ -28,10 +30,11 @@ public class Commodity implements Serializable {
 	private Integer collectedNum;    //收藏数量
 	private List<Comment> comments;  //商品有关评论
 	private String description; //商品描述
-	
+	@JSONField(name="_id")
 	public String getId() {
 		return id;
 	}
+	@JSONField(name="_id")
 	public void setId(String id) {
 		this.id = id;
 	}

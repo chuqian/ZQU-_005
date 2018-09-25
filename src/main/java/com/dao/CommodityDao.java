@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import com.alibaba.fastjson.support.odps.udf.CodecCheck.A;
 import com.dto.Commodity;
 import com.entity.AllCommodity;
+import com.mongodb.DBObject;
 
 /**
  * @author chenchuqian
@@ -84,5 +85,26 @@ public interface CommodityDao extends BaseDao<AllCommodity>{
 	 * @return
 	 */
 	int commodityCount(String sellerId);
+	
+	/**
+	 * 按条件查询商品
+	 * @param sellerId		卖家Id
+	 * @param name			商品名称
+	 * @param down			价格下限
+	 * @param up			价格上限
+	 * @param isShelf		是否上架
+	 * @param skip			起始位置
+	 * @param limit			每次查询数
+	 * @return
+	 */
+	List<Commodity> commodityCondition(String sellerId, String name, Double down, Double up, 
+			Integer isShelf, Integer skip, Integer limit);
+	
+	/**
+	 * 条件搜索商品的总数
+	 * @param conditions 查询条件
+	 * @return
+	 */
+	int commodityConditionCount(String sellerId, String name, Double down, Double up, Integer isShelf);
 	
 }

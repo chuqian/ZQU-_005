@@ -91,6 +91,15 @@ public class CommodityServiceImpl implements CommodityService {
 	@Override
 	public int count(String sellerId) {
 		return commodityDaoImpl.commodityCount(sellerId);
+	}
 	
+	@Override
+	public List<Commodity> commodityCondition(String sellerId, String name, Double down, Double up, Integer isShelf, Integer skip, Integer limit) {
+		return commodityDaoImpl.commodityCondition(sellerId, name, down, up, isShelf, skip, limit);
+	}
+	
+	@Override
+	public int commodityConditionCount(String sellerId, String name, Double down, Double up, Integer isShelf) {
+		return commodityDaoImpl.commodityConditionCount(sellerId, name, down, up, isShelf);
 	}
 }

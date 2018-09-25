@@ -142,6 +142,24 @@
     <script src="../js/jquery.min.js"></script>
     <script src="../kindeditor-master/kindeditor-all-min.js"></script>
     <script src="../js//zh-CN.js"></script>
+    <script type="text/javascript">
+	  	//总页数
+	    const totalPage = ${totalPage }
+	    //当前页数
+	    const page = ${page}
+	    function _click(target){
+	    	let btnText = target.innerText;
+	        if(btnText === '<<') {
+	            window.location.href ='?currentPage=' + 1 
+	        }
+	        else if(btnText === '>>') {
+	            window.location.href ='?currentPage=' + totalPage 
+	        }
+	        else {
+	            window.location.href ='?currentPage=' + target.innerText
+	        }
+	    }
+    </script>
     <script src="../js/generatePagenationBar.js"></script>
     <script src="../js/_sellerCenter.js"></script>
     <script>
@@ -203,6 +221,7 @@
             }
         }
     </script>
+
 </body>
 
 </html>
