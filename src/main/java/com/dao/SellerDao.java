@@ -90,9 +90,8 @@ public interface SellerDao extends BaseDao<Seller>{
 	/**
 	 * 第二层删除，信息要完全匹配才可以删除
 	 * @param commodityId
-	 * @param commodity
 	 */
-	void deleteSellerSecond(String commodityId,Commodity commodity);
+	void deleteSellerSecond(String commodityId);
 	
 	/**
 	 * 第三层添加，评论

@@ -8,6 +8,7 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.springframework.data.mongodb.core.query.BasicQuery;
+import org.springframework.data.mongodb.core.query.BasicUpdate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
@@ -109,11 +110,10 @@ public class SellerDaoImpl extends BaseDaoImpl<Seller> implements SellerDao {
 	}
 	
 	@Override
-	public void deleteSellerSecond(String commodityId,Commodity commodity) {
-		Query query = Query.query(Criteria.where("commoditys.id").is(commodityId));
-		Update update = new Update();
-		update.pull("commoditys",commodity);
-		this.getMongoTemplate().updateFirst(query, update, Seller.class);
+	public void deleteSellerSecond(String commodityId) {
+		String target = "{'$pull' : {'commoditys' : {'_id' : '" + commodityId +"'}}}";
+		Update update = new BasicUpdate(target);
+		getMongoTemplate().upsert(new Query(Criteria.where("commoditys.id").is(commodityId)), update, Seller.class);
 	}
 	
 	@Override
