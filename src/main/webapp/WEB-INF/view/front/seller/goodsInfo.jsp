@@ -52,29 +52,25 @@
                         <label>商品信息</label>
                     </div>
                     <div class="goodsInfo">
-                        <form >
+                        <form id="conditions">
                             <div class="row">
                                 <div class="col-sm-3">
                                     <label for="">名称：</label>
-                                    <input type="text" class="searchCondition">
+                                    <input type="text" class="searchCondition" name="name">
                                 </div>
                                 <div class="col-sm-4">
                                     <label >价格区间：</label>
-                                    <input type="text" class="searchCondition" style="width: 60px;">
+                                    <input type="text" class="searchCondition" style="width: 60px;" name="down">
                                     <label >&nbsp;-&nbsp;</label>
-                                    <input type="text" class="searchCondition" style="width: 60px;">
+                                    <input type="text" class="searchCondition" style="width: 60px;" name="up">
                                 </div>
                                 <div class="col-sm-4">
                                     <label>上架：</label>
-                                    
-                                    <input type="radio" name="pullOn" id="inlineRadio1" value="1"> 是
-                                    
-                                    
-                                    <input type="radio" name="pullOn" id="inlineRadio2" value="0"> 否
-                                    
+                                    <input type="radio" name="isShelf" id="inlineRadio1" value="1"> 是
+                                    <input type="radio" name="isShelf" id="inlineRadio2" value="0"> 否
                                 </div>
                                 <div class="col-sm-1">
-                                    <input type="button" value='搜索' class="searchBtn">
+                                    <input type="button" value='搜索' class="searchBtn" onclick="formSerialize()">
                                 </div>
                             </div>
                         </form>
@@ -102,7 +98,7 @@
                                 <div class="col-sm-1">
                                     <input type="checkbox" name="box" id="">
                                     <!-- 存放商品的id -->
-                                    <input type="hidden" name="">
+                                    <input type="hidden" name="${commodity.id }">
                                 </div>
                                 <div class="col-sm-2">
                                     <img src="../img/default.png" alt="" width="120px" height="120px">
@@ -123,7 +119,7 @@
                                 </div>
                                 <div class="col-sm-2">
                                     <input type="button" value="详细" class="detailBtn">
-                                    <input type="button" value="删除" class="deleBtn">
+                                    <input type="button" value="删除" class="deleBtn" onclick="commodityDelete('5b9625662fcc73437f2a47ce','${commodity.id }')">
                                 </div>
                             </div>
                             <hr style="border-color: #888; margin-bottom: 10px;">
@@ -143,6 +139,13 @@
     <script src="../kindeditor-master/kindeditor-all-min.js"></script>
     <script src="../js//zh-CN.js"></script>
     <script type="text/javascript">
+    	var url = window.location.href
+    	var params = '';
+    	if(url.indexOf('toGoodInfoCondition') != -1){
+    		params = url.substr(url.indexOf('name'))
+    		params = '&' + decodeURIComponent(params,true)
+    	}
+    	console.log(params)
 	  	//总页数
 	    const totalPage = ${totalPage }
 	    //当前页数
@@ -150,14 +153,34 @@
 	    function _click(target){
 	    	let btnText = target.innerText;
 	        if(btnText === '<<') {
-	            window.location.href ='?currentPage=' + 1 
+	            window.location.href ='?currentPage=' + 1 + params
 	        }
 	        else if(btnText === '>>') {
-	            window.location.href ='?currentPage=' + totalPage 
+	            window.location.href ='?currentPage=' + totalPage + params 
 	        }
 	        else {
-	            window.location.href ='?currentPage=' + target.innerText
+	            window.location.href ='?currentPage=' + target.innerText + params
 	        }
+	    }
+	    function formSerialize(){
+	    	var data  = $("#conditions").serialize()
+	    	data = decodeURIComponent(data,true)
+	    	if($("input[name='isShelf']:checked").length == 0){
+	    		data += '&isShelf='
+	    	}
+	    	window.location.href = './toGoodInfoCondition.action?' + data;
+	    }
+	    function commodityDelete(sellerId, commodityId){
+		    console.log("delete")
+	    	$.get("./commodityDel.action", {sellerId,commodityId}, function(result){
+	    		console.log(result)
+	    		if(result === 'success'){
+	    			alert("删除成功")	
+	    			window.location.reload()
+	    		}else{
+	    			alert("删除失败")
+	    		}
+	    	})
 	    }
     </script>
     <script src="../js/generatePagenationBar.js"></script>

@@ -67,8 +67,9 @@ public class CommodityController {
 	 */
 	@RequestMapping("/commodityDel")
 	@ResponseBody
-	public String del(String sellerId, String commodityId) {
-		 if(commodityService.delete(sellerId, commodityId))
+	public String del(@RequestParam(value="sellerId")String sellerId, @RequestParam(value="commodityId")String commodityId) {
+		System.out.println(sellerId + ":" + commodityId);
+		if(commodityService.delete(sellerId, commodityId))
 			 return "success";
 		 else
 			 return "fail";
@@ -127,7 +128,7 @@ public class CommodityController {
 		return mv;
 	}
 	
-	@RequestMapping(value="/toGoodInfCondition")
+	@RequestMapping(value="/toGoodInfoCondition")
 	public ModelAndView toGoodInfCondition(
 			@RequestParam(value="name") String name, 
 			@RequestParam(value="down") Double down, 
