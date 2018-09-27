@@ -25,7 +25,11 @@ public class AllCommodityDaoImpl extends BaseDaoImpl<AllCommodity> implements Al
 		Criteria[] criterias = new Criteria[size];
 		int i=0;
 		for (ConditionBeanUnit co : conditionBeanUnits) {
-			criterias[i] = Criteria.where(co.getKey()).regex(co.getValue());
+			if(co.getKey().equals("id")) {
+				criterias[i] = Criteria.where(co.getKey()).is(co.getValue());
+			}else {
+				criterias[i] = Criteria.where(co.getKey()).regex(co.getValue());
+			}
 			i++;
 		}
 		query.addCriteria(new Criteria().orOperator(criterias[0],criterias[1],criterias[2])).skip(skip).limit(limit);

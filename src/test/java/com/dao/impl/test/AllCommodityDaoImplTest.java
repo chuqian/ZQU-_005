@@ -64,20 +64,97 @@ public class AllCommodityDaoImplTest {
 	@Test
 	public void testInsert(){
 		List<AllCommodity> lists = new ArrayList<AllCommodity>();
-		Random ra =new Random();
-		for (int i = 1; i <= 3; i++) {
-			AllCommodity allCommodity = new AllCommodity();
-			int ran = ra.nextInt(100+i)+1;
-			allCommodity.setId("allCommodity" + ran + i);
-			allCommodity.setCommodityName("商品" + ran + i);
-			allCommodity.setCommodityType("类型" + ran + i);
-			allCommodity.setImgSrc("图片地址" + ran + i);
-			allCommodity.setPrice(1.00 + i);
-			allCommodity.setSaledNum(0 + i);
-			allCommodity.setSellerId("seller" + ran + i);
-			System.out.println(allCommodity.toString());
-			lists.add(allCommodity);
-		}
+		
+		AllCommodity allCommodity1 = new AllCommodity();
+		allCommodity1.setCommodityName("车厘子");
+		allCommodity1.setCommodityType("水果");
+		allCommodity1.setImgSrc("../customerFile/images/2.jpg");
+		allCommodity1.setPrice(13.8);
+		allCommodity1.setSaledNum(0);
+		allCommodity1.setSellerId("seller");
+		System.out.println(allCommodity1.toString());
+		lists.add(allCommodity1);
+		
+		AllCommodity allCommodity2 = new AllCommodity();
+		allCommodity2.setCommodityName("雪之恋和风大福");
+		allCommodity2.setCommodityType("水果");
+		allCommodity2.setImgSrc("../customerFile/images/1.jpg");
+		allCommodity2.setPrice(13.8);
+		allCommodity2.setSaledNum(0);
+		allCommodity2.setSellerId("seller");
+		System.out.println(allCommodity2.toString());
+		lists.add(allCommodity2);
+		
+		AllCommodity allCommodity3 = new AllCommodity();
+		allCommodity3.setCommodityName("雪之恋和风大福");
+		allCommodity3.setCommodityType("水果");
+		allCommodity3.setImgSrc("../customerFile/images/3.jpg");
+		allCommodity3.setPrice(13.8);
+		allCommodity3.setSaledNum(0);
+		allCommodity3.setSellerId("seller");
+		System.out.println(allCommodity3.toString());
+		lists.add(allCommodity3);
+		
+		AllCommodity allCommodity4 = new AllCommodity();
+		allCommodity4.setCommodityName("雪之恋和风大福");
+		allCommodity4.setCommodityType("水果");
+		allCommodity4.setImgSrc("../customerFile/images/5.jpg");
+		allCommodity4.setPrice(13.8);
+		allCommodity4.setSaledNum(0);
+		allCommodity4.setSellerId("seller");
+		System.out.println(allCommodity4.toString());
+		lists.add(allCommodity4);
+		
+		AllCommodity allCommodity5 = new AllCommodity();
+		allCommodity5.setCommodityName("小优布丁");
+		allCommodity5.setCommodityType("水果");
+		allCommodity5.setImgSrc("../customerFile/images/6.jpg");
+		allCommodity5.setPrice(13.8);
+		allCommodity5.setSaledNum(0);
+		allCommodity5.setSellerId("seller");
+		System.out.println(allCommodity5.toString());
+		lists.add(allCommodity5);
+		
+		AllCommodity allCommodity6 = new AllCommodity();
+		allCommodity6.setCommodityName("雪之恋和风大福");
+		allCommodity6.setCommodityType("水果");
+		allCommodity6.setImgSrc("../customerFile/images/7.jpg");
+		allCommodity6.setPrice(13.8);
+		allCommodity6.setSaledNum(0);
+		allCommodity6.setSellerId("seller");
+		System.out.println(allCommodity6.toString());
+		lists.add(allCommodity6);
+		
+		AllCommodity allCommodity7 = new AllCommodity();
+		allCommodity7.setCommodityName("雪之恋和风大福");
+		allCommodity7.setCommodityType("水果");
+		allCommodity7.setImgSrc("../customerFile/images/8.jpg");
+		allCommodity7.setPrice(13.8);
+		allCommodity7.setSaledNum(0);
+		allCommodity7.setSellerId("seller");
+		System.out.println(allCommodity7.toString());
+		lists.add(allCommodity7);
+		
+		AllCommodity allCommodity8 = new AllCommodity();
+		allCommodity8.setCommodityName("雪之恋和风大福");
+		allCommodity8.setCommodityType("水果");
+		allCommodity8.setImgSrc("../customerFile/images/9.jpg");
+		allCommodity8.setPrice(13.8);
+		allCommodity8.setSaledNum(0);
+		allCommodity8.setSellerId("seller");
+		System.out.println(allCommodity8.toString());
+		lists.add(allCommodity8);
+		
+		AllCommodity allCommodity9 = new AllCommodity();
+		allCommodity9.setCommodityName("雪之恋和风大福");
+		allCommodity9.setCommodityType("水果");
+		allCommodity9.setImgSrc("../customerFile/images/2.jpg");
+		allCommodity9.setPrice(13.8);
+		allCommodity9.setSaledNum(0);
+		allCommodity9.setSellerId("seller");
+		System.out.println(allCommodity9.toString());
+		lists.add(allCommodity9);
+			
 		System.out.println(lists.size());
 		allCommodityDaoImpl.save(lists);
 	}
