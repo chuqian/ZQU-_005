@@ -22,8 +22,10 @@
 <link href="../customerFile/css/skin.css" rel="stylesheet" type="text/css" />
 <script src="../customerFile/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
 <script src="../customerFile/AmazeUI-2.4.2/assets/js/amazeui.min.js"></script>
+<script src="../customerFile/basic/js/jquery-1.7.min.js"></script>
 <script src="../customerFile/js/home_type.js"></script>
 <script src="../customerFile/js/home_allCommodity.js"></script>
+
 </head>
 <body>
 	<div id="div_1"></div>

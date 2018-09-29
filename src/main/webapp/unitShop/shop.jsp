@@ -20,6 +20,7 @@
 
 <script type="text/javascript" src="../customerFile/basic/js/jquery-1.7.min.js"></script>
 <script type="text/javascript" src="../customerFile/js/script.js"></script>
+
 </head>
 <body>
 

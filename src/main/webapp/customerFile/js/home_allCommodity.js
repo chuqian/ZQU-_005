@@ -15,7 +15,14 @@ function initAllCommodity() {
 			var i, j;
 			for (i = 0; i < dataAllCommodityK.length; i++) {
 				str = str + '<div class=am-u-sm-7 id=am-u-sm-7div' + i + '>'
+				+ '<form id=form'
+				+ dataAllCommodityK[i].id
+				+ ' action=../customer_1/introductionURL.action method=post>'
 				+ '<div class=outer-con>'
+				+ '<input type=hidden name=commodityId value='
+				+ dataAllCommodityK[i].id
+				+ ' />'
+				+ '<input type=hidden name=PageURL value=home />'
 				+ '<div class=title>'
 				+ dataAllCommodityK[i].commodityName
 				+ '</div>'
@@ -23,12 +30,14 @@ function initAllCommodity() {
 				+ dataAllCommodityK[i].price
 				+ '</div><i class=am-icon-shopping-basket id=am-icon-shopping-basketi' + i + '>'
 				+ '</i></div>'
-				+ '<a href='
+				+ '<a class=inToIntr'
+				+ dataAllCommodityK[i].id
+				+ ' href=javascript:document.getElementById(\'form'
+				+ dataAllCommodityK[i].id
+				+ '\').submit();><img src='
 				+ dataAllCommodityK[i].imgSrc
-				+ '><img src='
-				+ dataAllCommodityK[i].imgSrc
-				+ '></a></div>';
-
+				+ '></a>'
+				+ '</form></div>';
 			}
 //			console.log(str);
 			document.getElementById("floodFour").innerHTML = str;

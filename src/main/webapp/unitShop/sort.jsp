@@ -10,6 +10,7 @@
 		<link href="../customerFile/basic/css/demo.css" rel="stylesheet" type="text/css" />		
 		<link href="../customerFile/css/sortstyle.css" rel="stylesheet" type="text/css" />
 		<script src="../customerFile/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
+		
 	</head>
 
 	<body>

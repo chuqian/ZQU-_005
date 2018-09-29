@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -151,163 +153,37 @@
 						</div>
 						<div class="clear"></div>
 
-						<ul class="am-avg-sm-2 am-avg-md-3 am-avg-lg-4 boxes">
-							<li>
-								<div class="i-pic limit">
-									<a href="introduction.jsp"><img
-										src="../customerFile/images/imgsearch1.jpg" />
-										<p class="title fl">【良品铺子旗舰店】手剥松子218g 坚果炒货零食新货巴西松子包邮</p></a>
-									<p class="price fl">
-										<b>¥</b> <strong>56.90</strong>
-									</p>
-									<p class="number fl">
-										销量<span>1110</span>
-									</p>
-								</div>
-							</li>
-							<li>
-								<div class="i-pic limit">
-
-									<img src="../customerFile/images/imgsearch1.jpg" />
-									<p class="title fl">手剥松子218g 坚果炒货零食新货巴西松子包邮</p>
-									<p class="price fl">
-										<b>¥</b> <strong>56.90</strong>
-									</p>
-									<p class="number fl">
-										销量<span>1110</span>
-									</p>
-								</div>
-							</li>
-							<li>
-								<div class="i-pic limit">
-
-									<img src="../customerFile/images/imgsearch1.jpg" />
-									<p class="title fl">【良品铺子旗舰店】手剥松子218g 坚果炒货零食新货巴西松子包邮</p>
-									<p class="price fl">
-										<b>¥</b> <strong>56.90</strong>
-									</p>
-									<p class="number fl">
-										销量<span>1110</span>
-									</p>
-								</div>
-							</li>
-							<li>
-								<div class="i-pic limit">
-
-									<img src="../customerFile/images/imgsearch1.jpg" />
-									<p class="title fl">手剥松子218g 坚果炒货零食新货巴西松子包邮</p>
-									<p class="price fl">
-										<b>¥</b> <strong>56.90</strong>
-									</p>
-									<p class="number fl">
-										销量<span>1110</span>
-									</p>
-								</div>
-							</li>
-							<li>
-								<div class="i-pic limit">
-
-									<img src="../customerFile/images/imgsearch1.jpg" />
-									<p class="title fl">【良品铺子旗舰店】手剥松子218g 坚果炒货零食新货巴西松子包邮</p>
-									<p class="price fl">
-										<b>¥</b> <strong>56.90</strong>
-									</p>
-									<p class="number fl">
-										销量<span>1110</span>
-									</p>
-								</div>
-							</li>
-							<li>
-								<div class="i-pic limit">
-
-									<img src="../customerFile/images/imgsearch1.jpg" />
-									<p class="title fl">【良品铺子旗舰店】手剥松子218g 坚果炒货零食新货巴西松子包邮</p>
-									<p class="price fl">
-										<b>¥</b> <strong>56.90</strong>
-									</p>
-									<p class="number fl">
-										销量<span>1110</span>
-									</p>
-								</div>
-							</li>
-							<li>
-								<div class="i-pic limit">
-
-									<img src="../customerFile/images/imgsearch1.jpg" />
-									<p class="title fl">【良品铺子旗舰店】手剥松子218g 坚果炒货零食新货巴西松子包邮</p>
-									<p class="price fl">
-										<b>¥</b> <strong>56.90</strong>
-									</p>
-									<p class="number fl">
-										销量<span>1110</span>
-									</p>
-								</div>
-							</li>
-							<li>
-								<div class="i-pic limit">
-
-									<img src="../customerFile/images/imgsearch1.jpg" />
-									<p class="title fl">【良品铺子旗舰店】手剥松子218g 坚果炒货零食新货巴西松子包邮</p>
-									<p class="price fl">
-										<b>¥</b> <strong>56.90</strong>
-									</p>
-									<p class="number fl">
-										销量<span>1110</span>
-									</p>
-								</div>
-							</li>
-							<li>
-								<div class="i-pic limit">
-
-									<img src="../customerFile/images/imgsearch1.jpg" />
-									<p class="title fl">【良品铺子旗舰店】手剥松子218g 坚果炒货零食新货巴西松子包邮</p>
-									<p class="price fl">
-										<b>¥</b> <strong>56.90</strong>
-									</p>
-									<p class="number fl">
-										销量<span>1110</span>
-									</p>
-								</div>
-							</li>
-							<li>
-								<div class="i-pic limit">
-
-									<img src="../customerFile/images/imgsearch1.jpg" />
-									<p class="title fl">【良品铺子旗舰店】手剥松子218g 坚果炒货零食新货巴西松子包邮</p>
-									<p class="price fl">
-										<b>¥</b> <strong>56.90</strong>
-									</p>
-									<p class="number fl">
-										销量<span>1110</span>
-									</p>
-								</div>
-							</li>
-							<li>
-								<div class="i-pic limit">
-
-									<img src="../customerFile/images/imgsearch1.jpg" />
-									<p class="title fl">【良品铺子旗舰店】手剥松子218g 坚果炒货零食新货巴西松子包邮</p>
-									<p class="price fl">
-										<b>¥</b> <strong>56.90</strong>
-									</p>
-									<p class="number fl">
-										销量<span>1110</span>
-									</p>
-								</div>
-							</li>
-							<li>
-								<div class="i-pic limit">
-
-									<img src="../customerFile/images/imgsearch1.jpg" />
-									<p class="title fl">【良品铺子旗舰店】手剥松子218g 坚果炒货零食新货巴西松子包邮</p>
-									<p class="price fl">
-										<b>¥</b> <strong>56.90</strong>
-									</p>
-									<p class="number fl">
-										销量<span>1110</span>
-									</p>
-								</div>
-							</li>
+						<c:if test="${empty requestScope.dataSearch}">
+							<br><br><br><p style="margin-left: 35%;">该商品不存在，请换其他关键词搜索</p>
+						</c:if>
+						<ul class="am-avg-sm-2 am-avg-md-3 am-avg-lg-4 boxes" id="searchList_js">
+							<c:forEach items="${requestScope.dataSearch}" var="dataSearch">
+								<li>
+									<div class="i-pic limit">
+										<form id="form${dataSearch.id}" action="" method="post">
+											<input type="hidden" name="commodityId" value="${dataSearch.id}" />
+											<input type="hidden" name="searchContent" value="${searchContent}" />
+										</form>
+										<a class="inToIntr${dataSearch.id}" href="../customer_1/introductionURL.action"><img src="${dataSearch.imgSrc}" />
+										<p class="title fl">${dataSearch.commodityName}</p></a>
+										<p class="price fl">
+											<b>¥</b> <strong>${dataSearch.price}</strong>
+										</p>
+										<p class="number fl">
+											销量<span>${dataSearch.saledNum}</span>
+										</p>
+										<script type="text/javascript">
+											$(function(){
+												$(".inToIntr${dataSearch.id}").click(function(){
+													var href = $(this).attr("href");
+													$("#form${dataSearch.id}").attr("action", href).submit();	
+													return false;
+												});
+											})
+										</script>
+									</div>
+								</li>
+							</c:forEach>
 						</ul>
 					</div>
 					<div class="search-side">

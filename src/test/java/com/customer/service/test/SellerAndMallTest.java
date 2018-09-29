@@ -31,7 +31,7 @@ public class SellerAndMallTest {
 	
 	@Test
 	public void testFindByCommodityId() {
-		String commodityId = "shangping1Tue Sep 25 16:13:21 CST 2018";
+		String commodityId = "7aa0d1d4ff184a3bab439033596e276e";
 		Seller seller = sellerAndMallService.findByCommodityId(commodityId);
 		System.out.println(seller.toString());
 	}

@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 import java.util.SimpleTimeZone;
 
 /**
@@ -23,6 +24,18 @@ public class DateChange {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
 		String str = format.format(date);
 		return str;
+	}
+	
+	/**
+	 * String类型转Date类型
+	 * @param adteTime
+	 * @return
+	 * @throws Exception 
+	 */
+	public static Date StringToDate(String adteTime) throws Exception {
+	    SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.US);//yyyy-mm-dd, 会出现时间不对, 因为小写的mm是代表: 分
+	    Date utilDate = sdf.parse(adteTime);
+		return utilDate;
 	}
 	
 	/**
