@@ -96,25 +96,17 @@ public class RegisterController {
 	
 	/**
 	 * @param role
-	 * @param request
+	 * @param email
 	 * @param response
 	 * @description 检查此邮箱是否已经注册 
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/validateEmail", method = RequestMethod.POST)
-	public String validateEmail(HttpServletRequest request) {
+	public String validateEmail(String role, String email) {
 		System.out.println("step into validateEmail");
-		String role = (String) request.getParameter("role");
-		String email = (String) request.getParameter("email");
-		
-		try {
-			if(registerService.validateEmail(email, role))
-				return "1";
-			else
-				return "0";
-		} catch (Exception e) {
-			e.printStackTrace();
+		if(registerService.validateEmail(email, role))
+			return "1";
+		else
 			return "0";
-		}	
 	}
 }

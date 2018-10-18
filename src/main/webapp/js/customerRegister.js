@@ -1,63 +1,75 @@
-$('#regUsername').blur(function(){
-	var email = $('#regUsername').val();
-	var data = {"email" : email, "role" : "customer"};
+$('#getCode').prop('disabled', true);
+var wait = 60;
+
+$('#regUsername').keyup(function(){
+	var nameVali = $('#regForm').validate().element($('#regUsername'));
+	console.log(nameVali);
 	
-	$.post("register/validateEmail.action", data, function(info) {
-		if(info == '1'){
+	//用户验证通过
+	if(nameVali == true) {
+		if(wait == 60)
 			$('#getCode').prop('disabled', false);
-			$('#getCode').click(function(event){
-				var email = $('#regUsername').val();
-				var data = {"email" : email};
-				
-				$('#getCode').prop('disabled', true);
-				$.post("register/getCode.action", data, function(info) {
-					if(info != ''){
-						alert('success to send the email ' + info);
-						countDown();
-					}						
-					else
-						alert('fail to send the email ' + info);
-				})				
+		
+		//单击"获取验证码"按钮
+		$('#getCode').click(function(envent){
+			var email = $('#regUsername').val();
+			var data = {"email" : email, "role" : "customer"};
+			//验证用户是否已被注册
+			$.post("register/validateEmail.action", data, function(info) {
+				if(info == '1'){      //用户可以注册
+					$('#getCode').prop('disabled', true);
+					var data = {"email" : email};
+					//获取验证码
+					$.post("register/getCode.action", data, function(info) {
+						if(info != ''){
+							alert('success to send the email ' + info);
+						}						
+						else
+							alert('fail to send the email ' + info);
+					});
+					countDown();  //60秒后重新获取
+				}
+				else{
+					alert('the email used ' + info);
+					$('#regUsername').after('<em class="tip">此邮箱已注册</em>');
+				}
 			});
-		}
-		else{
-			alert('the email used ' + info);
-			$('#regUsername').after('<p id="tip">此邮箱已注册</p>');
-		}
-	})
+		});
+	}
+	else {
+		$('#getCode').prop('disabled', true);
+	}
 });
 
 $('#regUsername').focus(function(){
-	$('#tip').remove();
+	$('.tip').remove();
 });
 
-$('#getCode').attr('disabled', true);
-
 $('#regSubmit').click(function(){
-	$('#tip').remove();
-	var code = $('#vCode').val();
+	$('.tip').remove();
 	var email = $('#regUsername').val();
+	var code = $('#vCode').val();
 	var data = {"email" : email, "code" : code};
-	var password = $('#regPassword1').val().trim();
-	var password1 = $('#regPassword2').val().trim();
+	var password1 = $('#regPassword1').val().trim();
+	var password2 = $('#regPassword2').val().trim();
 	
 	if(email == ''){
-		$('#regUsername').after('<p id="tip">邮箱不能为空</p>');
+		$('#regUsername').after('<p class="tip">邮箱不能为空</p>');
 		return false;
 	}
 	
 	if(code == ''){
-		$('#vCode').after('<p id="tip">验证码不能为空</p>');
-		return false;
-	}
-	
-	if(password == ''){
-		$('#regPassword1').after('<p id="tip">密码不能为空</p>');
+		$('#vCode').after('<p class="tip">验证码不能为空</p>');
 		return false;
 	}
 	
 	if(password1 == ''){
-		$('#regPassword2').after('<p id="tip">密码不能为空</p>');
+		$('#regPassword1').after('<p class="tip">密码不能为空</p>');
+		return false;
+	}
+	
+	if(password2 == ''){
+		$('#regPassword2').after('<p class="tip">密码不能为空</p>');
 		return false;
 	}
 	
@@ -66,29 +78,28 @@ $('#regSubmit').click(function(){
 			var password = $('#regPassword1').val().trim();
 			var data1 = {"email" : email, "password" : password};
 			$.post('reigter/seller.action', data1, function(){
-				location.href = "shopping/seller.jsp";
+				location.href = "shopping/customer.jsp";
 			});
 		}
 		else{
-			$('#vCode').after('<p id="tip">验证码有误</p>');
+			$('#vCode').after('<p class="tip">验证码有误</p>');
 			return false;
 		}	
-	})
+	});
 });
 
-var wait = 120;
 function countDown(){
-	
 	if(wait == 0){
 		wait = 60;		
 		$('#getCode').html('获取验证码');
 		$('#getCode').prop('disabled', false);
 	}
 	else{
+		$('#getCode').prop('disabled', true);
 		wait--;
-		$('#getCode').html(wait + 's 后此验证码无效');
+		$('#getCode').html(wait + 's后重新获取');
 		setTimeout(function(){
 			countDown();
-		}, 1000)
+		}, 1000);
 	}
 }

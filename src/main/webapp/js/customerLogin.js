@@ -1,4 +1,5 @@
 $('#logSubmit').click(function(){
+	$('#tip').remove();
 	var userName = $('#logUsername').val().trim();
 	var password = $('#logPassword').val().trim();
 	

@@ -28,6 +28,7 @@ public interface CustomerService {
 	
 	/**
 	 * 验证买家修改密码时输入的原密码
+	 * @param request
 	 * @param password
 	 * @return
 	 */
@@ -57,30 +58,41 @@ public interface CustomerService {
 	
 	/**
 	 * 更新购物车的数量和金额
+	 * @param count
+	 * @param amount
+	 * @param commodityId
+	 * @param customerId
 	 */
 	void updateCart(int count, double amount, String commodityId, String customerId);
 	
 	/**
 	 * 添加购物车
 	 * @param shopCart
+	 * @param customerId
+	 * @param commodityId
 	 */
 	void insertCart(ShopCart shopCart, String customerId, String commodityId);
 	
 	/**
 	 * 获取买家的购物车
 	 * @param customerId
+	 * @param filed
 	 * @param lastId
 	 * @param recordCount
 	 * @return
 	 */
-	List<ShopCart> findAllCart(String customerId, String lastId, int recordCount);
+	List<ShopCart> findAllCart(String customerId, String filed, String lastId, int recordCount, int findType);
 	
 	/**
 	 * 对买家购物车进行模糊查询
+	 * @param customerId
+	 * @param filed
 	 * @param value
+	 * @param lastId
+	 * @param recordCount
 	 * @return
 	 */
-	List<ShopCart> findCartByFuzzy(String customerId, String value, String lastId, int recordCount);
+	List<ShopCart> findCartByFuzzy(String customerId, String filed, String value, String lastId, int recordCount, int findType);
 	
 	/**
 	 * 删除买家的购物车
@@ -96,23 +108,34 @@ public interface CustomerService {
 	void insertOrder(CustomerOrder order);
 	
 	/**
-	 * 查找买家的订单
-	 * @param customerId
-	 * @param lastId
-	 * @param recordCount
+	 * 查找订单详情
+	 * @param orderId
 	 * @return
 	 */
-	List<CustomerOrder> findAllOrder(String customerId, String value, String lastId, int recordCount);
+	CustomerOrder findOneOrder(String orderId);
+	
+	/**
+	 *  查找买家的订单
+	 * @param customerId
+	 * @param idFiled
+	 * @param lastId
+	 * @param sortFiled
+	 * @param recordCount
+	 * @param findType : 0 为查找小于页面 id 的数据，1 为查找大于页面 id 的数据
+	 * @return
+	 */
+	List<CustomerOrder> findAllOrder(String customerId, String idFiled, String lastId, String sortFiled, int recordCount, int findType);
 	
 	/**
 	 * 对买家的订单进行模糊查询
 	 * @param customerId
+	 * @param filed
 	 * @param value
 	 * @param lastId
 	 * @param recordCount
 	 * @return
 	 */
-	List<CustomerOrder> findOrderByFuzzy(String customerId, String value, String lastId, int recordCount);
+	List<CustomerOrder> findOrderByFuzzy(String customerId, String filed, String value, String lastId, int recordCount, int findType);
 	
 	/**
 	 * 删除订单
@@ -157,8 +180,11 @@ public interface CustomerService {
 	/**
 	 * 添加商品收藏
 	 * @param collection
+	 * @param filed
+	 * @param customerId
+	 * @param commodityId
 	 */
-	void insertCollection(Collect collection, String customerId, String commodityId);
+	void insertCollection(Collect collection, String filed, String customerId, String commodityId);
 	
 	/**
 	 * 删除收藏夹里面的商品
@@ -169,16 +195,22 @@ public interface CustomerService {
 	/**
 	 * 查询收藏夹的所有信息
 	 * @param customerId
+	 * @param filed
+	 * @param lastId
+	 * @param recordCount
 	 * @return
 	 */
-	List<Collect> findCollection(String customerId, String lastId, int recordCount);
+	List<Collect> findCollection(String customerId, String filed, String lastId, int recordCount, int findType);
 	
 	/**
 	 * 获取买家售后清单
 	 * @param customerId
+	 * @param filed
+	 * @param lastId
+	 * @param recordCount
 	 * @return
 	 */
-	List<CustomerOrder> getAfterSale(String customerId, String lastId, int recordCount);
+	List<CustomerOrder> getAfterSale(String customerId, String filed, String lastId, int recordCount, int findType);
 	
 	/**
 	 * 插入评论
@@ -195,7 +227,10 @@ public interface CustomerService {
 	/**
 	 * 查询买家的所有评论
 	 * @param customerId
+	 * @param filed
+	 * @param lastId
+	 * @param recordCount
 	 * @return
 	 */
-	List<CommentMsg> findCommentMsg(String customerId, String lastId, int recordCount);
+	List<CommentMsg> findCommentMsg(String customerId, String filed, String lastId, int recordCount, int findType);
 }

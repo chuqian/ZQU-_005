@@ -118,13 +118,13 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 	
 	@Override
-	public List<ShopCart> findAllCart(String customerId, String lastId, int recordCount) {
-		return customerDao.findAllCart(customerId, lastId, recordCount);
+	public List<ShopCart> findAllCart(String customerId, String filed, String lastId, int recordCount, int findType) {
+		return customerDao.findAllCart(customerId, lastId, recordCount, findType);
 	}
 	
 	@Override
-	public List<ShopCart> findCartByFuzzy(String customerId, String value, String lastId, int recordCount) {
-		return customerDao.findCartByFuzzy(customerId, value, lastId, recordCount);
+	public List<ShopCart> findCartByFuzzy(String customerId, String filed, String value, String lastId, int recordCount, int findType) {
+		return customerDao.findCartByFuzzy(customerId, value, lastId, recordCount, findType);
 	}
 	
 	@Override
@@ -138,13 +138,21 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 	
 	@Override
-	public List<CustomerOrder> findAllOrder(String customerId, String value, String lastId, int recordCount) {
-		return customerDao.findAllOrder(customerId, lastId, recordCount);
+	public CustomerOrder findOneOrder(String orderId) {
+		return customerDao.findOneOrder(orderId);
+	}
+
+	@Override
+	public List<CustomerOrder> findAllOrder(String customerId, String idFiled, String firstId, String sortFiled, int recordCount, int findType) {
+		if(firstId == null)
+			firstId = "\0";
+		
+		return customerDao.findAllOrder(customerId, idFiled, firstId, sortFiled, recordCount, findType);
 	}
 	
 	@Override
-	public List<CustomerOrder> findOrderByFuzzy(String customerId, String value, String lastId, int recordCount) {
-		return customerDao.findOrderByFuzzy(customerId, value, lastId, recordCount);
+	public List<CustomerOrder> findOrderByFuzzy(String customerId, String filed, String value, String lastId, int recordCount, int findType) {
+		return customerDao.findOrderByFuzzy(customerId, value, lastId, recordCount, findType);
 	}
 	
 	@Override
@@ -189,7 +197,7 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 	
 	@Override
-	public void insertCollection(Collect collection, String customerId, String commodityId) {
+	public void insertCollection(Collect collection, String customerId, String filed, String commodityId) {
 		if(customerDao.isExistCollection(customerId, commodityId) == null)
 			customerDao.insertCollection(collection);
 	}
@@ -200,13 +208,13 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 	
 	@Override
-	public List<Collect> findCollection(String customerId, String lastId, int recordCount) {
-		return customerDao.findCollection(customerId, lastId, recordCount);
+	public List<Collect> findCollection(String customerId, String filed, String lastId, int recordCount, int findType) {
+		return customerDao.findCollection(customerId, lastId, recordCount, findType);
 	}
 	
 	@Override
-	public List<CustomerOrder> getAfterSale(String customerId, String lastId, int recordCount) {
-		return customerDao.getAfterSale(customerId, lastId, recordCount);
+	public List<CustomerOrder> getAfterSale(String customerId, String filed, String lastId, int recordCount, int findType) {
+		return customerDao.getAfterSale(customerId, lastId, recordCount, findType);
 	}
 	
 	@Override
@@ -220,7 +228,7 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 	
 	@Override
-	public List<CommentMsg> findCommentMsg(String customerId, String lastId, int recordCount) {
-		return customerDao.findCommentMsg(customerId, lastId, recordCount);
+	public List<CommentMsg> findCommentMsg(String customerId, String filed, String lastId, int recordCount, int findType) {
+		return customerDao.findCommentMsg(customerId,"", lastId, recordCount, findType);
 	}
 }
